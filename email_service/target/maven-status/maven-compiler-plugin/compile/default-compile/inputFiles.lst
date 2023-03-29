@@ -1,0 +1,9 @@
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/MailStatus.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/EmailService.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/MailServer.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/EmailOrBuilder.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/EmailResponse.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/MailerGrpc.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/EmailResponseOrBuilder.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/EmailServiceImpl.java
+/home/ebube/Downloads/mide/mide-app/email_service/src/main/java/com/ray/email/grpc/Email.java
