@@ -3,19 +3,42 @@ package com.ray.email;
 import com.ray.email.grpc.Email;
 import com.ray.email.grpc.EmailResponse;
 import com.ray.email.grpc.MailerGrpc;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.Properties;
 
 public class MailServer extends MailerGrpc.MailerImplBase {
-
+    private static final Logger LOG = LogManager.getLogger(MailServer.class);
     private static final Properties properties = new Properties();
 
-    public static void main(String [] args) {
-        loadConfig();
 
+    public static void main(String[] args) {
+        loadConfig(args);
+
+        MailServer mailServer = new MailServer();
+
+
+		Server server = null;
+		try {
+			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port"))).addService(mailServer).build().start();
+			LOG.info("Server started....");
+            registerService();
+			server.awaitTermination();
+		} catch (IOException | InterruptedException e) {
+            if (server != null) {
+                server.shutdown();
+            }
+            LOG.error(e.getMessage(), e);
+		}
     }
 
     @Override
@@ -28,7 +51,7 @@ public class MailServer extends MailerGrpc.MailerImplBase {
 
             @Override
             public void onError(Throwable throwable) {
-
+                LOG.error(throwable.getMessage(), throwable);
             }
 
             @Override
@@ -38,8 +61,12 @@ public class MailServer extends MailerGrpc.MailerImplBase {
         };
     }
 
-    private static void loadConfig() {
-        try (InputStream is = MailServer.class.getResourceAsStream("/application.properties")) {
+    private static void loadConfig(String[] args) {
+        var propertyFile = "/application.properties";
+        if (args.length > 0 && args[0].equalsIgnoreCase("dev")) {
+            propertyFile = "/application-dev.properties";
+        }
+        try (InputStream is = MailServer.class.getResourceAsStream(propertyFile)) {
             properties.load(is);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,4 +78,17 @@ public class MailServer extends MailerGrpc.MailerImplBase {
         return properties;
     }
 
+    public static void registerService() {
+        JmDNS jmdns = null;
+        try {
+            jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = ServiceInfo.create("_http._tcp.local.", "user_service", Integer.parseInt(properties.getProperty("port")), "path=index.html");
+            jmdns.registerService(serviceInfo);
+        } catch (IOException e) {
+            if (jmdns != null) {
+                jmdns.unregisterAllServices();
+            }
+            LOG.error(e.getMessage(), e);
+        }
+    }
 }
