@@ -1,4 +1,4 @@
-package com.vsub.schedule;
+package com.ray.schedule;
 
 /**
  * Hello world!

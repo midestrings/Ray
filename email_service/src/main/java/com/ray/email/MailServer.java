@@ -68,6 +68,7 @@ public class MailServer extends MailerGrpc.MailerImplBase {
         }
         try (InputStream is = MailServer.class.getResourceAsStream(propertyFile)) {
             properties.load(is);
+            System.setProperties(properties);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

@@ -1,4 +1,4 @@
-package com.vsub.app;
+package com.ray.app;
 
 import static org.junit.Assert.assertTrue;
 

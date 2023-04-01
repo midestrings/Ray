@@ -1,4 +1,4 @@
-package com.vsub.schedule;
+package com.ray.schedule;
 
 import static org.junit.Assert.assertTrue;
 

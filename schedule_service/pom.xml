@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.vsub</groupId>
+        <groupId>com.ray</groupId>
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -15,5 +15,44 @@
     <name>schedule_service</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
+
+    <build>
+        <plugins>
+            <!-- compile proto file into java files. -->
+            <plugin>
+                <groupId>com.github.os72</groupId>
+                <artifactId>protoc-jar-maven-plugin</artifactId>
+                <version>3.6.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <includeMavenTypes>direct</includeMavenTypes>
+
+                            <inputDirectories>
+                                <include>src/main/resources</include>
+                            </inputDirectories>
+
+                            <outputTargets>
+                                <outputTarget>
+                                    <type>java</type>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                </outputTarget>
+                                <outputTarget>
+                                    <type>grpc-java</type>
+                                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                </outputTarget>
+                            </outputTargets>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

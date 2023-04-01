@@ -1,4 +1,4 @@
-package com.vsub.vehicle;
+package com.ray.vehicle;
 
 /**
  * Hello world!
