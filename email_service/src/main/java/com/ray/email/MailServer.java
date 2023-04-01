@@ -83,7 +83,7 @@ public class MailServer extends MailerGrpc.MailerImplBase {
         JmDNS jmdns = null;
         try {
             jmdns = JmDNS.create(InetAddress.getLocalHost());
-            ServiceInfo serviceInfo = ServiceInfo.create("_http._tcp.local.", "user_service", Integer.parseInt(properties.getProperty("port")), "path=index.html");
+            ServiceInfo serviceInfo = ServiceInfo.create("_http._tcp.local.", "email_service", Integer.parseInt(properties.getProperty("port")), "path=index.html");
             jmdns.registerService(serviceInfo);
         } catch (IOException e) {
             if (jmdns != null) {

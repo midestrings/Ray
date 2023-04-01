@@ -5,4 +5,54 @@ option java_package = "com.ray.user.grpc";
 option java_outer_classname = "UserServiceImpl";
 package user;
 
+service UserService {
+  rpc createUser (User) returns (User) {}
+  rpc login (User) returns (Authentication) {}
+  rpc refreshToken (Authentication) returns (Authentication) {}
+  rpc updateUser (User) returns (User) {}
+  rpc getUser (User) returns (User) {}
+  rpc activateUser (User) returns (User) {}
+  rpc getAllUser (Filter) returns (stream User) {}
+}
 
+message User {
+  int32 id = 1;
+  string firstName = 2;
+  repeated UserRole roles = 3;
+  string lastName = 4;
+  string email = 5;
+  string phone = 6;
+  string gender = 7;
+  string nationality = 8;
+  string address = 9;
+  string passportNo = 10;
+  string type = 11;
+  string otp = 12;
+  string status = 13;
+  string fileName = 14;
+  string contentType = 15;
+  bytes profilePicture = 16;
+  string password = 17;
+}
+
+message UserRole {
+  int32 id = 1;
+  string role = 2;
+}
+
+message Authentication {
+  int32 id = 1;
+  string token = 2;
+  string refreshToken = 3;
+  Date refreshTokenExpiry = 4;
+}
+
+message Date {
+  int32 year = 1;
+  int32 month = 2;
+  int32 day = 3;
+}
+
+message Filter {
+  string filterQuery = 1;
+}

@@ -20,9 +20,12 @@ message Email {
 
 message EmailResponse {
   MailStatus status = 1;
+  string to = 2;
+  string subject = 3;
 }
 
 enum MailStatus {
   SENT = 0;
   ERROR = 1;
+  PERSISTED = 2;
 }
