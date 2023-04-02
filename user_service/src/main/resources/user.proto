@@ -11,12 +11,11 @@ service UserService {
   rpc refreshToken (Authentication) returns (Authentication) {}
   rpc updateUser (User) returns (User) {}
   rpc getUser (User) returns (User) {}
-  rpc activateUser (User) returns (User) {}
-  rpc getAllUser (Filter) returns (stream User) {}
+  rpc activateUser (User) returns (Authentication) {}
+  rpc getAllUser (UserFilter) returns (stream User) {}
 }
 
 message User {
-  int32 id = 1;
   string firstName = 2;
   repeated UserRole roles = 3;
   string lastName = 4;
@@ -36,12 +35,11 @@ message User {
 }
 
 message UserRole {
-  int32 id = 1;
   string role = 2;
 }
 
 message Authentication {
-  int32 id = 1;
+  string error = 1;
   string token = 2;
   string refreshToken = 3;
   Date refreshTokenExpiry = 4;
@@ -53,6 +51,6 @@ message Date {
   int32 day = 3;
 }
 
-message Filter {
+message UserFilter {
   string filterQuery = 1;
 }

@@ -16,7 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private User() {
-    id_ = 0;
     firstName_ = "";
     roles_ = java.util.Collections.emptyList();
     lastName_ = "";
@@ -59,11 +58,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
-
-            id_ = input.readInt32();
-            break;
-          }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
@@ -71,9 +65,9 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 26: {
-            if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
               roles_ = new java.util.ArrayList<com.ray.user.grpc.UserRole>();
-              mutable_bitField0_ |= 0x00000004;
+              mutable_bitField0_ |= 0x00000002;
             }
             roles_.add(
                 input.readMessage(com.ray.user.grpc.UserRole.parser(), extensionRegistry));
@@ -177,7 +171,7 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
         roles_ = java.util.Collections.unmodifiableList(roles_);
       }
       this.unknownFields = unknownFields.build();
@@ -198,15 +192,6 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
-  public static final int ID_FIELD_NUMBER = 1;
-  private int id_;
-  /**
-   * <code>int32 id = 1;</code>
-   */
-  public int getId() {
-    return id_;
-  }
-
   public static final int FIRSTNAME_FIELD_NUMBER = 2;
   private volatile java.lang.Object firstName_;
   /**
@@ -741,9 +726,6 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (id_ != 0) {
-      output.writeInt32(1, id_);
-    }
     if (!getFirstNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, firstName_);
     }
@@ -801,10 +783,6 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (id_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, id_);
-    }
     if (!getFirstNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, firstName_);
     }
@@ -871,8 +849,6 @@ private static final long serialVersionUID = 0L;
     com.ray.user.grpc.User other = (com.ray.user.grpc.User) obj;
 
     boolean result = true;
-    result = result && (getId()
-        == other.getId());
     result = result && getFirstName()
         .equals(other.getFirstName());
     result = result && getRolesList()
@@ -916,8 +892,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId();
     hash = (37 * hash) + FIRSTNAME_FIELD_NUMBER;
     hash = (53 * hash) + getFirstName().hashCode();
     if (getRolesCount() > 0) {
@@ -1086,13 +1060,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      id_ = 0;
-
       firstName_ = "";
 
       if (rolesBuilder_ == null) {
         roles_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
         rolesBuilder_.clear();
       }
@@ -1152,12 +1124,11 @@ private static final long serialVersionUID = 0L;
       com.ray.user.grpc.User result = new com.ray.user.grpc.User(this);
       int from_bitField0_ = bitField0_;
       int to_bitField0_ = 0;
-      result.id_ = id_;
       result.firstName_ = firstName_;
       if (rolesBuilder_ == null) {
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           roles_ = java.util.Collections.unmodifiableList(roles_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.roles_ = roles_;
       } else {
@@ -1226,9 +1197,6 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ray.user.grpc.User other) {
       if (other == com.ray.user.grpc.User.getDefaultInstance()) return this;
-      if (other.getId() != 0) {
-        setId(other.getId());
-      }
       if (!other.getFirstName().isEmpty()) {
         firstName_ = other.firstName_;
         onChanged();
@@ -1237,7 +1205,7 @@ private static final long serialVersionUID = 0L;
         if (!other.roles_.isEmpty()) {
           if (roles_.isEmpty()) {
             roles_ = other.roles_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureRolesIsMutable();
             roles_.addAll(other.roles_);
@@ -1250,7 +1218,7 @@ private static final long serialVersionUID = 0L;
             rolesBuilder_.dispose();
             rolesBuilder_ = null;
             roles_ = other.roles_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
             rolesBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getRolesFieldBuilder() : null;
@@ -1344,32 +1312,6 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private int id_ ;
-    /**
-     * <code>int32 id = 1;</code>
-     */
-    public int getId() {
-      return id_;
-    }
-    /**
-     * <code>int32 id = 1;</code>
-     */
-    public Builder setId(int value) {
-      
-      id_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 id = 1;</code>
-     */
-    public Builder clearId() {
-      
-      id_ = 0;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object firstName_ = "";
     /**
      * <code>string firstName = 2;</code>
@@ -1442,9 +1384,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<com.ray.user.grpc.UserRole> roles_ =
       java.util.Collections.emptyList();
     private void ensureRolesIsMutable() {
-      if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
         roles_ = new java.util.ArrayList<com.ray.user.grpc.UserRole>(roles_);
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
        }
     }
 
@@ -1594,7 +1536,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearRoles() {
       if (rolesBuilder_ == null) {
         roles_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
       } else {
         rolesBuilder_.clear();
@@ -1671,7 +1613,7 @@ private static final long serialVersionUID = 0L;
         rolesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             com.ray.user.grpc.UserRole, com.ray.user.grpc.UserRole.Builder, com.ray.user.grpc.UserRoleOrBuilder>(
                 roles_,
-                ((bitField0_ & 0x00000004) == 0x00000004),
+                ((bitField0_ & 0x00000002) == 0x00000002),
                 getParentForChildren(),
                 isClean());
         roles_ = null;

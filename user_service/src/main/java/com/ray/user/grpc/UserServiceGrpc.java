@@ -188,21 +188,21 @@ public final class UserServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.ray.user.grpc.User,
-      com.ray.user.grpc.User> getActivateUserMethod;
+      com.ray.user.grpc.Authentication> getActivateUserMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "activateUser",
       requestType = com.ray.user.grpc.User.class,
-      responseType = com.ray.user.grpc.User.class,
+      responseType = com.ray.user.grpc.Authentication.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.ray.user.grpc.User,
-      com.ray.user.grpc.User> getActivateUserMethod() {
-    io.grpc.MethodDescriptor<com.ray.user.grpc.User, com.ray.user.grpc.User> getActivateUserMethod;
+      com.ray.user.grpc.Authentication> getActivateUserMethod() {
+    io.grpc.MethodDescriptor<com.ray.user.grpc.User, com.ray.user.grpc.Authentication> getActivateUserMethod;
     if ((getActivateUserMethod = UserServiceGrpc.getActivateUserMethod) == null) {
       synchronized (UserServiceGrpc.class) {
         if ((getActivateUserMethod = UserServiceGrpc.getActivateUserMethod) == null) {
           UserServiceGrpc.getActivateUserMethod = getActivateUserMethod = 
-              io.grpc.MethodDescriptor.<com.ray.user.grpc.User, com.ray.user.grpc.User>newBuilder()
+              io.grpc.MethodDescriptor.<com.ray.user.grpc.User, com.ray.user.grpc.Authentication>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "user.UserService", "activateUser"))
@@ -210,7 +210,7 @@ public final class UserServiceGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ray.user.grpc.User.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ray.user.grpc.User.getDefaultInstance()))
+                  com.ray.user.grpc.Authentication.getDefaultInstance()))
                   .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("activateUser"))
                   .build();
           }
@@ -219,28 +219,28 @@ public final class UserServiceGrpc {
      return getActivateUserMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.ray.user.grpc.Filter,
+  private static volatile io.grpc.MethodDescriptor<com.ray.user.grpc.UserFilter,
       com.ray.user.grpc.User> getGetAllUserMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getAllUser",
-      requestType = com.ray.user.grpc.Filter.class,
+      requestType = com.ray.user.grpc.UserFilter.class,
       responseType = com.ray.user.grpc.User.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.ray.user.grpc.Filter,
+  public static io.grpc.MethodDescriptor<com.ray.user.grpc.UserFilter,
       com.ray.user.grpc.User> getGetAllUserMethod() {
-    io.grpc.MethodDescriptor<com.ray.user.grpc.Filter, com.ray.user.grpc.User> getGetAllUserMethod;
+    io.grpc.MethodDescriptor<com.ray.user.grpc.UserFilter, com.ray.user.grpc.User> getGetAllUserMethod;
     if ((getGetAllUserMethod = UserServiceGrpc.getGetAllUserMethod) == null) {
       synchronized (UserServiceGrpc.class) {
         if ((getGetAllUserMethod = UserServiceGrpc.getGetAllUserMethod) == null) {
           UserServiceGrpc.getGetAllUserMethod = getGetAllUserMethod = 
-              io.grpc.MethodDescriptor.<com.ray.user.grpc.Filter, com.ray.user.grpc.User>newBuilder()
+              io.grpc.MethodDescriptor.<com.ray.user.grpc.UserFilter, com.ray.user.grpc.User>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "user.UserService", "getAllUser"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ray.user.grpc.Filter.getDefaultInstance()))
+                  com.ray.user.grpc.UserFilter.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ray.user.grpc.User.getDefaultInstance()))
                   .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("getAllUser"))
@@ -316,13 +316,13 @@ public final class UserServiceGrpc {
     /**
      */
     public void activateUser(com.ray.user.grpc.User request,
-        io.grpc.stub.StreamObserver<com.ray.user.grpc.User> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ray.user.grpc.Authentication> responseObserver) {
       asyncUnimplementedUnaryCall(getActivateUserMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllUser(com.ray.user.grpc.Filter request,
+    public void getAllUser(com.ray.user.grpc.UserFilter request,
         io.grpc.stub.StreamObserver<com.ray.user.grpc.User> responseObserver) {
       asyncUnimplementedUnaryCall(getGetAllUserMethod(), responseObserver);
     }
@@ -369,13 +369,13 @@ public final class UserServiceGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 com.ray.user.grpc.User,
-                com.ray.user.grpc.User>(
+                com.ray.user.grpc.Authentication>(
                   this, METHODID_ACTIVATE_USER)))
           .addMethod(
             getGetAllUserMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                com.ray.user.grpc.Filter,
+                com.ray.user.grpc.UserFilter,
                 com.ray.user.grpc.User>(
                   this, METHODID_GET_ALL_USER)))
           .build();
@@ -443,14 +443,14 @@ public final class UserServiceGrpc {
     /**
      */
     public void activateUser(com.ray.user.grpc.User request,
-        io.grpc.stub.StreamObserver<com.ray.user.grpc.User> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ray.user.grpc.Authentication> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getActivateUserMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getAllUser(com.ray.user.grpc.Filter request,
+    public void getAllUser(com.ray.user.grpc.UserFilter request,
         io.grpc.stub.StreamObserver<com.ray.user.grpc.User> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getGetAllUserMethod(), getCallOptions()), request, responseObserver);
@@ -512,7 +512,7 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public com.ray.user.grpc.User activateUser(com.ray.user.grpc.User request) {
+    public com.ray.user.grpc.Authentication activateUser(com.ray.user.grpc.User request) {
       return blockingUnaryCall(
           getChannel(), getActivateUserMethod(), getCallOptions(), request);
     }
@@ -520,7 +520,7 @@ public final class UserServiceGrpc {
     /**
      */
     public java.util.Iterator<com.ray.user.grpc.User> getAllUser(
-        com.ray.user.grpc.Filter request) {
+        com.ray.user.grpc.UserFilter request) {
       return blockingServerStreamingCall(
           getChannel(), getGetAllUserMethod(), getCallOptions(), request);
     }
@@ -586,7 +586,7 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.ray.user.grpc.User> activateUser(
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.user.grpc.Authentication> activateUser(
         com.ray.user.grpc.User request) {
       return futureUnaryCall(
           getChannel().newCall(getActivateUserMethod(), getCallOptions()), request);
@@ -640,10 +640,10 @@ public final class UserServiceGrpc {
           break;
         case METHODID_ACTIVATE_USER:
           serviceImpl.activateUser((com.ray.user.grpc.User) request,
-              (io.grpc.stub.StreamObserver<com.ray.user.grpc.User>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.ray.user.grpc.Authentication>) responseObserver);
           break;
         case METHODID_GET_ALL_USER:
-          serviceImpl.getAllUser((com.ray.user.grpc.Filter) request,
+          serviceImpl.getAllUser((com.ray.user.grpc.UserFilter) request,
               (io.grpc.stub.StreamObserver<com.ray.user.grpc.User>) responseObserver);
           break;
         default:

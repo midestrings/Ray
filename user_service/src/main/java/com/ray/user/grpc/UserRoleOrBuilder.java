@@ -8,11 +8,6 @@ public interface UserRoleOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 id = 1;</code>
-   */
-  int getId();
-
-  /**
    * <code>string role = 2;</code>
    */
   java.lang.String getRole();

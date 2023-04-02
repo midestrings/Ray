@@ -8,9 +8,14 @@ public interface AuthenticationOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 id = 1;</code>
+   * <code>string error = 1;</code>
    */
-  int getId();
+  java.lang.String getError();
+  /**
+   * <code>string error = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getErrorBytes();
 
   /**
    * <code>string token = 2;</code>

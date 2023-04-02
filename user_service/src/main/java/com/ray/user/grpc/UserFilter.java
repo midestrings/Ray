@@ -4,19 +4,19 @@
 package com.ray.user.grpc;
 
 /**
- * Protobuf type {@code user.UserRole}
+ * Protobuf type {@code user.UserFilter}
  */
-public  final class UserRole extends
+public  final class UserFilter extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:user.UserRole)
-    UserRoleOrBuilder {
+    // @@protoc_insertion_point(message_implements:user.UserFilter)
+    UserFilterOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use UserRole.newBuilder() to construct.
-  private UserRole(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use UserFilter.newBuilder() to construct.
+  private UserFilter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private UserRole() {
-    role_ = "";
+  private UserFilter() {
+    filterQuery_ = "";
   }
 
   @java.lang.Override
@@ -24,7 +24,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private UserRole(
+  private UserFilter(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -43,10 +43,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 18: {
+          case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            role_ = s;
+            filterQuery_ = s;
             break;
           }
           default: {
@@ -70,45 +70,45 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserRole_descriptor;
+    return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserFilter_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserRole_fieldAccessorTable
+    return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserFilter_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.ray.user.grpc.UserRole.class, com.ray.user.grpc.UserRole.Builder.class);
+            com.ray.user.grpc.UserFilter.class, com.ray.user.grpc.UserFilter.Builder.class);
   }
 
-  public static final int ROLE_FIELD_NUMBER = 2;
-  private volatile java.lang.Object role_;
+  public static final int FILTERQUERY_FIELD_NUMBER = 1;
+  private volatile java.lang.Object filterQuery_;
   /**
-   * <code>string role = 2;</code>
+   * <code>string filterQuery = 1;</code>
    */
-  public java.lang.String getRole() {
-    java.lang.Object ref = role_;
+  public java.lang.String getFilterQuery() {
+    java.lang.Object ref = filterQuery_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      role_ = s;
+      filterQuery_ = s;
       return s;
     }
   }
   /**
-   * <code>string role = 2;</code>
+   * <code>string filterQuery = 1;</code>
    */
   public com.google.protobuf.ByteString
-      getRoleBytes() {
-    java.lang.Object ref = role_;
+      getFilterQueryBytes() {
+    java.lang.Object ref = filterQuery_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      role_ = b;
+      filterQuery_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -129,8 +129,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getRoleBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, role_);
+    if (!getFilterQueryBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, filterQuery_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +141,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getRoleBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, role_);
+    if (!getFilterQueryBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, filterQuery_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -154,14 +154,14 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.ray.user.grpc.UserRole)) {
+    if (!(obj instanceof com.ray.user.grpc.UserFilter)) {
       return super.equals(obj);
     }
-    com.ray.user.grpc.UserRole other = (com.ray.user.grpc.UserRole) obj;
+    com.ray.user.grpc.UserFilter other = (com.ray.user.grpc.UserFilter) obj;
 
     boolean result = true;
-    result = result && getRole()
-        .equals(other.getRole());
+    result = result && getFilterQuery()
+        .equals(other.getFilterQuery());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -173,76 +173,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ROLE_FIELD_NUMBER;
-    hash = (53 * hash) + getRole().hashCode();
+    hash = (37 * hash) + FILTERQUERY_FIELD_NUMBER;
+    hash = (53 * hash) + getFilterQuery().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(byte[] data)
+  public static com.ray.user.grpc.UserFilter parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(java.io.InputStream input)
+  public static com.ray.user.grpc.UserFilter parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.ray.user.grpc.UserRole parseDelimitedFrom(java.io.InputStream input)
+  public static com.ray.user.grpc.UserFilter parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.ray.user.grpc.UserRole parseDelimitedFrom(
+  public static com.ray.user.grpc.UserFilter parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ray.user.grpc.UserRole parseFrom(
+  public static com.ray.user.grpc.UserFilter parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -255,7 +255,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.ray.user.grpc.UserRole prototype) {
+  public static Builder newBuilder(com.ray.user.grpc.UserFilter prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -271,26 +271,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code user.UserRole}
+   * Protobuf type {@code user.UserFilter}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:user.UserRole)
-      com.ray.user.grpc.UserRoleOrBuilder {
+      // @@protoc_insertion_point(builder_implements:user.UserFilter)
+      com.ray.user.grpc.UserFilterOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserRole_descriptor;
+      return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserFilter_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserRole_fieldAccessorTable
+      return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserFilter_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.ray.user.grpc.UserRole.class, com.ray.user.grpc.UserRole.Builder.class);
+              com.ray.user.grpc.UserFilter.class, com.ray.user.grpc.UserFilter.Builder.class);
     }
 
-    // Construct using com.ray.user.grpc.UserRole.newBuilder()
+    // Construct using com.ray.user.grpc.UserFilter.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -308,7 +308,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      role_ = "";
+      filterQuery_ = "";
 
       return this;
     }
@@ -316,17 +316,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserRole_descriptor;
+      return com.ray.user.grpc.UserServiceImpl.internal_static_user_UserFilter_descriptor;
     }
 
     @java.lang.Override
-    public com.ray.user.grpc.UserRole getDefaultInstanceForType() {
-      return com.ray.user.grpc.UserRole.getDefaultInstance();
+    public com.ray.user.grpc.UserFilter getDefaultInstanceForType() {
+      return com.ray.user.grpc.UserFilter.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.ray.user.grpc.UserRole build() {
-      com.ray.user.grpc.UserRole result = buildPartial();
+    public com.ray.user.grpc.UserFilter build() {
+      com.ray.user.grpc.UserFilter result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -334,9 +334,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.ray.user.grpc.UserRole buildPartial() {
-      com.ray.user.grpc.UserRole result = new com.ray.user.grpc.UserRole(this);
-      result.role_ = role_;
+    public com.ray.user.grpc.UserFilter buildPartial() {
+      com.ray.user.grpc.UserFilter result = new com.ray.user.grpc.UserFilter(this);
+      result.filterQuery_ = filterQuery_;
       onBuilt();
       return result;
     }
@@ -375,18 +375,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.ray.user.grpc.UserRole) {
-        return mergeFrom((com.ray.user.grpc.UserRole)other);
+      if (other instanceof com.ray.user.grpc.UserFilter) {
+        return mergeFrom((com.ray.user.grpc.UserFilter)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.ray.user.grpc.UserRole other) {
-      if (other == com.ray.user.grpc.UserRole.getDefaultInstance()) return this;
-      if (!other.getRole().isEmpty()) {
-        role_ = other.role_;
+    public Builder mergeFrom(com.ray.user.grpc.UserFilter other) {
+      if (other == com.ray.user.grpc.UserFilter.getDefaultInstance()) return this;
+      if (!other.getFilterQuery().isEmpty()) {
+        filterQuery_ = other.filterQuery_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -404,11 +404,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.ray.user.grpc.UserRole parsedMessage = null;
+      com.ray.user.grpc.UserFilter parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.ray.user.grpc.UserRole) e.getUnfinishedMessage();
+        parsedMessage = (com.ray.user.grpc.UserFilter) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -418,71 +418,71 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object role_ = "";
+    private java.lang.Object filterQuery_ = "";
     /**
-     * <code>string role = 2;</code>
+     * <code>string filterQuery = 1;</code>
      */
-    public java.lang.String getRole() {
-      java.lang.Object ref = role_;
+    public java.lang.String getFilterQuery() {
+      java.lang.Object ref = filterQuery_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        role_ = s;
+        filterQuery_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string role = 2;</code>
+     * <code>string filterQuery = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getRoleBytes() {
-      java.lang.Object ref = role_;
+        getFilterQueryBytes() {
+      java.lang.Object ref = filterQuery_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        role_ = b;
+        filterQuery_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string role = 2;</code>
+     * <code>string filterQuery = 1;</code>
      */
-    public Builder setRole(
+    public Builder setFilterQuery(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      role_ = value;
+      filterQuery_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string role = 2;</code>
+     * <code>string filterQuery = 1;</code>
      */
-    public Builder clearRole() {
+    public Builder clearFilterQuery() {
       
-      role_ = getDefaultInstance().getRole();
+      filterQuery_ = getDefaultInstance().getFilterQuery();
       onChanged();
       return this;
     }
     /**
-     * <code>string role = 2;</code>
+     * <code>string filterQuery = 1;</code>
      */
-    public Builder setRoleBytes(
+    public Builder setFilterQueryBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      role_ = value;
+      filterQuery_ = value;
       onChanged();
       return this;
     }
@@ -499,41 +499,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:user.UserRole)
+    // @@protoc_insertion_point(builder_scope:user.UserFilter)
   }
 
-  // @@protoc_insertion_point(class_scope:user.UserRole)
-  private static final com.ray.user.grpc.UserRole DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:user.UserFilter)
+  private static final com.ray.user.grpc.UserFilter DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.ray.user.grpc.UserRole();
+    DEFAULT_INSTANCE = new com.ray.user.grpc.UserFilter();
   }
 
-  public static com.ray.user.grpc.UserRole getDefaultInstance() {
+  public static com.ray.user.grpc.UserFilter getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<UserRole>
-      PARSER = new com.google.protobuf.AbstractParser<UserRole>() {
+  private static final com.google.protobuf.Parser<UserFilter>
+      PARSER = new com.google.protobuf.AbstractParser<UserFilter>() {
     @java.lang.Override
-    public UserRole parsePartialFrom(
+    public UserFilter parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new UserRole(input, extensionRegistry);
+      return new UserFilter(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<UserRole> parser() {
+  public static com.google.protobuf.Parser<UserFilter> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<UserRole> getParserForType() {
+  public com.google.protobuf.Parser<UserFilter> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.ray.user.grpc.UserRole getDefaultInstanceForType() {
+  public com.ray.user.grpc.UserFilter getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

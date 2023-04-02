@@ -1,5 +1,7 @@
 package com.ray.user.entity;
 
+import com.ray.user.grpc.Authentication;
+import com.ray.user.grpc.Date;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 
@@ -58,5 +60,21 @@ public class AuthenticationEntity {
 
     public void setRefreshTokenExpiry(LocalDate refreshTokenExpiry) {
         this.refreshTokenExpiry = refreshTokenExpiry;
+    }
+
+    public static Authentication getAuthentication(AuthenticationEntity auth) {
+        return Authentication.newBuilder()
+                .setToken(auth.token)
+                .setRefreshToken(auth.refreshToken)
+                .setRefreshTokenExpiry(auth.getDate())
+                .build();
+    }
+
+    public Date getDate() {
+        return Date.newBuilder()
+                .setDay(refreshTokenExpiry.getDayOfMonth())
+                .setMonth(refreshTokenExpiry.getMonthValue())
+                .setYear(refreshTokenExpiry.getYear())
+                .build();
     }
 }

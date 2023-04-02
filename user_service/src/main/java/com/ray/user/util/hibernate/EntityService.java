@@ -15,23 +15,21 @@ public class EntityService<T> {
         this.clazz = clazz;
     }
 
-    public T save(T entity) {
+    public void save(T entity) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         session.persist(entity);
         session.getTransaction().commit();
         session.close();
-        return entity;
     }
 
-    public T update(T entity) {
+    public void update(T entity) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        T savedEntity = session.merge(entity);
+        session.merge(entity);
         session.flush();
         session.getTransaction().commit();
         session.close();
-        return savedEntity;
     }
 
     public Optional<T> getById(Integer id) {

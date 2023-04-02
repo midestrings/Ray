@@ -1,13 +1,24 @@
 package com.ray.user.entity;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.google.protobuf.ByteString;
+import com.ray.user.grpc.User;
+import com.ray.user.grpc.UserRole;
+import com.ray.user.util.Role;
+import com.ray.user.util.Status;
+import com.ray.user.util.Type;
+import com.ray.user.util.Utility;
+import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity(name = "User")
 public class UserEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String firstName;
@@ -33,8 +44,9 @@ public class UserEntity {
     private String status;
     @Column
     private String fileName;
-    @Column
-    private String filePath;
+    @Lob
+    @Column(columnDefinition = "BLOB", length = 5242880)
+    @Basic(fetch = FetchType.LAZY)
     private byte[] profilePicture;
     @Column
     private String contentType;
@@ -147,14 +159,6 @@ public class UserEntity {
         this.fileName = fileName;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     public byte[] getProfilePicture() {
         return profilePicture;
     }
@@ -185,5 +189,87 @@ public class UserEntity {
 
     public void setRoles(List<UserEntityRole> roles) {
         this.roles = roles;
+    }
+
+    public String getFullName() {
+        return firstName + (lastName != null ? " " + lastName : "");
+    }
+
+    public static User getUser(UserEntity user, boolean loadImage) {
+        var userBuilder = User.newBuilder()
+                .setAddress(user.address)
+                .setFirstName(user.firstName)
+                .setLastName(user.lastName)
+                .setEmail(user.email)
+                .setPassportNo(user.passportNo)
+                .setPhone(user.phone)
+                .setGender(user.gender)
+                .setNationality(user.nationality)
+                .setType(user.type)
+                .setStatus(user.status);
+        int index = 0;
+        for (var role : user.roles) {
+            userBuilder.setRoles(index++, UserEntityRole.getUserRole(role));
+        }
+        if (loadImage) {
+            userBuilder.setFileName(user.fileName)
+                    .setContentType(user.contentType)
+                    .setProfilePicture(ByteString.copyFrom(user.profilePicture));
+        }
+        return userBuilder.build();
+    }
+
+    public static UserEntity getInstance(User user) {
+        var entity = new UserEntity();
+        entity.status = user.getStatus();
+        entity.lastName = user.getLastName();
+        entity.contentType = user.getContentType();
+        entity.fileName = user.getFileName();
+        entity.address = user.getAddress();
+        entity.gender = user.getGender();
+        entity.nationality = user.getNationality();
+        entity.email = user.getEmail();
+        entity.firstName = user.getFirstName();
+        entity.passportNo = user.getPassportNo();
+        entity.phone = user.getPhone();
+        entity.otp = user.getOtp();
+        entity.type = user.getType();
+        entity.password = user.getPassword();
+        entity.profilePicture = user.getProfilePicture().toByteArray();
+        entity.roles = user.getRolesList().stream()
+                .map(UserEntityRole::getInstance)
+                .collect(Collectors.toList());
+        return entity;
+    }
+
+    public static void updateInstance(User user, UserEntity savedUser) {
+        savedUser.status = Status.statuses.contains(user.getStatus()) ? user.getStatus() : savedUser.status;
+        savedUser.lastName = StringUtil.isNullOrEmpty(user.getLastName()) ? savedUser.lastName : user.getLastName();
+        savedUser.address = StringUtil.isNullOrEmpty(user.getAddress()) ? savedUser.getAddress() : user.getAddress();
+        savedUser.gender = StringUtil.isNullOrEmpty(user.getGender()) ? savedUser.gender : user.getGender();
+        savedUser.nationality = StringUtil.isNullOrEmpty(user.getNationality()) ? savedUser.nationality : user.getNationality();
+        savedUser.firstName = StringUtil.isNullOrEmpty(user.getFirstName()) ? savedUser.firstName : user.getFirstName();
+        savedUser.passportNo = StringUtil.isNullOrEmpty(user.getPassportNo()) ? savedUser.passportNo : user.getPassportNo();
+        savedUser.phone = StringUtil.isNullOrEmpty(user.getPhone()) ? savedUser.phone : user.getPhone();
+        savedUser.type = Type.types.contains(user.getType()) ? user.getType() : savedUser.type;
+        if (!Utility.isInvalidPassword(user.getPassword())) {
+            savedUser.password = BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray());
+        }
+        var roles = savedUser.roles.stream()
+                .map(UserEntityRole::getRole)
+                .collect(Collectors.toList());
+
+        savedUser.roles.addAll(user.getRolesList().stream()
+                .map(UserRole::getRole)
+                .filter(Role.roles::contains)
+                .filter(roles::contains)
+                .map(UserEntityRole::new)
+                .collect(Collectors.toList()));
+
+        if (!StringUtil.isNullOrEmpty(user.getFileName()) && !user.getFileName().equals(savedUser.fileName)) {
+            savedUser.contentType = user.getContentType();
+            savedUser.fileName = user.getFileName();
+            savedUser.profilePicture = user.getProfilePicture().toByteArray();
+        }
     }
 }

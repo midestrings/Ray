@@ -32,41 +32,6 @@ public class UserInfoServer extends UserServiceGrpc.UserServiceImplBase {
 
     }
 
-    @Override
-    public void createUser(User request, StreamObserver<User> responseObserver) {
-        super.createUser(request, responseObserver);
-    }
-
-    @Override
-    public void login(User request, StreamObserver<Authentication> responseObserver) {
-        super.login(request, responseObserver);
-    }
-
-    @Override
-    public void refreshToken(Authentication request, StreamObserver<Authentication> responseObserver) {
-        super.refreshToken(request, responseObserver);
-    }
-
-    @Override
-    public void updateUser(User request, StreamObserver<User> responseObserver) {
-        super.updateUser(request, responseObserver);
-    }
-
-    @Override
-    public void getUser(User request, StreamObserver<User> responseObserver) {
-        super.getUser(request, responseObserver);
-    }
-
-    @Override
-    public void activateUser(User request, StreamObserver<User> responseObserver) {
-        super.activateUser(request, responseObserver);
-    }
-
-    @Override
-    public void getAllUser(Filter request, StreamObserver<User> responseObserver) {
-        super.getAllUser(request, responseObserver);
-    }
-
     private static void loadConfig(String[] args) {
         var propertyFile = "/application.properties";
         if (args.length > 0 && args[0].equalsIgnoreCase("dev")) {
@@ -97,7 +62,7 @@ public class UserInfoServer extends UserServiceGrpc.UserServiceImplBase {
         }
     }
 
-    public Properties getProperties() {
+    public static Properties getProperties() {
         return properties;
     }
 

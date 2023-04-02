@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Authentication() {
-    id_ = 0;
+    error_ = "";
     token_ = "";
     refreshToken_ = "";
   }
@@ -45,9 +45,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            id_ = input.readInt32();
+            error_ = s;
             break;
           }
           case 18: {
@@ -107,13 +108,38 @@ private static final long serialVersionUID = 0L;
             com.ray.user.grpc.Authentication.class, com.ray.user.grpc.Authentication.Builder.class);
   }
 
-  public static final int ID_FIELD_NUMBER = 1;
-  private int id_;
+  public static final int ERROR_FIELD_NUMBER = 1;
+  private volatile java.lang.Object error_;
   /**
-   * <code>int32 id = 1;</code>
+   * <code>string error = 1;</code>
    */
-  public int getId() {
-    return id_;
+  public java.lang.String getError() {
+    java.lang.Object ref = error_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      error_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string error = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getErrorBytes() {
+    java.lang.Object ref = error_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      error_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   public static final int TOKEN_FIELD_NUMBER = 2;
@@ -219,8 +245,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (id_ != 0) {
-      output.writeInt32(1, id_);
+    if (!getErrorBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, error_);
     }
     if (!getTokenBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, token_);
@@ -240,9 +266,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (id_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, id_);
+    if (!getErrorBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, error_);
     }
     if (!getTokenBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, token_);
@@ -270,8 +295,8 @@ private static final long serialVersionUID = 0L;
     com.ray.user.grpc.Authentication other = (com.ray.user.grpc.Authentication) obj;
 
     boolean result = true;
-    result = result && (getId()
-        == other.getId());
+    result = result && getError()
+        .equals(other.getError());
     result = result && getToken()
         .equals(other.getToken());
     result = result && getRefreshToken()
@@ -292,8 +317,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId();
+    hash = (37 * hash) + ERROR_FIELD_NUMBER;
+    hash = (53 * hash) + getError().hashCode();
     hash = (37 * hash) + TOKEN_FIELD_NUMBER;
     hash = (53 * hash) + getToken().hashCode();
     hash = (37 * hash) + REFRESHTOKEN_FIELD_NUMBER;
@@ -435,7 +460,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      id_ = 0;
+      error_ = "";
 
       token_ = "";
 
@@ -473,7 +498,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.ray.user.grpc.Authentication buildPartial() {
       com.ray.user.grpc.Authentication result = new com.ray.user.grpc.Authentication(this);
-      result.id_ = id_;
+      result.error_ = error_;
       result.token_ = token_;
       result.refreshToken_ = refreshToken_;
       if (refreshTokenExpiryBuilder_ == null) {
@@ -529,8 +554,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ray.user.grpc.Authentication other) {
       if (other == com.ray.user.grpc.Authentication.getDefaultInstance()) return this;
-      if (other.getId() != 0) {
-        setId(other.getId());
+      if (!other.getError().isEmpty()) {
+        error_ = other.error_;
+        onChanged();
       }
       if (!other.getToken().isEmpty()) {
         token_ = other.token_;
@@ -572,28 +598,71 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int id_ ;
+    private java.lang.Object error_ = "";
     /**
-     * <code>int32 id = 1;</code>
+     * <code>string error = 1;</code>
      */
-    public int getId() {
-      return id_;
+    public java.lang.String getError() {
+      java.lang.Object ref = error_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        error_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>int32 id = 1;</code>
+     * <code>string error = 1;</code>
      */
-    public Builder setId(int value) {
-      
-      id_ = value;
+    public com.google.protobuf.ByteString
+        getErrorBytes() {
+      java.lang.Object ref = error_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        error_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string error = 1;</code>
+     */
+    public Builder setError(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      error_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 id = 1;</code>
+     * <code>string error = 1;</code>
      */
-    public Builder clearId() {
+    public Builder clearError() {
       
-      id_ = 0;
+      error_ = getDefaultInstance().getError();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string error = 1;</code>
+     */
+    public Builder setErrorBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      error_ = value;
       onChanged();
       return this;
     }
