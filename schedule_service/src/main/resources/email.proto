@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ray.schedule.grpc";
+option java_outer_classname = "EmailServiceImpl";
+package email;
+
+service Mailer{
+  rpc sendMail (stream Email) returns (stream EmailResponse) {
+
+  }
+}
+
+message Email {
+  string to = 1;
+  string from = 2;
+  string subject = 3;
+  string body = 4;
+}
+
+message EmailResponse {
+  MailStatus status = 1;
+  string to = 2;
+  string subject = 3;
+}
+
+enum MailStatus {
+  SENT = 0;
+  ERROR = 1;
+  PERSISTED = 2;
+}
