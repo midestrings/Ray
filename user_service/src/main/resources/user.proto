@@ -32,6 +32,7 @@ message User {
   string contentType = 15;
   bytes profilePicture = 16;
   string password = 17;
+  bool loadImage = 18;
 }
 
 message UserRole {
@@ -52,5 +53,10 @@ message Date {
 }
 
 message UserFilter {
-  string filterQuery = 1;
+  repeated string status = 1;
+  string type = 2;
+  string gender = 3;
+  repeated string roles = 4;
+  int32 page = 5;
+  int32 limit = 6;
 }

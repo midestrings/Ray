@@ -4,15 +4,15 @@
 package com.ray.user.grpc;
 
 public interface EmailResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:user.EmailResponse)
+    // @@protoc_insertion_point(interface_extends:email.EmailResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.user.MailStatus status = 1;</code>
+   * <code>.email.MailStatus status = 1;</code>
    */
   int getStatusValue();
   /**
-   * <code>.user.MailStatus status = 1;</code>
+   * <code>.email.MailStatus status = 1;</code>
    */
   com.ray.user.grpc.MailStatus getStatus();
 

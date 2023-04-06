@@ -16,7 +16,12 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private UserFilter() {
-    filterQuery_ = "";
+    status_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    type_ = "";
+    gender_ = "";
+    roles_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    page_ = 0;
+    limit_ = 0;
   }
 
   @java.lang.Override
@@ -45,8 +50,42 @@ private static final long serialVersionUID = 0L;
             break;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
+            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              status_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            status_.add(s);
+            break;
+          }
+          case 18: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            filterQuery_ = s;
+            type_ = s;
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            gender_ = s;
+            break;
+          }
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+            if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              roles_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000008;
+            }
+            roles_.add(s);
+            break;
+          }
+          case 40: {
+
+            page_ = input.readInt32();
+            break;
+          }
+          case 48: {
+
+            limit_ = input.readInt32();
             break;
           }
           default: {
@@ -64,6 +103,12 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        status_ = status_.getUnmodifiableView();
+      }
+      if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        roles_ = roles_.getUnmodifiableView();
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -81,38 +126,149 @@ private static final long serialVersionUID = 0L;
             com.ray.user.grpc.UserFilter.class, com.ray.user.grpc.UserFilter.Builder.class);
   }
 
-  public static final int FILTERQUERY_FIELD_NUMBER = 1;
-  private volatile java.lang.Object filterQuery_;
+  private int bitField0_;
+  public static final int STATUS_FIELD_NUMBER = 1;
+  private com.google.protobuf.LazyStringList status_;
   /**
-   * <code>string filterQuery = 1;</code>
+   * <code>repeated string status = 1;</code>
    */
-  public java.lang.String getFilterQuery() {
-    java.lang.Object ref = filterQuery_;
+  public com.google.protobuf.ProtocolStringList
+      getStatusList() {
+    return status_;
+  }
+  /**
+   * <code>repeated string status = 1;</code>
+   */
+  public int getStatusCount() {
+    return status_.size();
+  }
+  /**
+   * <code>repeated string status = 1;</code>
+   */
+  public java.lang.String getStatus(int index) {
+    return status_.get(index);
+  }
+  /**
+   * <code>repeated string status = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getStatusBytes(int index) {
+    return status_.getByteString(index);
+  }
+
+  public static final int TYPE_FIELD_NUMBER = 2;
+  private volatile java.lang.Object type_;
+  /**
+   * <code>string type = 2;</code>
+   */
+  public java.lang.String getType() {
+    java.lang.Object ref = type_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      filterQuery_ = s;
+      type_ = s;
       return s;
     }
   }
   /**
-   * <code>string filterQuery = 1;</code>
+   * <code>string type = 2;</code>
    */
   public com.google.protobuf.ByteString
-      getFilterQueryBytes() {
-    java.lang.Object ref = filterQuery_;
+      getTypeBytes() {
+    java.lang.Object ref = type_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      filterQuery_ = b;
+      type_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int GENDER_FIELD_NUMBER = 3;
+  private volatile java.lang.Object gender_;
+  /**
+   * <code>string gender = 3;</code>
+   */
+  public java.lang.String getGender() {
+    java.lang.Object ref = gender_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gender_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string gender = 3;</code>
+   */
+  public com.google.protobuf.ByteString
+      getGenderBytes() {
+    java.lang.Object ref = gender_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gender_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int ROLES_FIELD_NUMBER = 4;
+  private com.google.protobuf.LazyStringList roles_;
+  /**
+   * <code>repeated string roles = 4;</code>
+   */
+  public com.google.protobuf.ProtocolStringList
+      getRolesList() {
+    return roles_;
+  }
+  /**
+   * <code>repeated string roles = 4;</code>
+   */
+  public int getRolesCount() {
+    return roles_.size();
+  }
+  /**
+   * <code>repeated string roles = 4;</code>
+   */
+  public java.lang.String getRoles(int index) {
+    return roles_.get(index);
+  }
+  /**
+   * <code>repeated string roles = 4;</code>
+   */
+  public com.google.protobuf.ByteString
+      getRolesBytes(int index) {
+    return roles_.getByteString(index);
+  }
+
+  public static final int PAGE_FIELD_NUMBER = 5;
+  private int page_;
+  /**
+   * <code>int32 page = 5;</code>
+   */
+  public int getPage() {
+    return page_;
+  }
+
+  public static final int LIMIT_FIELD_NUMBER = 6;
+  private int limit_;
+  /**
+   * <code>int32 limit = 6;</code>
+   */
+  public int getLimit() {
+    return limit_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +285,23 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getFilterQueryBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, filterQuery_);
+    for (int i = 0; i < status_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, status_.getRaw(i));
+    }
+    if (!getTypeBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, type_);
+    }
+    if (!getGenderBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, gender_);
+    }
+    for (int i = 0; i < roles_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, roles_.getRaw(i));
+    }
+    if (page_ != 0) {
+      output.writeInt32(5, page_);
+    }
+    if (limit_ != 0) {
+      output.writeInt32(6, limit_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +312,35 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getFilterQueryBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, filterQuery_);
+    {
+      int dataSize = 0;
+      for (int i = 0; i < status_.size(); i++) {
+        dataSize += computeStringSizeNoTag(status_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getStatusList().size();
+    }
+    if (!getTypeBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, type_);
+    }
+    if (!getGenderBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, gender_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < roles_.size(); i++) {
+        dataSize += computeStringSizeNoTag(roles_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getRolesList().size();
+    }
+    if (page_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(5, page_);
+    }
+    if (limit_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(6, limit_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -160,8 +358,18 @@ private static final long serialVersionUID = 0L;
     com.ray.user.grpc.UserFilter other = (com.ray.user.grpc.UserFilter) obj;
 
     boolean result = true;
-    result = result && getFilterQuery()
-        .equals(other.getFilterQuery());
+    result = result && getStatusList()
+        .equals(other.getStatusList());
+    result = result && getType()
+        .equals(other.getType());
+    result = result && getGender()
+        .equals(other.getGender());
+    result = result && getRolesList()
+        .equals(other.getRolesList());
+    result = result && (getPage()
+        == other.getPage());
+    result = result && (getLimit()
+        == other.getLimit());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -173,8 +381,22 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + FILTERQUERY_FIELD_NUMBER;
-    hash = (53 * hash) + getFilterQuery().hashCode();
+    if (getStatusCount() > 0) {
+      hash = (37 * hash) + STATUS_FIELD_NUMBER;
+      hash = (53 * hash) + getStatusList().hashCode();
+    }
+    hash = (37 * hash) + TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getType().hashCode();
+    hash = (37 * hash) + GENDER_FIELD_NUMBER;
+    hash = (53 * hash) + getGender().hashCode();
+    if (getRolesCount() > 0) {
+      hash = (37 * hash) + ROLES_FIELD_NUMBER;
+      hash = (53 * hash) + getRolesList().hashCode();
+    }
+    hash = (37 * hash) + PAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getPage();
+    hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+    hash = (53 * hash) + getLimit();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -308,7 +530,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      filterQuery_ = "";
+      status_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
+      type_ = "";
+
+      gender_ = "";
+
+      roles_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000008);
+      page_ = 0;
+
+      limit_ = 0;
 
       return this;
     }
@@ -336,7 +568,23 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.ray.user.grpc.UserFilter buildPartial() {
       com.ray.user.grpc.UserFilter result = new com.ray.user.grpc.UserFilter(this);
-      result.filterQuery_ = filterQuery_;
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        status_ = status_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      }
+      result.status_ = status_;
+      result.type_ = type_;
+      result.gender_ = gender_;
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        roles_ = roles_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000008);
+      }
+      result.roles_ = roles_;
+      result.page_ = page_;
+      result.limit_ = limit_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -385,9 +633,39 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ray.user.grpc.UserFilter other) {
       if (other == com.ray.user.grpc.UserFilter.getDefaultInstance()) return this;
-      if (!other.getFilterQuery().isEmpty()) {
-        filterQuery_ = other.filterQuery_;
+      if (!other.status_.isEmpty()) {
+        if (status_.isEmpty()) {
+          status_ = other.status_;
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          ensureStatusIsMutable();
+          status_.addAll(other.status_);
+        }
         onChanged();
+      }
+      if (!other.getType().isEmpty()) {
+        type_ = other.type_;
+        onChanged();
+      }
+      if (!other.getGender().isEmpty()) {
+        gender_ = other.gender_;
+        onChanged();
+      }
+      if (!other.roles_.isEmpty()) {
+        if (roles_.isEmpty()) {
+          roles_ = other.roles_;
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          ensureRolesIsMutable();
+          roles_.addAll(other.roles_);
+        }
+        onChanged();
+      }
+      if (other.getPage() != 0) {
+        setPage(other.getPage());
+      }
+      if (other.getLimit() != 0) {
+        setLimit(other.getLimit());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -417,72 +695,382 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
-    private java.lang.Object filterQuery_ = "";
+    private com.google.protobuf.LazyStringList status_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureStatusIsMutable() {
+      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        status_ = new com.google.protobuf.LazyStringArrayList(status_);
+        bitField0_ |= 0x00000001;
+       }
+    }
     /**
-     * <code>string filterQuery = 1;</code>
+     * <code>repeated string status = 1;</code>
      */
-    public java.lang.String getFilterQuery() {
-      java.lang.Object ref = filterQuery_;
+    public com.google.protobuf.ProtocolStringList
+        getStatusList() {
+      return status_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public int getStatusCount() {
+      return status_.size();
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public java.lang.String getStatus(int index) {
+      return status_.get(index);
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStatusBytes(int index) {
+      return status_.getByteString(index);
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public Builder setStatus(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStatusIsMutable();
+      status_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public Builder addStatus(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStatusIsMutable();
+      status_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public Builder addAllStatus(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureStatusIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, status_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public Builder clearStatus() {
+      status_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string status = 1;</code>
+     */
+    public Builder addStatusBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      ensureStatusIsMutable();
+      status_.add(value);
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object type_ = "";
+    /**
+     * <code>string type = 2;</code>
+     */
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        filterQuery_ = s;
+        type_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string filterQuery = 1;</code>
+     * <code>string type = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getFilterQueryBytes() {
-      java.lang.Object ref = filterQuery_;
+        getTypeBytes() {
+      java.lang.Object ref = type_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        filterQuery_ = b;
+        type_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string filterQuery = 1;</code>
+     * <code>string type = 2;</code>
      */
-    public Builder setFilterQuery(
+    public Builder setType(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      filterQuery_ = value;
+      type_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string filterQuery = 1;</code>
+     * <code>string type = 2;</code>
      */
-    public Builder clearFilterQuery() {
+    public Builder clearType() {
       
-      filterQuery_ = getDefaultInstance().getFilterQuery();
+      type_ = getDefaultInstance().getType();
       onChanged();
       return this;
     }
     /**
-     * <code>string filterQuery = 1;</code>
+     * <code>string type = 2;</code>
      */
-    public Builder setFilterQueryBytes(
+    public Builder setTypeBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      filterQuery_ = value;
+      type_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object gender_ = "";
+    /**
+     * <code>string gender = 3;</code>
+     */
+    public java.lang.String getGender() {
+      java.lang.Object ref = gender_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gender_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string gender = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGenderBytes() {
+      java.lang.Object ref = gender_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gender_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string gender = 3;</code>
+     */
+    public Builder setGender(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      gender_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string gender = 3;</code>
+     */
+    public Builder clearGender() {
+      
+      gender_ = getDefaultInstance().getGender();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string gender = 3;</code>
+     */
+    public Builder setGenderBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      gender_ = value;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringList roles_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureRolesIsMutable() {
+      if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        roles_ = new com.google.protobuf.LazyStringArrayList(roles_);
+        bitField0_ |= 0x00000008;
+       }
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getRolesList() {
+      return roles_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public int getRolesCount() {
+      return roles_.size();
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public java.lang.String getRoles(int index) {
+      return roles_.get(index);
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRolesBytes(int index) {
+      return roles_.getByteString(index);
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public Builder setRoles(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRolesIsMutable();
+      roles_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public Builder addRoles(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRolesIsMutable();
+      roles_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public Builder addAllRoles(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureRolesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, roles_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public Builder clearRoles() {
+      roles_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000008);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string roles = 4;</code>
+     */
+    public Builder addRolesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      ensureRolesIsMutable();
+      roles_.add(value);
+      onChanged();
+      return this;
+    }
+
+    private int page_ ;
+    /**
+     * <code>int32 page = 5;</code>
+     */
+    public int getPage() {
+      return page_;
+    }
+    /**
+     * <code>int32 page = 5;</code>
+     */
+    public Builder setPage(int value) {
+      
+      page_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 page = 5;</code>
+     */
+    public Builder clearPage() {
+      
+      page_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int limit_ ;
+    /**
+     * <code>int32 limit = 6;</code>
+     */
+    public int getLimit() {
+      return limit_;
+    }
+    /**
+     * <code>int32 limit = 6;</code>
+     */
+    public Builder setLimit(int value) {
+      
+      limit_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 limit = 6;</code>
+     */
+    public Builder clearLimit() {
+      
+      limit_ = 0;
       onChanged();
       return this;
     }

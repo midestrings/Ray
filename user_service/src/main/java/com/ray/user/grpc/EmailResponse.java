@@ -4,11 +4,11 @@
 package com.ray.user.grpc;
 
 /**
- * Protobuf type {@code user.EmailResponse}
+ * Protobuf type {@code email.EmailResponse}
  */
 public  final class EmailResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:user.EmailResponse)
+    // @@protoc_insertion_point(message_implements:email.EmailResponse)
     EmailResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use EmailResponse.newBuilder() to construct.
@@ -84,13 +84,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ray.user.grpc.EmailServiceImpl.internal_static_user_EmailResponse_descriptor;
+    return com.ray.user.grpc.EmailServiceImpl.internal_static_email_EmailResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ray.user.grpc.EmailServiceImpl.internal_static_user_EmailResponse_fieldAccessorTable
+    return com.ray.user.grpc.EmailServiceImpl.internal_static_email_EmailResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.ray.user.grpc.EmailResponse.class, com.ray.user.grpc.EmailResponse.Builder.class);
   }
@@ -98,13 +98,13 @@ private static final long serialVersionUID = 0L;
   public static final int STATUS_FIELD_NUMBER = 1;
   private int status_;
   /**
-   * <code>.user.MailStatus status = 1;</code>
+   * <code>.email.MailStatus status = 1;</code>
    */
   public int getStatusValue() {
     return status_;
   }
   /**
-   * <code>.user.MailStatus status = 1;</code>
+   * <code>.email.MailStatus status = 1;</code>
    */
   public com.ray.user.grpc.MailStatus getStatus() {
     @SuppressWarnings("deprecation")
@@ -356,21 +356,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code user.EmailResponse}
+   * Protobuf type {@code email.EmailResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:user.EmailResponse)
+      // @@protoc_insertion_point(builder_implements:email.EmailResponse)
       com.ray.user.grpc.EmailResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ray.user.grpc.EmailServiceImpl.internal_static_user_EmailResponse_descriptor;
+      return com.ray.user.grpc.EmailServiceImpl.internal_static_email_EmailResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ray.user.grpc.EmailServiceImpl.internal_static_user_EmailResponse_fieldAccessorTable
+      return com.ray.user.grpc.EmailServiceImpl.internal_static_email_EmailResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.ray.user.grpc.EmailResponse.class, com.ray.user.grpc.EmailResponse.Builder.class);
     }
@@ -405,7 +405,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ray.user.grpc.EmailServiceImpl.internal_static_user_EmailResponse_descriptor;
+      return com.ray.user.grpc.EmailServiceImpl.internal_static_email_EmailResponse_descriptor;
     }
 
     @java.lang.Override
@@ -518,13 +518,13 @@ private static final long serialVersionUID = 0L;
 
     private int status_ = 0;
     /**
-     * <code>.user.MailStatus status = 1;</code>
+     * <code>.email.MailStatus status = 1;</code>
      */
     public int getStatusValue() {
       return status_;
     }
     /**
-     * <code>.user.MailStatus status = 1;</code>
+     * <code>.email.MailStatus status = 1;</code>
      */
     public Builder setStatusValue(int value) {
       status_ = value;
@@ -532,7 +532,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.user.MailStatus status = 1;</code>
+     * <code>.email.MailStatus status = 1;</code>
      */
     public com.ray.user.grpc.MailStatus getStatus() {
       @SuppressWarnings("deprecation")
@@ -540,7 +540,7 @@ private static final long serialVersionUID = 0L;
       return result == null ? com.ray.user.grpc.MailStatus.UNRECOGNIZED : result;
     }
     /**
-     * <code>.user.MailStatus status = 1;</code>
+     * <code>.email.MailStatus status = 1;</code>
      */
     public Builder setStatus(com.ray.user.grpc.MailStatus value) {
       if (value == null) {
@@ -552,7 +552,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.user.MailStatus status = 1;</code>
+     * <code>.email.MailStatus status = 1;</code>
      */
     public Builder clearStatus() {
       
@@ -711,10 +711,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:user.EmailResponse)
+    // @@protoc_insertion_point(builder_scope:email.EmailResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:user.EmailResponse)
+  // @@protoc_insertion_point(class_scope:email.EmailResponse)
   private static final com.ray.user.grpc.EmailResponse DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new com.ray.user.grpc.EmailResponse();

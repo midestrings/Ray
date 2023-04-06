@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import static com.ray.user.UserInfoServer.getProperties;
+
 public final class HibernateUtil {
     private static final Logger LOG = LogManager.getLogger(HibernateUtil.class);
     private static SessionFactory sessionFactory;
@@ -36,7 +38,7 @@ public final class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         Configuration configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
+        configuration.setProperties(getProperties());
         configuration.addAnnotatedClass(UserEntity.class);
         configuration.addAnnotatedClass(UserEntityRole.class);
         configuration.addAnnotatedClass(AuthenticationEntity.class);

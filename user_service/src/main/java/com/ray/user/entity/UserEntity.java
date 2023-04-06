@@ -244,13 +244,13 @@ public class UserEntity {
 
     public static void updateInstance(User user, UserEntity savedUser) {
         savedUser.status = Status.statuses.contains(user.getStatus()) ? user.getStatus() : savedUser.status;
-        savedUser.lastName = StringUtil.isNullOrEmpty(user.getLastName()) ? savedUser.lastName : user.getLastName();
-        savedUser.address = StringUtil.isNullOrEmpty(user.getAddress()) ? savedUser.getAddress() : user.getAddress();
-        savedUser.gender = StringUtil.isNullOrEmpty(user.getGender()) ? savedUser.gender : user.getGender();
-        savedUser.nationality = StringUtil.isNullOrEmpty(user.getNationality()) ? savedUser.nationality : user.getNationality();
-        savedUser.firstName = StringUtil.isNullOrEmpty(user.getFirstName()) ? savedUser.firstName : user.getFirstName();
-        savedUser.passportNo = StringUtil.isNullOrEmpty(user.getPassportNo()) ? savedUser.passportNo : user.getPassportNo();
-        savedUser.phone = StringUtil.isNullOrEmpty(user.getPhone()) ? savedUser.phone : user.getPhone();
+        savedUser.lastName = Utility.isEmpty(user.getLastName()) ? savedUser.lastName : user.getLastName();
+        savedUser.address = Utility.isEmpty(user.getAddress()) ? savedUser.getAddress() : user.getAddress();
+        savedUser.gender = Utility.isEmpty(user.getGender()) ? savedUser.gender : user.getGender();
+        savedUser.nationality = Utility.isEmpty(user.getNationality()) ? savedUser.nationality : user.getNationality();
+        savedUser.firstName = Utility.isEmpty(user.getFirstName()) ? savedUser.firstName : user.getFirstName();
+        savedUser.passportNo = Utility.isEmpty(user.getPassportNo()) ? savedUser.passportNo : user.getPassportNo();
+        savedUser.phone = Utility.isEmpty(user.getPhone()) ? savedUser.phone : user.getPhone();
         savedUser.type = Type.types.contains(user.getType()) ? user.getType() : savedUser.type;
         if (!Utility.isInvalidPassword(user.getPassword())) {
             savedUser.password = BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray());
@@ -266,7 +266,7 @@ public class UserEntity {
                 .map(UserEntityRole::new)
                 .collect(Collectors.toList()));
 
-        if (!StringUtil.isNullOrEmpty(user.getFileName()) && !user.getFileName().equals(savedUser.fileName)) {
+        if (!Utility.isEmpty(user.getFileName()) && !user.getFileName().equals(savedUser.fileName)) {
             savedUser.contentType = user.getContentType();
             savedUser.fileName = user.getFileName();
             savedUser.profilePicture = user.getProfilePicture().toByteArray();

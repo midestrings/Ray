@@ -1,0 +1,700 @@
+package com.ray.vehicle.grpc;
+
+import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+
+/**
+ */
+@javax.annotation.Generated(
+    value = "by gRPC proto compiler (version 1.15.0)",
+    comments = "Source: vehicle.proto")
+public final class VehicleServiceGrpc {
+
+  private VehicleServiceGrpc() {}
+
+  public static final String SERVICE_NAME = "vehicle.VehicleService";
+
+  // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Vehicle> getAddVehicleMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "addVehicle",
+      requestType = com.ray.vehicle.grpc.Vehicle.class,
+      responseType = com.ray.vehicle.grpc.Vehicle.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Vehicle> getAddVehicleMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle> getAddVehicleMethod;
+    if ((getAddVehicleMethod = VehicleServiceGrpc.getAddVehicleMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getAddVehicleMethod = VehicleServiceGrpc.getAddVehicleMethod) == null) {
+          VehicleServiceGrpc.getAddVehicleMethod = getAddVehicleMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "addVehicle"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("addVehicle"))
+                  .build();
+          }
+        }
+     }
+     return getAddVehicleMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.VehicleFilter,
+      com.ray.vehicle.grpc.Vehicle> getGetVehiclesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getVehicles",
+      requestType = com.ray.vehicle.grpc.VehicleFilter.class,
+      responseType = com.ray.vehicle.grpc.Vehicle.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.VehicleFilter,
+      com.ray.vehicle.grpc.Vehicle> getGetVehiclesMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.VehicleFilter, com.ray.vehicle.grpc.Vehicle> getGetVehiclesMethod;
+    if ((getGetVehiclesMethod = VehicleServiceGrpc.getGetVehiclesMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getGetVehiclesMethod = VehicleServiceGrpc.getGetVehiclesMethod) == null) {
+          VehicleServiceGrpc.getGetVehiclesMethod = getGetVehiclesMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.VehicleFilter, com.ray.vehicle.grpc.Vehicle>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "getVehicles"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.VehicleFilter.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("getVehicles"))
+                  .build();
+          }
+        }
+     }
+     return getGetVehiclesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Vehicle> getUpdateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "update",
+      requestType = com.ray.vehicle.grpc.Vehicle.class,
+      responseType = com.ray.vehicle.grpc.Vehicle.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Vehicle> getUpdateMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle> getUpdateMethod;
+    if ((getUpdateMethod = VehicleServiceGrpc.getUpdateMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getUpdateMethod = VehicleServiceGrpc.getUpdateMethod) == null) {
+          VehicleServiceGrpc.getUpdateMethod = getUpdateMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "update"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("update"))
+                  .build();
+          }
+        }
+     }
+     return getUpdateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.VehicleCategory,
+      com.ray.vehicle.grpc.VehicleCategory> getAddCategoryMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "addCategory",
+      requestType = com.ray.vehicle.grpc.VehicleCategory.class,
+      responseType = com.ray.vehicle.grpc.VehicleCategory.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.VehicleCategory,
+      com.ray.vehicle.grpc.VehicleCategory> getAddCategoryMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.VehicleCategory, com.ray.vehicle.grpc.VehicleCategory> getAddCategoryMethod;
+    if ((getAddCategoryMethod = VehicleServiceGrpc.getAddCategoryMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getAddCategoryMethod = VehicleServiceGrpc.getAddCategoryMethod) == null) {
+          VehicleServiceGrpc.getAddCategoryMethod = getAddCategoryMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.VehicleCategory, com.ray.vehicle.grpc.VehicleCategory>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "addCategory"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.VehicleCategory.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.VehicleCategory.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("addCategory"))
+                  .build();
+          }
+        }
+     }
+     return getAddCategoryMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Empty,
+      com.ray.vehicle.grpc.VehicleCategory> getGetCategoriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getCategories",
+      requestType = com.ray.vehicle.grpc.Empty.class,
+      responseType = com.ray.vehicle.grpc.VehicleCategory.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Empty,
+      com.ray.vehicle.grpc.VehicleCategory> getGetCategoriesMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Empty, com.ray.vehicle.grpc.VehicleCategory> getGetCategoriesMethod;
+    if ((getGetCategoriesMethod = VehicleServiceGrpc.getGetCategoriesMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getGetCategoriesMethod = VehicleServiceGrpc.getGetCategoriesMethod) == null) {
+          VehicleServiceGrpc.getGetCategoriesMethod = getGetCategoriesMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.Empty, com.ray.vehicle.grpc.VehicleCategory>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "getCategories"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.VehicleCategory.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("getCategories"))
+                  .build();
+          }
+        }
+     }
+     return getGetCategoriesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Availability> getConfirmAvailabilityMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "confirmAvailability",
+      requestType = com.ray.vehicle.grpc.Vehicle.class,
+      responseType = com.ray.vehicle.grpc.Availability.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Availability> getConfirmAvailabilityMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Availability> getConfirmAvailabilityMethod;
+    if ((getConfirmAvailabilityMethod = VehicleServiceGrpc.getConfirmAvailabilityMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getConfirmAvailabilityMethod = VehicleServiceGrpc.getConfirmAvailabilityMethod) == null) {
+          VehicleServiceGrpc.getConfirmAvailabilityMethod = getConfirmAvailabilityMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Availability>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "confirmAvailability"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Availability.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("confirmAvailability"))
+                  .build();
+          }
+        }
+     }
+     return getConfirmAvailabilityMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Vehicle> getGetVehicleMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getVehicle",
+      requestType = com.ray.vehicle.grpc.Vehicle.class,
+      responseType = com.ray.vehicle.grpc.Vehicle.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle,
+      com.ray.vehicle.grpc.Vehicle> getGetVehicleMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle> getGetVehicleMethod;
+    if ((getGetVehicleMethod = VehicleServiceGrpc.getGetVehicleMethod) == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        if ((getGetVehicleMethod = VehicleServiceGrpc.getGetVehicleMethod) == null) {
+          VehicleServiceGrpc.getGetVehicleMethod = getGetVehicleMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "vehicle.VehicleService", "getVehicle"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Vehicle.getDefaultInstance()))
+                  .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("getVehicle"))
+                  .build();
+          }
+        }
+     }
+     return getGetVehicleMethod;
+  }
+
+  /**
+   * Creates a new async stub that supports all call types for the service
+   */
+  public static VehicleServiceStub newStub(io.grpc.Channel channel) {
+    return new VehicleServiceStub(channel);
+  }
+
+  /**
+   * Creates a new blocking-style stub that supports unary and streaming output calls on the service
+   */
+  public static VehicleServiceBlockingStub newBlockingStub(
+      io.grpc.Channel channel) {
+    return new VehicleServiceBlockingStub(channel);
+  }
+
+  /**
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
+   */
+  public static VehicleServiceFutureStub newFutureStub(
+      io.grpc.Channel channel) {
+    return new VehicleServiceFutureStub(channel);
+  }
+
+  /**
+   */
+  public static abstract class VehicleServiceImplBase implements io.grpc.BindableService {
+
+    /**
+     */
+    public void addVehicle(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnimplementedUnaryCall(getAddVehicleMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getVehicles(com.ray.vehicle.grpc.VehicleFilter request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetVehiclesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void update(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory> addCategory(
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory> responseObserver) {
+      return asyncUnimplementedStreamingCall(getAddCategoryMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getCategories(com.ray.vehicle.grpc.Empty request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetCategoriesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void confirmAvailability(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Availability> responseObserver) {
+      asyncUnimplementedUnaryCall(getConfirmAvailabilityMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getVehicle(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetVehicleMethod(), responseObserver);
+    }
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+          .addMethod(
+            getAddVehicleMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.Vehicle,
+                com.ray.vehicle.grpc.Vehicle>(
+                  this, METHODID_ADD_VEHICLE)))
+          .addMethod(
+            getGetVehiclesMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.VehicleFilter,
+                com.ray.vehicle.grpc.Vehicle>(
+                  this, METHODID_GET_VEHICLES)))
+          .addMethod(
+            getUpdateMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.Vehicle,
+                com.ray.vehicle.grpc.Vehicle>(
+                  this, METHODID_UPDATE)))
+          .addMethod(
+            getAddCategoryMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.VehicleCategory,
+                com.ray.vehicle.grpc.VehicleCategory>(
+                  this, METHODID_ADD_CATEGORY)))
+          .addMethod(
+            getGetCategoriesMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.Empty,
+                com.ray.vehicle.grpc.VehicleCategory>(
+                  this, METHODID_GET_CATEGORIES)))
+          .addMethod(
+            getConfirmAvailabilityMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.Vehicle,
+                com.ray.vehicle.grpc.Availability>(
+                  this, METHODID_CONFIRM_AVAILABILITY)))
+          .addMethod(
+            getGetVehicleMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.Vehicle,
+                com.ray.vehicle.grpc.Vehicle>(
+                  this, METHODID_GET_VEHICLE)))
+          .build();
+    }
+  }
+
+  /**
+   */
+  public static final class VehicleServiceStub extends io.grpc.stub.AbstractStub<VehicleServiceStub> {
+    private VehicleServiceStub(io.grpc.Channel channel) {
+      super(channel);
+    }
+
+    private VehicleServiceStub(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected VehicleServiceStub build(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      return new VehicleServiceStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public void addVehicle(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getAddVehicleMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getVehicles(com.ray.vehicle.grpc.VehicleFilter request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getGetVehiclesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void update(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory> addCategory(
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getAddCategoryMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     */
+    public void getCategories(com.ray.vehicle.grpc.Empty request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getGetCategoriesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void confirmAvailability(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Availability> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getConfirmAvailabilityMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getVehicle(com.ray.vehicle.grpc.Vehicle request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetVehicleMethod(), getCallOptions()), request, responseObserver);
+    }
+  }
+
+  /**
+   */
+  public static final class VehicleServiceBlockingStub extends io.grpc.stub.AbstractStub<VehicleServiceBlockingStub> {
+    private VehicleServiceBlockingStub(io.grpc.Channel channel) {
+      super(channel);
+    }
+
+    private VehicleServiceBlockingStub(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected VehicleServiceBlockingStub build(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      return new VehicleServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.ray.vehicle.grpc.Vehicle addVehicle(com.ray.vehicle.grpc.Vehicle request) {
+      return blockingUnaryCall(
+          getChannel(), getAddVehicleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.ray.vehicle.grpc.Vehicle> getVehicles(
+        com.ray.vehicle.grpc.VehicleFilter request) {
+      return blockingServerStreamingCall(
+          getChannel(), getGetVehiclesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.ray.vehicle.grpc.Vehicle update(com.ray.vehicle.grpc.Vehicle request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.ray.vehicle.grpc.VehicleCategory> getCategories(
+        com.ray.vehicle.grpc.Empty request) {
+      return blockingServerStreamingCall(
+          getChannel(), getGetCategoriesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.ray.vehicle.grpc.Availability confirmAvailability(com.ray.vehicle.grpc.Vehicle request) {
+      return blockingUnaryCall(
+          getChannel(), getConfirmAvailabilityMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.ray.vehicle.grpc.Vehicle getVehicle(com.ray.vehicle.grpc.Vehicle request) {
+      return blockingUnaryCall(
+          getChannel(), getGetVehicleMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   */
+  public static final class VehicleServiceFutureStub extends io.grpc.stub.AbstractStub<VehicleServiceFutureStub> {
+    private VehicleServiceFutureStub(io.grpc.Channel channel) {
+      super(channel);
+    }
+
+    private VehicleServiceFutureStub(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected VehicleServiceFutureStub build(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      return new VehicleServiceFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.vehicle.grpc.Vehicle> addVehicle(
+        com.ray.vehicle.grpc.Vehicle request) {
+      return futureUnaryCall(
+          getChannel().newCall(getAddVehicleMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.vehicle.grpc.Vehicle> update(
+        com.ray.vehicle.grpc.Vehicle request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.vehicle.grpc.Availability> confirmAvailability(
+        com.ray.vehicle.grpc.Vehicle request) {
+      return futureUnaryCall(
+          getChannel().newCall(getConfirmAvailabilityMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.vehicle.grpc.Vehicle> getVehicle(
+        com.ray.vehicle.grpc.Vehicle request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetVehicleMethod(), getCallOptions()), request);
+    }
+  }
+
+  private static final int METHODID_ADD_VEHICLE = 0;
+  private static final int METHODID_GET_VEHICLES = 1;
+  private static final int METHODID_UPDATE = 2;
+  private static final int METHODID_GET_CATEGORIES = 3;
+  private static final int METHODID_CONFIRM_AVAILABILITY = 4;
+  private static final int METHODID_GET_VEHICLE = 5;
+  private static final int METHODID_ADD_CATEGORY = 6;
+
+  private static final class MethodHandlers<Req, Resp> implements
+      io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
+    private final VehicleServiceImplBase serviceImpl;
+    private final int methodId;
+
+    MethodHandlers(VehicleServiceImplBase serviceImpl, int methodId) {
+      this.serviceImpl = serviceImpl;
+      this.methodId = methodId;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        case METHODID_ADD_VEHICLE:
+          serviceImpl.addVehicle((com.ray.vehicle.grpc.Vehicle) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle>) responseObserver);
+          break;
+        case METHODID_GET_VEHICLES:
+          serviceImpl.getVehicles((com.ray.vehicle.grpc.VehicleFilter) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle>) responseObserver);
+          break;
+        case METHODID_UPDATE:
+          serviceImpl.update((com.ray.vehicle.grpc.Vehicle) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle>) responseObserver);
+          break;
+        case METHODID_GET_CATEGORIES:
+          serviceImpl.getCategories((com.ray.vehicle.grpc.Empty) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory>) responseObserver);
+          break;
+        case METHODID_CONFIRM_AVAILABILITY:
+          serviceImpl.confirmAvailability((com.ray.vehicle.grpc.Vehicle) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Availability>) responseObserver);
+          break;
+        case METHODID_GET_VEHICLE:
+          serviceImpl.getVehicle((com.ray.vehicle.grpc.Vehicle) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Vehicle>) responseObserver);
+          break;
+        default:
+          throw new AssertionError();
+      }
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public io.grpc.stub.StreamObserver<Req> invoke(
+        io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        case METHODID_ADD_CATEGORY:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.addCategory(
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.VehicleCategory>) responseObserver);
+        default:
+          throw new AssertionError();
+      }
+    }
+  }
+
+  private static abstract class VehicleServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    VehicleServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return com.ray.vehicle.grpc.VehicleServiceImpl.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("VehicleService");
+    }
+  }
+
+  private static final class VehicleServiceFileDescriptorSupplier
+      extends VehicleServiceBaseDescriptorSupplier {
+    VehicleServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class VehicleServiceMethodDescriptorSupplier
+      extends VehicleServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    VehicleServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (VehicleServiceGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new VehicleServiceFileDescriptorSupplier())
+              .addMethod(getAddVehicleMethod())
+              .addMethod(getGetVehiclesMethod())
+              .addMethod(getUpdateMethod())
+              .addMethod(getAddCategoryMethod())
+              .addMethod(getGetCategoriesMethod())
+              .addMethod(getConfirmAvailabilityMethod())
+              .addMethod(getGetVehicleMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
+}

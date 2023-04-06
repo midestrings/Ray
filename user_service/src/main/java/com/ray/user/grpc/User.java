@@ -32,6 +32,7 @@ private static final long serialVersionUID = 0L;
     contentType_ = "";
     profilePicture_ = com.google.protobuf.ByteString.EMPTY;
     password_ = "";
+    loadImage_ = false;
   }
 
   @java.lang.Override
@@ -154,6 +155,11 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             password_ = s;
+            break;
+          }
+          case 144: {
+
+            loadImage_ = input.readBool();
             break;
           }
           default: {
@@ -712,6 +718,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int LOADIMAGE_FIELD_NUMBER = 18;
+  private boolean loadImage_;
+  /**
+   * <code>bool loadImage = 18;</code>
+   */
+  public boolean getLoadImage() {
+    return loadImage_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -774,6 +789,9 @@ private static final long serialVersionUID = 0L;
     if (!getPasswordBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 17, password_);
     }
+    if (loadImage_ != false) {
+      output.writeBool(18, loadImage_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -833,6 +851,10 @@ private static final long serialVersionUID = 0L;
     if (!getPasswordBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, password_);
     }
+    if (loadImage_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(18, loadImage_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -881,6 +903,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getProfilePicture());
     result = result && getPassword()
         .equals(other.getPassword());
+    result = result && (getLoadImage()
+        == other.getLoadImage());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -926,6 +950,9 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getProfilePicture().hashCode();
     hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
     hash = (53 * hash) + getPassword().hashCode();
+    hash = (37 * hash) + LOADIMAGE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getLoadImage());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1096,6 +1123,8 @@ private static final long serialVersionUID = 0L;
 
       password_ = "";
 
+      loadImage_ = false;
+
       return this;
     }
 
@@ -1148,6 +1177,7 @@ private static final long serialVersionUID = 0L;
       result.contentType_ = contentType_;
       result.profilePicture_ = profilePicture_;
       result.password_ = password_;
+      result.loadImage_ = loadImage_;
       result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
@@ -1281,6 +1311,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getPassword().isEmpty()) {
         password_ = other.password_;
         onChanged();
+      }
+      if (other.getLoadImage() != false) {
+        setLoadImage(other.getLoadImage());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -2543,6 +2576,32 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       password_ = value;
+      onChanged();
+      return this;
+    }
+
+    private boolean loadImage_ ;
+    /**
+     * <code>bool loadImage = 18;</code>
+     */
+    public boolean getLoadImage() {
+      return loadImage_;
+    }
+    /**
+     * <code>bool loadImage = 18;</code>
+     */
+    public Builder setLoadImage(boolean value) {
+      
+      loadImage_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool loadImage = 18;</code>
+     */
+    public Builder clearLoadImage() {
+      
+      loadImage_ = false;
       onChanged();
       return this;
     }

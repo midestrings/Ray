@@ -38,7 +38,7 @@ public class EmailService {
         Session session = Session.getInstance(mailProperties, auth);
         try {
             MimeMessage message = new MimeMessage(session);
-            var from = StringUtil.isNullOrEmpty(email.getFrom()) ? getProperties().getProperty("sender_email") : email.getFrom();
+            var from = Utility.isEmpty(email.getFrom()) ? getProperties().getProperty("sender_email") : email.getFrom();
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email.getTo()));
             message.setSubject(email.getSubject());

@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ray.vehicle.grpc";
+option java_outer_classname = "VehicleServiceImpl";
+package vehicle;
+
+service VehicleService {
+  rpc addVehicle (Vehicle) returns (Vehicle) {}
+  rpc getVehicles (VehicleFilter) returns (stream Vehicle) {}
+  rpc update (Vehicle) returns (Vehicle) {}
+  rpc addCategory (stream VehicleCategory) returns (stream VehicleCategory) {}
+  rpc getCategories (Empty) returns (stream VehicleCategory) {}
+  rpc confirmAvailability(Vehicle) returns (Availability) {}
+  rpc getVehicle(Vehicle) returns (Vehicle) {}
+
+}
+
+message Vehicle {
+  string make = 1;
+  string model = 2;
+  int32 year = 3;
+  string color = 4;
+  int32 mileage = 5;
+  double rent_price = 6;
+  string engine_type = 7;
+  string fuel_type = 8;
+  string transmission = 9;
+  double ride_price = 10;
+  string fileName = 11;
+  bytes image = 12;
+  string owner_name = 13;
+  string owner_email = 14;
+  bool is_available_for_rent = 15;
+  bool is_available_for_ride_hailing = 16;
+  VehicleCategory category = 17;
+  int32 id = 18;
+  string plate_no = 19;
+  string body_type = 20;
+  bool loadImage = 21;
+}
+
+message Availability {
+  bool is_available_for_rent = 1;
+  bool is_available_for_ride_hailing = 2;
+}
+
+message VehicleCategory {
+  string name = 1;
+  string description = 2;
+  string fileName = 3;
+  bytes image = 4;
+  int32 id = 6;
+  bool loadImage = 7;
+}
+
+message VehicleFilter {
+
+}
+
+message Empty {}

@@ -4,11 +4,11 @@
 package com.ray.user.grpc;
 
 /**
- * Protobuf type {@code user.Email}
+ * Protobuf type {@code email.Email}
  */
 public  final class Email extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:user.Email)
+    // @@protoc_insertion_point(message_implements:email.Email)
     EmailOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use Email.newBuilder() to construct.
@@ -91,13 +91,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ray.user.grpc.EmailServiceImpl.internal_static_user_Email_descriptor;
+    return com.ray.user.grpc.EmailServiceImpl.internal_static_email_Email_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ray.user.grpc.EmailServiceImpl.internal_static_user_Email_fieldAccessorTable
+    return com.ray.user.grpc.EmailServiceImpl.internal_static_email_Email_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.ray.user.grpc.Email.class, com.ray.user.grpc.Email.Builder.class);
   }
@@ -424,21 +424,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code user.Email}
+   * Protobuf type {@code email.Email}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:user.Email)
+      // @@protoc_insertion_point(builder_implements:email.Email)
       com.ray.user.grpc.EmailOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ray.user.grpc.EmailServiceImpl.internal_static_user_Email_descriptor;
+      return com.ray.user.grpc.EmailServiceImpl.internal_static_email_Email_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ray.user.grpc.EmailServiceImpl.internal_static_user_Email_fieldAccessorTable
+      return com.ray.user.grpc.EmailServiceImpl.internal_static_email_Email_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.ray.user.grpc.Email.class, com.ray.user.grpc.Email.Builder.class);
     }
@@ -475,7 +475,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ray.user.grpc.EmailServiceImpl.internal_static_user_Email_descriptor;
+      return com.ray.user.grpc.EmailServiceImpl.internal_static_email_Email_descriptor;
     }
 
     @java.lang.Override
@@ -880,10 +880,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:user.Email)
+    // @@protoc_insertion_point(builder_scope:email.Email)
   }
 
-  // @@protoc_insertion_point(class_scope:user.Email)
+  // @@protoc_insertion_point(class_scope:email.Email)
   private static final com.ray.user.grpc.Email DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new com.ray.user.grpc.Email();

@@ -4,7 +4,7 @@
 package com.ray.user.grpc;
 
 /**
- * Protobuf enum {@code user.MailStatus}
+ * Protobuf enum {@code email.MailStatus}
  */
 public enum MailStatus
     implements com.google.protobuf.ProtocolMessageEnum {
@@ -107,6 +107,6 @@ public enum MailStatus
     this.value = value;
   }
 
-  // @@protoc_insertion_point(enum_scope:user.MailStatus)
+  // @@protoc_insertion_point(enum_scope:email.MailStatus)
 }
 

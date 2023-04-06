@@ -4,7 +4,7 @@
 package com.ray.user.grpc;
 
 public interface EmailOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:user.Email)
+    // @@protoc_insertion_point(interface_extends:email.Email)
     com.google.protobuf.MessageOrBuilder {
 
   /**

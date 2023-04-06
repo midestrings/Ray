@@ -38,6 +38,7 @@ public class UserService {
     public Optional<User> createUser(User user) {
         try {
             validateUser(user);
+            if (getUserByEmailWithoutSession(user.getEmail()).isPresent()) throw new RuntimeException("User with email already exists");
             var userEntity = UserEntity.getInstance(user);
 
             var roles = new LinkedList<UserEntityRole>();
@@ -46,6 +47,7 @@ public class UserService {
             userEntity.setRoles(roles);
             userEntity.setPassword(BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray()));
             userEntity.setOtp(generateOTP());
+            userEntity.setStatus(Status.Unverified);
             userService.save(userEntity);
             EmailUtil.sendEmail("Verify your email", user.getEmail(),
                     String.format("Verify your email on the Ray app.\nHere is your one time passcode <strong>%s</strong>", userEntity.getOtp()));
@@ -64,10 +66,7 @@ public class UserService {
             return Optional.of(Authentication.newBuilder().setError("Enter valid password").build());
         }
         try {
-            var session = HibernateUtil.getSession();
-            var savedUser = getUserByEmail(user.getEmail(), session).orElse(null);
-            session.close();
-
+            var savedUser = getUserByEmailWithoutSession(user.getEmail()).orElse(null);
             if (savedUser == null || !BCrypt.verifyer().verify(user.getPassword().toCharArray(), savedUser.getPassword()).verified) {
                 return Optional.of(Authentication.newBuilder().setError("Invalid credentials").build());
             }
@@ -89,7 +88,7 @@ public class UserService {
     }
 
     public Optional<Authentication> refreshToken(Authentication auth) {
-        if (StringUtil.isNullOrEmpty(auth.getRefreshToken())) {
+        if (Utility.isEmpty(auth.getRefreshToken())) {
             return Optional.of(Authentication.newBuilder().setError("Invalid refresh token").build());
         }
         try {
@@ -119,9 +118,7 @@ public class UserService {
     public Optional<User> updateUser(User user) {
         try {
             validateUser(user);
-            var session = HibernateUtil.getSession();
-            var savedUser = getUserByEmail(user.getEmail(), session).orElseThrow();
-            session.close();
+            var savedUser = getUserByEmailWithoutSession(user.getEmail()).orElseThrow();
             UserEntity.updateInstance(user, savedUser);
             userService.update(savedUser);
             return Optional.of(UserEntity.getUser(savedUser, false));
@@ -136,7 +133,7 @@ public class UserService {
         if (Utility.isInvalidEmail(user.getEmail())) return Optional.empty();
         try (var session = HibernateUtil.getSession()) {
             var savedUser = getUserByEmail(user.getEmail(), session).orElseThrow();
-            return Optional.of(UserEntity.getUser(savedUser, true));
+            return Optional.of(UserEntity.getUser(savedUser, user.getLoadImage()));
         } catch (Exception e) {
             HibernateUtil.closeSession();
             LOG.error(e.getMessage(), e);
@@ -149,12 +146,11 @@ public class UserService {
             return Optional.of(Authentication.newBuilder().setError("Invalid Email").build());
         }
         try {
-            var session = HibernateUtil.getSession();
-            var savedUser = getUserByEmail(user.getEmail(), session).orElseThrow();
-            session.close();
+            var savedUser = getUserByEmailWithoutSession(user.getEmail()).orElseThrow();
             if (!savedUser.getOtp().equals(user.getOtp())) {
                 return Optional.of(Authentication.newBuilder().setError("Invalid OTP").build());
             }
+            savedUser.setStatus(Status.Active);
             return getAuthentication(savedUser);
 
         } catch (Exception e) {
@@ -186,6 +182,13 @@ public class UserService {
         return savedUser != null ? Optional.of(savedUser) : Optional.empty();
     }
 
+    private Optional<UserEntity> getUserByEmailWithoutSession(String email) {
+        var session = HibernateUtil.getSession();
+        var savedUser = getUserByEmail(email, session).orElse(null);
+        session.close();
+        return savedUser != null ? Optional.of(savedUser) : Optional.empty();
+    }
+
     private String generateToken(UserEntity user) {
         var secret = getProperties().getProperty("jwt_secret_key");
 
@@ -205,8 +208,8 @@ public class UserService {
     private void validateUser(User user) throws RuntimeException {
         if (Utility.isInvalidEmail(user.getEmail())) throw new RuntimeException("Invalid email");
         if (Utility.isInvalidPassword(user.getPassword())) throw new RuntimeException("Invalid password");
-        if (StringUtil.isNullOrEmpty(user.getFirstName())) throw new RuntimeException("Invalid name");
-        if (StringUtil.isNullOrEmpty(user.getType()) && !Type.types.contains(user.getType()))
+        if (Utility.isEmpty(user.getFirstName())) throw new RuntimeException("Invalid name");
+        if (Utility.isEmpty(user.getType()) && !Type.types.contains(user.getType()))
             throw new RuntimeException("Invalid type");
     }
 

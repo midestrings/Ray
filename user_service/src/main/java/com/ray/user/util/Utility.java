@@ -8,6 +8,10 @@ public final class Utility {
         return email == null || !email.matches(regex);
     }
 
+    public static boolean isEmpty(String string) {
+        return string == null || string.isBlank();
+    }
+
     public static boolean isInvalidPassword(String password) {
         return password == null || password.length() < 8;
     }

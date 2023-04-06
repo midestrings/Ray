@@ -24,7 +24,7 @@ public final class MailerGrpc {
 
   private MailerGrpc() {}
 
-  public static final String SERVICE_NAME = "user.Mailer";
+  public static final String SERVICE_NAME = "email.Mailer";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.ray.user.grpc.Email,
@@ -45,7 +45,7 @@ public final class MailerGrpc {
               io.grpc.MethodDescriptor.<com.ray.user.grpc.Email, com.ray.user.grpc.EmailResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "user.Mailer", "sendMail"))
+                  "email.Mailer", "sendMail"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ray.user.grpc.Email.getDefaultInstance()))

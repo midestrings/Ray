@@ -175,4 +175,9 @@ public interface UserOrBuilder extends
    */
   com.google.protobuf.ByteString
       getPasswordBytes();
+
+  /**
+   * <code>bool loadImage = 18;</code>
+   */
+  boolean getLoadImage();
 }

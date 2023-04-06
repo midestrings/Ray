@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.ray.user.grpc";
 option java_outer_classname = "EmailServiceImpl";
-package user;
+package email;
 
 service Mailer{
   rpc sendMail (stream Email) returns (stream EmailResponse) {
