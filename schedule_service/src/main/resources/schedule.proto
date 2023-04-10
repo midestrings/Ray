@@ -11,6 +11,21 @@ message Reservation {
   string client_email = 3;
   string client_name = 4;
   string type = 5;
+  string pickup_address = 6;
+  string destination_address = 7;
+  DateTime pickup_time = 8;
+  DateTime drop_off_time = 9;
+  string drop_off_address = 10;
+  DateTime expected_end_time = 11;
+  double pickup_latitude = 12;
+  double pickup_longitude = 13;
+  double drop_off_latitude = 14;
+  double drop_off_longitude = 15;
+  double destination_latitude = 16;
+  double destination_longitude = 17;
+  string status = 18;
+  double rating = 19;
+  string vehicle_plate_no = 20;
 }
 
 message DateTime {
