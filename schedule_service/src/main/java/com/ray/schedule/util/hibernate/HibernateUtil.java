@@ -1,5 +1,6 @@
 package com.ray.schedule.util.hibernate;
 
+import com.ray.schedule.entity.ReservationEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -35,8 +36,7 @@ public final class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         Configuration configuration = new Configuration();
         configuration.setProperties(getProperties());
-//        configuration.addAnnotatedClass(VehicleCategoryEntity.class);
-
+        configuration.addAnnotatedClass(ReservationEntity.class);
         return configuration.buildSessionFactory();
     }
 }

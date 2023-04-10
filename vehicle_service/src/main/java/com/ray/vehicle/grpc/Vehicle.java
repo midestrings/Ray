@@ -35,6 +35,7 @@ private static final long serialVersionUID = 0L;
     id_ = 0;
     plateNo_ = "";
     bodyType_ = "";
+    loadImage_ = false;
   }
 
   @java.lang.Override
@@ -178,6 +179,11 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             bodyType_ = s;
+            break;
+          }
+          case 168: {
+
+            loadImage_ = input.readBool();
             break;
           }
           default: {
@@ -679,6 +685,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int LOADIMAGE_FIELD_NUMBER = 21;
+  private boolean loadImage_;
+  /**
+   * <code>bool loadImage = 21;</code>
+   */
+  public boolean getLoadImage() {
+    return loadImage_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -752,6 +767,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!getBodyTypeBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 20, bodyType_);
+    }
+    if (loadImage_ != false) {
+      output.writeBool(21, loadImage_);
     }
     unknownFields.writeTo(output);
   }
@@ -831,6 +849,10 @@ private static final long serialVersionUID = 0L;
     if (!getBodyTypeBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(20, bodyType_);
     }
+    if (loadImage_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(21, loadImage_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -894,6 +916,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getPlateNo());
     result = result && getBodyType()
         .equals(other.getBodyType());
+    result = result && (getLoadImage()
+        == other.getLoadImage());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -951,6 +975,9 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getPlateNo().hashCode();
     hash = (37 * hash) + BODY_TYPE_FIELD_NUMBER;
     hash = (53 * hash) + getBodyType().hashCode();
+    hash = (37 * hash) + LOADIMAGE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getLoadImage());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1128,6 +1155,8 @@ private static final long serialVersionUID = 0L;
 
       bodyType_ = "";
 
+      loadImage_ = false;
+
       return this;
     }
 
@@ -1178,6 +1207,7 @@ private static final long serialVersionUID = 0L;
       result.id_ = id_;
       result.plateNo_ = plateNo_;
       result.bodyType_ = bodyType_;
+      result.loadImage_ = loadImage_;
       onBuilt();
       return result;
     }
@@ -1296,6 +1326,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getBodyType().isEmpty()) {
         bodyType_ = other.bodyType_;
         onChanged();
+      }
+      if (other.getLoadImage() != false) {
+        setLoadImage(other.getLoadImage());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -2409,6 +2442,32 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       bodyType_ = value;
+      onChanged();
+      return this;
+    }
+
+    private boolean loadImage_ ;
+    /**
+     * <code>bool loadImage = 21;</code>
+     */
+    public boolean getLoadImage() {
+      return loadImage_;
+    }
+    /**
+     * <code>bool loadImage = 21;</code>
+     */
+    public Builder setLoadImage(boolean value) {
+      
+      loadImage_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool loadImage = 21;</code>
+     */
+    public Builder clearLoadImage() {
+      
+      loadImage_ = false;
       onChanged();
       return this;
     }

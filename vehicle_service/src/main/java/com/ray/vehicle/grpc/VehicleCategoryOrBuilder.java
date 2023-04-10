@@ -43,31 +43,12 @@ public interface VehicleCategoryOrBuilder extends
   com.google.protobuf.ByteString getImage();
 
   /**
-   * <code>int32 id = 18;</code>
+   * <code>int32 id = 6;</code>
    */
   int getId();
 
   /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
+   * <code>bool loadImage = 7;</code>
    */
-  java.util.List<com.ray.vehicle.grpc.Vehicle> 
-      getVehiclesList();
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  com.ray.vehicle.grpc.Vehicle getVehicles(int index);
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  int getVehiclesCount();
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  java.util.List<? extends com.ray.vehicle.grpc.VehicleOrBuilder> 
-      getVehiclesOrBuilderList();
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  com.ray.vehicle.grpc.VehicleOrBuilder getVehiclesOrBuilder(
-      int index);
+  boolean getLoadImage();
 }

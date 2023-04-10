@@ -169,4 +169,9 @@ public interface VehicleOrBuilder extends
    */
   com.google.protobuf.ByteString
       getBodyTypeBytes();
+
+  /**
+   * <code>bool loadImage = 21;</code>
+   */
+  boolean getLoadImage();
 }

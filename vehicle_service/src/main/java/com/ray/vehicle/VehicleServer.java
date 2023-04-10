@@ -18,7 +18,6 @@ import java.util.Properties;
 
 /**
  * Hello world!
- *
  */
 public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     private static final Logger LOG = LogManager.getLogger(VehicleServer.class);
@@ -27,7 +26,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     private final VehicleService service = new VehicleService();
 
 
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         loadConfig(args);
         registerAndDiscoverServices();
 
@@ -78,7 +77,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     }
 
     @Override
-    public void confirmAvailability(Vehicle request, StreamObserver<Availability> responseObserver) {
+    public void confirmAvailability(Vehicle request, StreamObserver<Vehicle> responseObserver) {
         responseObserver.onNext(service.confirmAvailability(request));
         responseObserver.onCompleted();
     }
@@ -101,6 +100,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
             throw new RuntimeException(e);
         }
     }
+
     public static void registerAndDiscoverServices() {
         JmDNS jmdns = null;
         try {
@@ -116,6 +116,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
             }
         }
     }
+
     public static Properties getProperties() {
         return properties;
     }
@@ -124,6 +125,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
         public void serviceAdded(ServiceEvent event) {
             LOG.info("Service added: " + event.getInfo());
         }
+
         public void serviceRemoved(ServiceEvent event) {
             LOG.info("Service removed: " + event.getInfo());
             if (event.getInfo().getName().equals("email_service")) {
@@ -132,6 +134,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
                 UserUtil.removeUserStub();
             }
         }
+
         public void serviceResolved(ServiceEvent event) {
             LOG.info("Service resolved: " + event.getInfo());
             ServiceInfo info = event.getInfo();

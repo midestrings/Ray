@@ -3,6 +3,7 @@ package com.ray.vehicle.entity;
 import com.google.protobuf.ByteString;
 import com.ray.vehicle.grpc.Vehicle;
 import com.ray.vehicle.grpc.VehicleCategory;
+import com.ray.vehicle.util.Utility;
 import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import jakarta.persistence.*;
 

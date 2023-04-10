@@ -21,7 +21,7 @@ private static final long serialVersionUID = 0L;
     fileName_ = "";
     image_ = com.google.protobuf.ByteString.EMPTY;
     id_ = 0;
-    vehicles_ = java.util.Collections.emptyList();
+    loadImage_ = false;
   }
 
   @java.lang.Override
@@ -71,18 +71,14 @@ private static final long serialVersionUID = 0L;
             image_ = input.readBytes();
             break;
           }
-          case 42: {
-            if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-              vehicles_ = new java.util.ArrayList<com.ray.vehicle.grpc.Vehicle>();
-              mutable_bitField0_ |= 0x00000020;
-            }
-            vehicles_.add(
-                input.readMessage(com.ray.vehicle.grpc.Vehicle.parser(), extensionRegistry));
-            break;
-          }
-          case 144: {
+          case 48: {
 
             id_ = input.readInt32();
+            break;
+          }
+          case 56: {
+
+            loadImage_ = input.readBool();
             break;
           }
           default: {
@@ -100,9 +96,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-        vehicles_ = java.util.Collections.unmodifiableList(vehicles_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -120,7 +113,6 @@ private static final long serialVersionUID = 0L;
             com.ray.vehicle.grpc.VehicleCategory.class, com.ray.vehicle.grpc.VehicleCategory.Builder.class);
   }
 
-  private int bitField0_;
   public static final int NAME_FIELD_NUMBER = 1;
   private volatile java.lang.Object name_;
   /**
@@ -232,48 +224,22 @@ private static final long serialVersionUID = 0L;
     return image_;
   }
 
-  public static final int ID_FIELD_NUMBER = 18;
+  public static final int ID_FIELD_NUMBER = 6;
   private int id_;
   /**
-   * <code>int32 id = 18;</code>
+   * <code>int32 id = 6;</code>
    */
   public int getId() {
     return id_;
   }
 
-  public static final int VEHICLES_FIELD_NUMBER = 5;
-  private java.util.List<com.ray.vehicle.grpc.Vehicle> vehicles_;
+  public static final int LOADIMAGE_FIELD_NUMBER = 7;
+  private boolean loadImage_;
   /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
+   * <code>bool loadImage = 7;</code>
    */
-  public java.util.List<com.ray.vehicle.grpc.Vehicle> getVehiclesList() {
-    return vehicles_;
-  }
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  public java.util.List<? extends com.ray.vehicle.grpc.VehicleOrBuilder> 
-      getVehiclesOrBuilderList() {
-    return vehicles_;
-  }
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  public int getVehiclesCount() {
-    return vehicles_.size();
-  }
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  public com.ray.vehicle.grpc.Vehicle getVehicles(int index) {
-    return vehicles_.get(index);
-  }
-  /**
-   * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-   */
-  public com.ray.vehicle.grpc.VehicleOrBuilder getVehiclesOrBuilder(
-      int index) {
-    return vehicles_.get(index);
+  public boolean getLoadImage() {
+    return loadImage_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -302,11 +268,11 @@ private static final long serialVersionUID = 0L;
     if (!image_.isEmpty()) {
       output.writeBytes(4, image_);
     }
-    for (int i = 0; i < vehicles_.size(); i++) {
-      output.writeMessage(5, vehicles_.get(i));
-    }
     if (id_ != 0) {
-      output.writeInt32(18, id_);
+      output.writeInt32(6, id_);
+    }
+    if (loadImage_ != false) {
+      output.writeBool(7, loadImage_);
     }
     unknownFields.writeTo(output);
   }
@@ -330,13 +296,13 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(4, image_);
     }
-    for (int i = 0; i < vehicles_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, vehicles_.get(i));
-    }
     if (id_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(18, id_);
+        .computeInt32Size(6, id_);
+    }
+    if (loadImage_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(7, loadImage_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -364,8 +330,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getImage());
     result = result && (getId()
         == other.getId());
-    result = result && getVehiclesList()
-        .equals(other.getVehiclesList());
+    result = result && (getLoadImage()
+        == other.getLoadImage());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -387,10 +353,9 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getImage().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId();
-    if (getVehiclesCount() > 0) {
-      hash = (37 * hash) + VEHICLES_FIELD_NUMBER;
-      hash = (53 * hash) + getVehiclesList().hashCode();
-    }
+    hash = (37 * hash) + LOADIMAGE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getLoadImage());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -519,7 +484,6 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getVehiclesFieldBuilder();
       }
     }
     @java.lang.Override
@@ -535,12 +499,8 @@ private static final long serialVersionUID = 0L;
 
       id_ = 0;
 
-      if (vehiclesBuilder_ == null) {
-        vehicles_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-      } else {
-        vehiclesBuilder_.clear();
-      }
+      loadImage_ = false;
+
       return this;
     }
 
@@ -567,23 +527,12 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.ray.vehicle.grpc.VehicleCategory buildPartial() {
       com.ray.vehicle.grpc.VehicleCategory result = new com.ray.vehicle.grpc.VehicleCategory(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       result.name_ = name_;
       result.description_ = description_;
       result.fileName_ = fileName_;
       result.image_ = image_;
       result.id_ = id_;
-      if (vehiclesBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          vehicles_ = java.util.Collections.unmodifiableList(vehicles_);
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.vehicles_ = vehicles_;
-      } else {
-        result.vehicles_ = vehiclesBuilder_.build();
-      }
-      result.bitField0_ = to_bitField0_;
+      result.loadImage_ = loadImage_;
       onBuilt();
       return result;
     }
@@ -650,31 +599,8 @@ private static final long serialVersionUID = 0L;
       if (other.getId() != 0) {
         setId(other.getId());
       }
-      if (vehiclesBuilder_ == null) {
-        if (!other.vehicles_.isEmpty()) {
-          if (vehicles_.isEmpty()) {
-            vehicles_ = other.vehicles_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureVehiclesIsMutable();
-            vehicles_.addAll(other.vehicles_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.vehicles_.isEmpty()) {
-          if (vehiclesBuilder_.isEmpty()) {
-            vehiclesBuilder_.dispose();
-            vehiclesBuilder_ = null;
-            vehicles_ = other.vehicles_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-            vehiclesBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getVehiclesFieldBuilder() : null;
-          } else {
-            vehiclesBuilder_.addAllMessages(other.vehicles_);
-          }
-        }
+      if (other.getLoadImage() != false) {
+        setLoadImage(other.getLoadImage());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -704,7 +630,6 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
     private java.lang.Object name_ = "";
     /**
@@ -944,13 +869,13 @@ private static final long serialVersionUID = 0L;
 
     private int id_ ;
     /**
-     * <code>int32 id = 18;</code>
+     * <code>int32 id = 6;</code>
      */
     public int getId() {
       return id_;
     }
     /**
-     * <code>int32 id = 18;</code>
+     * <code>int32 id = 6;</code>
      */
     public Builder setId(int value) {
       
@@ -959,7 +884,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int32 id = 18;</code>
+     * <code>int32 id = 6;</code>
      */
     public Builder clearId() {
       
@@ -968,244 +893,30 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<com.ray.vehicle.grpc.Vehicle> vehicles_ =
-      java.util.Collections.emptyList();
-    private void ensureVehiclesIsMutable() {
-      if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-        vehicles_ = new java.util.ArrayList<com.ray.vehicle.grpc.Vehicle>(vehicles_);
-        bitField0_ |= 0x00000020;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle.Builder, com.ray.vehicle.grpc.VehicleOrBuilder> vehiclesBuilder_;
-
+    private boolean loadImage_ ;
     /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
+     * <code>bool loadImage = 7;</code>
      */
-    public java.util.List<com.ray.vehicle.grpc.Vehicle> getVehiclesList() {
-      if (vehiclesBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(vehicles_);
-      } else {
-        return vehiclesBuilder_.getMessageList();
-      }
+    public boolean getLoadImage() {
+      return loadImage_;
     }
     /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
+     * <code>bool loadImage = 7;</code>
      */
-    public int getVehiclesCount() {
-      if (vehiclesBuilder_ == null) {
-        return vehicles_.size();
-      } else {
-        return vehiclesBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public com.ray.vehicle.grpc.Vehicle getVehicles(int index) {
-      if (vehiclesBuilder_ == null) {
-        return vehicles_.get(index);
-      } else {
-        return vehiclesBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder setVehicles(
-        int index, com.ray.vehicle.grpc.Vehicle value) {
-      if (vehiclesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureVehiclesIsMutable();
-        vehicles_.set(index, value);
-        onChanged();
-      } else {
-        vehiclesBuilder_.setMessage(index, value);
-      }
+    public Builder setLoadImage(boolean value) {
+      
+      loadImage_ = value;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
+     * <code>bool loadImage = 7;</code>
      */
-    public Builder setVehicles(
-        int index, com.ray.vehicle.grpc.Vehicle.Builder builderForValue) {
-      if (vehiclesBuilder_ == null) {
-        ensureVehiclesIsMutable();
-        vehicles_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        vehiclesBuilder_.setMessage(index, builderForValue.build());
-      }
+    public Builder clearLoadImage() {
+      
+      loadImage_ = false;
+      onChanged();
       return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder addVehicles(com.ray.vehicle.grpc.Vehicle value) {
-      if (vehiclesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureVehiclesIsMutable();
-        vehicles_.add(value);
-        onChanged();
-      } else {
-        vehiclesBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder addVehicles(
-        int index, com.ray.vehicle.grpc.Vehicle value) {
-      if (vehiclesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureVehiclesIsMutable();
-        vehicles_.add(index, value);
-        onChanged();
-      } else {
-        vehiclesBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder addVehicles(
-        com.ray.vehicle.grpc.Vehicle.Builder builderForValue) {
-      if (vehiclesBuilder_ == null) {
-        ensureVehiclesIsMutable();
-        vehicles_.add(builderForValue.build());
-        onChanged();
-      } else {
-        vehiclesBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder addVehicles(
-        int index, com.ray.vehicle.grpc.Vehicle.Builder builderForValue) {
-      if (vehiclesBuilder_ == null) {
-        ensureVehiclesIsMutable();
-        vehicles_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        vehiclesBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder addAllVehicles(
-        java.lang.Iterable<? extends com.ray.vehicle.grpc.Vehicle> values) {
-      if (vehiclesBuilder_ == null) {
-        ensureVehiclesIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, vehicles_);
-        onChanged();
-      } else {
-        vehiclesBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder clearVehicles() {
-      if (vehiclesBuilder_ == null) {
-        vehicles_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-      } else {
-        vehiclesBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public Builder removeVehicles(int index) {
-      if (vehiclesBuilder_ == null) {
-        ensureVehiclesIsMutable();
-        vehicles_.remove(index);
-        onChanged();
-      } else {
-        vehiclesBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public com.ray.vehicle.grpc.Vehicle.Builder getVehiclesBuilder(
-        int index) {
-      return getVehiclesFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public com.ray.vehicle.grpc.VehicleOrBuilder getVehiclesOrBuilder(
-        int index) {
-      if (vehiclesBuilder_ == null) {
-        return vehicles_.get(index);  } else {
-        return vehiclesBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public java.util.List<? extends com.ray.vehicle.grpc.VehicleOrBuilder> 
-         getVehiclesOrBuilderList() {
-      if (vehiclesBuilder_ != null) {
-        return vehiclesBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(vehicles_);
-      }
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public com.ray.vehicle.grpc.Vehicle.Builder addVehiclesBuilder() {
-      return getVehiclesFieldBuilder().addBuilder(
-          com.ray.vehicle.grpc.Vehicle.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public com.ray.vehicle.grpc.Vehicle.Builder addVehiclesBuilder(
-        int index) {
-      return getVehiclesFieldBuilder().addBuilder(
-          index, com.ray.vehicle.grpc.Vehicle.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .vehicle.Vehicle vehicles = 5;</code>
-     */
-    public java.util.List<com.ray.vehicle.grpc.Vehicle.Builder> 
-         getVehiclesBuilderList() {
-      return getVehiclesFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle.Builder, com.ray.vehicle.grpc.VehicleOrBuilder> 
-        getVehiclesFieldBuilder() {
-      if (vehiclesBuilder_ == null) {
-        vehiclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            com.ray.vehicle.grpc.Vehicle, com.ray.vehicle.grpc.Vehicle.Builder, com.ray.vehicle.grpc.VehicleOrBuilder>(
-                vehicles_,
-                ((bitField0_ & 0x00000020) == 0x00000020),
-                getParentForChildren(),
-                isClean());
-        vehicles_ = null;
-      }
-      return vehiclesBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

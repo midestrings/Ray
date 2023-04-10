@@ -2,7 +2,6 @@ package com.ray.vehicle;
 
 import com.ray.vehicle.entity.VehicleCategoryEntity;
 import com.ray.vehicle.entity.VehicleEntity;
-import com.ray.vehicle.grpc.Availability;
 import com.ray.vehicle.grpc.Vehicle;
 import com.ray.vehicle.grpc.VehicleCategory;
 import com.ray.vehicle.grpc.VehicleFilter;
@@ -11,7 +10,6 @@ import com.ray.vehicle.util.email.EmailUtil;
 import com.ray.vehicle.util.hibernate.EntityService;
 import com.ray.vehicle.util.hibernate.HibernateUtil;
 import com.ray.vehicle.util.user.UserUtil;
-import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +26,8 @@ public class VehicleService {
     public Optional<Vehicle> addVehicle(Vehicle vehicle) {
         try {
             validateVehicle(vehicle);
-            if (getVehicleByPlateNoOrId(vehicle.getPlateNo(), vehicle.getId()).isPresent()) throw new RuntimeException("Vehicle with plateNo already exists");
+            if (getVehicleByPlateNoOrId(vehicle.getPlateNo(), vehicle.getId()).isPresent())
+                throw new RuntimeException("Vehicle with plateNo already exists");
             var user = UserUtil.getUser(vehicle.getOwnerEmail()).orElse(null);
             if (user == null) throw new RuntimeException("Invalid owner");
             var vehicleEntity = VehicleEntity.getInstance(vehicle);
@@ -59,7 +58,8 @@ public class VehicleService {
         try {
             validateVehicle(vehicle);
             var savedVehicle = getVehicleByPlateNoOrId(vehicle.getPlateNo(), vehicle.getId()).orElse(null);
-            if (savedVehicle == null) throw new RuntimeException(String.format("Vehicle [%d, %s] not found", vehicle.getId(), vehicle.getPlateNo()));
+            if (savedVehicle == null)
+                throw new RuntimeException(String.format("Vehicle [%d, %s] not found", vehicle.getId(), vehicle.getPlateNo()));
             VehicleEntity.updateInstance(vehicle, savedVehicle);
             categoryService.getById(vehicle.getCategory().getId()).ifPresent(savedVehicle::setVehicleCategory);
             vehicleService.update(savedVehicle);
@@ -94,17 +94,14 @@ public class VehicleService {
         return Optional.empty();
     }
 
-    public Availability confirmAvailability(Vehicle vehicle) {
+    public Vehicle confirmAvailability(Vehicle vehicle) {
         try {
             var savedVehicle = getVehicleByPlateNoOrId(vehicle.getPlateNo(), vehicle.getId()).orElseThrow();
-            return Availability.newBuilder()
-                    .setIsAvailableForRent(savedVehicle.isAvailableForRent())
-                    .setIsAvailableForRideHailing(savedVehicle.isAvailableForRideHailing())
-                    .build();
+            return VehicleEntity.getVehicle(savedVehicle, false);
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
         }
-        return Availability.getDefaultInstance();
+        return Vehicle.getDefaultInstance();
     }
 
     private Optional<VehicleEntity> getVehicleByPlateNoOrId(String plateNo, Integer id) {

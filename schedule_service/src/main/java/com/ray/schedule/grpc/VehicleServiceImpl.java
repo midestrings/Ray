@@ -20,11 +20,6 @@ public final class VehicleServiceImpl {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_vehicle_Vehicle_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_vehicle_Availability_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_vehicle_Availability_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_vehicle_VehicleCategory_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -59,25 +54,23 @@ public final class VehicleServiceImpl {
       "\n\035is_available_for_ride_hailing\030\020 \001(\010\022*\n" +
       "\010category\030\021 \001(\0132\030.vehicle.VehicleCategor" +
       "y\022\n\n\002id\030\022 \001(\005\022\020\n\010plate_no\030\023 \001(\t\022\021\n\tbody_" +
-      "type\030\024 \001(\t\022\021\n\tloadImage\030\025 \001(\010\"T\n\014Availab" +
-      "ility\022\035\n\025is_available_for_rent\030\001 \001(\010\022%\n\035" +
-      "is_available_for_ride_hailing\030\002 \001(\010\"t\n\017V" +
-      "ehicleCategory\022\014\n\004name\030\001 \001(\t\022\023\n\013descript" +
-      "ion\030\002 \001(\t\022\020\n\010fileName\030\003 \001(\t\022\r\n\005image\030\004 \001" +
-      "(\014\022\n\n\002id\030\006 \001(\005\022\021\n\tloadImage\030\007 \001(\010\"\017\n\rVeh" +
-      "icleFilter\"\007\n\005Empty2\257\003\n\016VehicleService\0222" +
-      "\n\naddVehicle\022\020.vehicle.Vehicle\032\020.vehicle" +
-      ".Vehicle\"\000\022;\n\013getVehicles\022\026.vehicle.Vehi" +
-      "cleFilter\032\020.vehicle.Vehicle\"\0000\001\022.\n\006updat" +
-      "e\022\020.vehicle.Vehicle\032\020.vehicle.Vehicle\"\000\022" +
-      "G\n\013addCategory\022\030.vehicle.VehicleCategory" +
-      "\032\030.vehicle.VehicleCategory\"\000(\0010\001\022=\n\rgetC" +
-      "ategories\022\016.vehicle.Empty\032\030.vehicle.Vehi" +
-      "cleCategory\"\0000\001\022@\n\023confirmAvailability\022\020" +
-      ".vehicle.Vehicle\032\025.vehicle.Availability\"" +
-      "\000\0222\n\ngetVehicle\022\020.vehicle.Vehicle\032\020.vehi" +
-      "cle.Vehicle\"\000B-\n\025com.ray.schedule.grpcB\022" +
-      "VehicleServiceImplP\001b\006proto3"
+      "type\030\024 \001(\t\022\021\n\tloadImage\030\025 \001(\010\"t\n\017Vehicle" +
+      "Category\022\014\n\004name\030\001 \001(\t\022\023\n\013description\030\002 " +
+      "\001(\t\022\020\n\010fileName\030\003 \001(\t\022\r\n\005image\030\004 \001(\014\022\n\n\002" +
+      "id\030\006 \001(\005\022\021\n\tloadImage\030\007 \001(\010\"\017\n\rVehicleFi" +
+      "lter\"\007\n\005Empty2\252\003\n\016VehicleService\0222\n\naddV" +
+      "ehicle\022\020.vehicle.Vehicle\032\020.vehicle.Vehic" +
+      "le\"\000\022;\n\013getVehicles\022\026.vehicle.VehicleFil" +
+      "ter\032\020.vehicle.Vehicle\"\0000\001\022.\n\006update\022\020.ve" +
+      "hicle.Vehicle\032\020.vehicle.Vehicle\"\000\022G\n\013add" +
+      "Category\022\030.vehicle.VehicleCategory\032\030.veh" +
+      "icle.VehicleCategory\"\000(\0010\001\022=\n\rgetCategor" +
+      "ies\022\016.vehicle.Empty\032\030.vehicle.VehicleCat" +
+      "egory\"\0000\001\022;\n\023confirmAvailability\022\020.vehic" +
+      "le.Vehicle\032\020.vehicle.Vehicle\"\000\0222\n\ngetVeh" +
+      "icle\022\020.vehicle.Vehicle\032\020.vehicle.Vehicle" +
+      "\"\000B-\n\025com.ray.schedule.grpcB\022VehicleServ" +
+      "iceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -97,26 +90,20 @@ public final class VehicleServiceImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vehicle_Vehicle_descriptor,
         new java.lang.String[] { "Make", "Model", "Year", "Color", "Mileage", "RentPrice", "EngineType", "FuelType", "Transmission", "RidePrice", "FileName", "Image", "OwnerName", "OwnerEmail", "IsAvailableForRent", "IsAvailableForRideHailing", "Category", "Id", "PlateNo", "BodyType", "LoadImage", });
-    internal_static_vehicle_Availability_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_vehicle_Availability_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_vehicle_Availability_descriptor,
-        new java.lang.String[] { "IsAvailableForRent", "IsAvailableForRideHailing", });
     internal_static_vehicle_VehicleCategory_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_vehicle_VehicleCategory_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vehicle_VehicleCategory_descriptor,
         new java.lang.String[] { "Name", "Description", "FileName", "Image", "Id", "LoadImage", });
     internal_static_vehicle_VehicleFilter_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_vehicle_VehicleFilter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vehicle_VehicleFilter_descriptor,
         new java.lang.String[] { });
     internal_static_vehicle_Empty_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_vehicle_Empty_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vehicle_Empty_descriptor,

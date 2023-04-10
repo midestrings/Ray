@@ -11,7 +11,7 @@ service VehicleService {
   rpc update (Vehicle) returns (Vehicle) {}
   rpc addCategory (stream VehicleCategory) returns (stream VehicleCategory) {}
   rpc getCategories (Empty) returns (stream VehicleCategory) {}
-  rpc confirmAvailability(Vehicle) returns (Availability) {}
+  rpc confirmAvailability(Vehicle) returns (Vehicle) {}
   rpc getVehicle(Vehicle) returns (Vehicle) {}
 
 }
@@ -38,11 +38,6 @@ message Vehicle {
   string plate_no = 19;
   string body_type = 20;
   bool loadImage = 21;
-}
-
-message Availability {
-  bool is_available_for_rent = 1;
-  bool is_available_for_ride_hailing = 2;
 }
 
 message VehicleCategory {

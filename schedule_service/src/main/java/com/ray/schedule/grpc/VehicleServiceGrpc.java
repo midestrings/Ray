@@ -188,21 +188,21 @@ public final class VehicleServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.ray.schedule.grpc.Vehicle,
-      com.ray.schedule.grpc.Availability> getConfirmAvailabilityMethod;
+      com.ray.schedule.grpc.Vehicle> getConfirmAvailabilityMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "confirmAvailability",
       requestType = com.ray.schedule.grpc.Vehicle.class,
-      responseType = com.ray.schedule.grpc.Availability.class,
+      responseType = com.ray.schedule.grpc.Vehicle.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.ray.schedule.grpc.Vehicle,
-      com.ray.schedule.grpc.Availability> getConfirmAvailabilityMethod() {
-    io.grpc.MethodDescriptor<com.ray.schedule.grpc.Vehicle, com.ray.schedule.grpc.Availability> getConfirmAvailabilityMethod;
+      com.ray.schedule.grpc.Vehicle> getConfirmAvailabilityMethod() {
+    io.grpc.MethodDescriptor<com.ray.schedule.grpc.Vehicle, com.ray.schedule.grpc.Vehicle> getConfirmAvailabilityMethod;
     if ((getConfirmAvailabilityMethod = VehicleServiceGrpc.getConfirmAvailabilityMethod) == null) {
       synchronized (VehicleServiceGrpc.class) {
         if ((getConfirmAvailabilityMethod = VehicleServiceGrpc.getConfirmAvailabilityMethod) == null) {
           VehicleServiceGrpc.getConfirmAvailabilityMethod = getConfirmAvailabilityMethod = 
-              io.grpc.MethodDescriptor.<com.ray.schedule.grpc.Vehicle, com.ray.schedule.grpc.Availability>newBuilder()
+              io.grpc.MethodDescriptor.<com.ray.schedule.grpc.Vehicle, com.ray.schedule.grpc.Vehicle>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "vehicle.VehicleService", "confirmAvailability"))
@@ -210,7 +210,7 @@ public final class VehicleServiceGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ray.schedule.grpc.Vehicle.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ray.schedule.grpc.Availability.getDefaultInstance()))
+                  com.ray.schedule.grpc.Vehicle.getDefaultInstance()))
                   .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("confirmAvailability"))
                   .build();
           }
@@ -316,7 +316,7 @@ public final class VehicleServiceGrpc {
     /**
      */
     public void confirmAvailability(com.ray.schedule.grpc.Vehicle request,
-        io.grpc.stub.StreamObserver<com.ray.schedule.grpc.Availability> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ray.schedule.grpc.Vehicle> responseObserver) {
       asyncUnimplementedUnaryCall(getConfirmAvailabilityMethod(), responseObserver);
     }
 
@@ -369,7 +369,7 @@ public final class VehicleServiceGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 com.ray.schedule.grpc.Vehicle,
-                com.ray.schedule.grpc.Availability>(
+                com.ray.schedule.grpc.Vehicle>(
                   this, METHODID_CONFIRM_AVAILABILITY)))
           .addMethod(
             getGetVehicleMethod(),
@@ -443,7 +443,7 @@ public final class VehicleServiceGrpc {
     /**
      */
     public void confirmAvailability(com.ray.schedule.grpc.Vehicle request,
-        io.grpc.stub.StreamObserver<com.ray.schedule.grpc.Availability> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ray.schedule.grpc.Vehicle> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getConfirmAvailabilityMethod(), getCallOptions()), request, responseObserver);
     }
@@ -507,7 +507,7 @@ public final class VehicleServiceGrpc {
 
     /**
      */
-    public com.ray.schedule.grpc.Availability confirmAvailability(com.ray.schedule.grpc.Vehicle request) {
+    public com.ray.schedule.grpc.Vehicle confirmAvailability(com.ray.schedule.grpc.Vehicle request) {
       return blockingUnaryCall(
           getChannel(), getConfirmAvailabilityMethod(), getCallOptions(), request);
     }
@@ -556,7 +556,7 @@ public final class VehicleServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.ray.schedule.grpc.Availability> confirmAvailability(
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.schedule.grpc.Vehicle> confirmAvailability(
         com.ray.schedule.grpc.Vehicle request) {
       return futureUnaryCall(
           getChannel().newCall(getConfirmAvailabilityMethod(), getCallOptions()), request);
@@ -614,7 +614,7 @@ public final class VehicleServiceGrpc {
           break;
         case METHODID_CONFIRM_AVAILABILITY:
           serviceImpl.confirmAvailability((com.ray.schedule.grpc.Vehicle) request,
-              (io.grpc.stub.StreamObserver<com.ray.schedule.grpc.Availability>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.ray.schedule.grpc.Vehicle>) responseObserver);
           break;
         case METHODID_GET_VEHICLE:
           serviceImpl.getVehicle((com.ray.schedule.grpc.Vehicle) request,

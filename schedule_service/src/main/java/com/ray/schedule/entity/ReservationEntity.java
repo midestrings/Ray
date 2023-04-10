@@ -1,7 +1,11 @@
 package com.ray.schedule.entity;
 
+import com.ray.schedule.grpc.DateTime;
+import com.ray.schedule.grpc.Reservation;
+import com.ray.schedule.util.Utility;
 import jakarta.persistence.*;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity(name = "Reservation")
@@ -206,4 +210,68 @@ public class ReservationEntity {
     public void setVehiclePlateNo(String vehiclePlateNo) {
         this.vehiclePlateNo = vehiclePlateNo;
     }
+
+    public static ReservationEntity getInstance(Reservation reservation) {
+        var entity = new ReservationEntity();
+        entity.id = reservation.getId();
+        entity.vehicleId = reservation.getVehicleId();
+        entity.clientEmail = reservation.getClientEmail();
+        entity.clientName = reservation.getClientName();
+        entity.type = reservation.getType();
+        entity.pickupAddress = reservation.getPickupAddress();
+        entity.destinationAddress = reservation.getDestinationAddress();
+        entity.dropOffAddress = reservation.getDropOffAddress();
+        setDefaultFields(entity, reservation);
+        entity.vehiclePlateNo = reservation.getVehiclePlateNo();
+
+        return entity;
+    }
+
+    public static Reservation getReservation(ReservationEntity entity) {
+        return Reservation.newBuilder()
+                .setId(entity.id)
+                .setVehicleId(entity.vehicleId)
+                .setClientEmail(entity.clientEmail)
+                .setClientName(entity.clientName)
+                .setType(entity.type)
+                .setPickupAddress(entity.pickupAddress)
+                .setDestinationAddress(entity.destinationAddress)
+                .setDropOffAddress(entity.dropOffAddress)
+                .setPickupTime(Utility.getDateTime(entity.pickupTime))
+                .setDropOffTime(Utility.getDateTime(entity.dropOffTime))
+                .setExpectedEndTime(Utility.getDateTime(entity.expectedEndTime))
+                .setPickupLatitude(entity.pickupLatitude)
+                .setPickupLongitude(entity.pickupLongitude)
+                .setDropOffLatitude(entity.dropOffLatitude)
+                .setDropOffLongitude(entity.dropOffLongitude)
+                .setDestinationLatitude(entity.destinationLatitude)
+                .setDestinationLongitude(entity.destinationLongitude)
+                .setStatus(entity.status)
+                .setRating(entity.rating)
+                .setVehiclePlateNo(entity.vehiclePlateNo)
+                .build();
+    }
+
+    public static void updateInstance(ReservationEntity entity, Reservation reservation) {
+        entity.pickupAddress = Utility.isEmpty(reservation.getPickupAddress()) ? entity.pickupAddress : reservation.getPickupAddress();
+        entity.destinationAddress = Utility.isEmpty(reservation.getDestinationAddress()) ? entity.destinationAddress : reservation.getDestinationAddress();
+        entity.dropOffAddress = Utility.isEmpty(reservation.getDropOffAddress()) ? entity.dropOffAddress : reservation.getDropOffAddress();
+        setDefaultFields(entity, reservation);
+
+    }
+
+    private static void setDefaultFields(ReservationEntity entity, Reservation reservation) {
+        entity.pickupTime = Utility.getDate(reservation.getPickupTime());
+        entity.dropOffTime = Utility.getDate(reservation.getDropOffTime());
+        entity.expectedEndTime = Utility.getDate(reservation.getExpectedEndTime());
+        entity.pickupLatitude = reservation.getPickupLatitude();
+        entity.pickupLongitude = reservation.getPickupLongitude();
+        entity.dropOffLatitude = reservation.getDropOffLatitude();
+        entity.dropOffLongitude = reservation.getDropOffLongitude();
+        entity.destinationLatitude = reservation.getDestinationLatitude();
+        entity.destinationLongitude = reservation.getDestinationLongitude();
+        entity.status = reservation.getStatus();
+        entity.rating = reservation.getRating();
+    }
+
 }
