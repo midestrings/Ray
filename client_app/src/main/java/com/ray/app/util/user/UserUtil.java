@@ -1,8 +1,8 @@
 package com.ray.app.util.user;
 
 
-import com.ray.schedule.grpc.User;
-import com.ray.schedule.grpc.UserServiceGrpc;
+import com.ray.app.grpc.User;
+import com.ray.app.grpc.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.apache.logging.log4j.LogManager;

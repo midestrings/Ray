@@ -1,7 +1,8 @@
 package com.ray.app.util.vehicle;
 
-import com.ray.schedule.grpc.Vehicle;
-import com.ray.schedule.grpc.VehicleServiceGrpc;
+
+import com.ray.app.grpc.Vehicle;
+import com.ray.app.grpc.VehicleServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.apache.logging.log4j.LogManager;
