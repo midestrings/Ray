@@ -20,7 +20,7 @@ public class ScheduleUtil {
     public static void setServiceStub(ServiceInfo info) {
         LOG.info("IP Resolved for schedule_service - " + info.getPort() + ":" + info.getHostAddress());
         ManagedChannel channel = ManagedChannelBuilder.forAddress(info.getHostAddress(), info.getPort()).usePlaintext().build();
-        serviceStub = ScheduleServiceGrpc.newBlockingStub(channel).withCallCredentials(new BearerToken(getAuth().getToken()));
+        serviceStub = ScheduleServiceGrpc.newBlockingStub(channel);
     }
 
 

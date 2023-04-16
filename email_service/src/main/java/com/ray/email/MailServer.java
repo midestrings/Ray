@@ -3,6 +3,7 @@ package com.ray.email;
 import com.ray.email.grpc.Email;
 import com.ray.email.grpc.EmailResponse;
 import com.ray.email.grpc.MailerGrpc;
+import com.ray.email.util.auth.AuthorizationServerInterceptor;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
@@ -23,13 +24,12 @@ public class MailServer extends MailerGrpc.MailerImplBase {
 
     public static void main(String[] args) {
         loadConfig(args);
-
-        MailServer mailServer = new MailServer();
-
-
-		Server server = null;
+        Server server = null;
 		try {
-			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port"))).addService(mailServer).build().start();
+			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
+                    .addService(new MailServer())
+                    .intercept(new AuthorizationServerInterceptor())
+                    .build().start();
 			LOG.info("Server started....");
             registerService();
 			server.awaitTermination();

@@ -3,9 +3,12 @@ package com.ray.schedule;
 import com.ray.schedule.grpc.Reservation;
 import com.ray.schedule.grpc.ReservationFilter;
 import com.ray.schedule.grpc.ScheduleServiceGrpc;
+import com.ray.schedule.util.auth.AuthorizationServerInterceptor;
 import com.ray.schedule.util.email.EmailUtil;
 import com.ray.schedule.util.user.UserUtil;
 import com.ray.schedule.util.vehicle.VehicleUtil;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +33,21 @@ public class ReservationServer extends ScheduleServiceGrpc.ScheduleServiceImplBa
     private static final ReservationService service = new ReservationService();
     public static void main( String[] args ) {
         loadConfig(args);
-        registerAndDiscoverServices();
+        Server server = null;
+		try {
+			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
+                    .addService(new ReservationServer())
+                    .intercept(new AuthorizationServerInterceptor())
+                    .build().start();
+			LOG.info("Server started....");
+            registerAndDiscoverServices();
+			server.awaitTermination();
+		} catch (IOException | InterruptedException e) {
+            if (server != null) {
+                server.shutdown();
+            }
+            LOG.error(e.getMessage(), e);
+		}
     }
 
 

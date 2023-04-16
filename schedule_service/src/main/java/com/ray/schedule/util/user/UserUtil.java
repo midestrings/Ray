@@ -3,6 +3,8 @@ package com.ray.schedule.util.user;
 
 import com.ray.schedule.grpc.User;
 import com.ray.schedule.grpc.UserServiceGrpc;
+import com.ray.schedule.util.Utility;
+import com.ray.schedule.util.auth.BearerToken;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +33,9 @@ public class UserUtil {
 
     public static Optional<User> getUser(String email) {
         if (serviceStub != null) {
-            var user = serviceStub.getUser(User.newBuilder().setEmail(email).build());
+            var user = serviceStub
+                .withCallCredentials(new BearerToken(Utility::generateToken))
+                .getUser(User.newBuilder().setEmail(email).build());
             return user != null ? Optional.of(user) : Optional.empty();
         }
         return Optional.empty();

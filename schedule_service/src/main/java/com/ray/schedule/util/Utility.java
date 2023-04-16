@@ -1,9 +1,18 @@
 package com.ray.schedule.util;
 
 import com.ray.schedule.grpc.DateTime;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
+
+import static com.ray.schedule.ReservationServer.getProperties;
 
 public final class Utility {
     private Utility() {}
@@ -34,4 +43,18 @@ public final class Utility {
                 .setMinute(calendar.get(Calendar.MINUTE))
                 .setSecond(calendar.get(Calendar.SECOND))
                 .build();
+    }
+
+    public static String generateToken() {
+        var secret = getProperties().getProperty("jwt_secret_key");
+
+        var hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
+        var now = Instant.now();
+        return Jwts.builder()
+                .setSubject("schedule_service")
+                .setId(UUID.randomUUID().toString())
+                .setIssuedAt(Date.from(now))
+                .setExpiration(Date.from(now.plus(5L, ChronoUnit.MINUTES)))
+                .signWith(hmacKey)
+                .compact();
     }}

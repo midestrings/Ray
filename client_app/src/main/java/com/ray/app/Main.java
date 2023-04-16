@@ -18,20 +18,15 @@ import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.InetAddress;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.prefs.Preferences;
 
 /**
  * Hello world!
- *
  */
 public class Main extends Application {
     private final static Logger LOG = LogManager.getLogger(Main.class.getName());
@@ -60,8 +55,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/fxml/home.fxml")));
         Scene scene = new Scene(root);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
+        stage.setTitle("RentMyRide");
         stage.show();
         Utility.setStageIcon(stage);
 
@@ -99,7 +94,7 @@ public class Main extends Application {
     }
 
     public static Authentication getAuth() {
-        return auth;
+        return auth == null ? Authentication.getDefaultInstance() : auth;
     }
 
     public static void setAuth(Authentication auth) {
@@ -114,6 +109,7 @@ public class Main extends Application {
         public void serviceAdded(ServiceEvent event) {
             LOG.info("Service added: " + event.getInfo());
         }
+
         public void serviceRemoved(ServiceEvent event) {
             LOG.info("Service removed: " + event.getInfo());
             if (event.getInfo().getName().equals("user_service")) {
@@ -124,6 +120,7 @@ public class Main extends Application {
                 ScheduleUtil.removeScheduleStub();
             }
         }
+
         public void serviceResolved(ServiceEvent event) {
             LOG.info("Service resolved: " + event.getInfo());
             ServiceInfo info = event.getInfo();

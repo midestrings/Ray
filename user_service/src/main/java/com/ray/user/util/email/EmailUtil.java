@@ -3,6 +3,8 @@ package com.ray.user.util.email;
 import com.ray.user.grpc.Email;
 import com.ray.user.grpc.EmailResponse;
 import com.ray.user.grpc.MailerGrpc;
+import com.ray.user.util.Utility;
+import com.ray.user.util.auth.BearerToken;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -73,7 +75,9 @@ public final class EmailUtil {
                 LOG.info("Finished sending emails");
             }
         };
-        StreamObserver<Email> requestObserver = mailerStub.sendMail(responseObserver);
+        StreamObserver<Email> requestObserver = mailerStub
+                .withCallCredentials(new BearerToken(Utility::generateToken))
+                .sendMail(responseObserver);
         try {
             for (Email email: emailQueue) {
                 LOG.info("Sending email with subject - {} to {}", email.getSubject(), email.getTo());

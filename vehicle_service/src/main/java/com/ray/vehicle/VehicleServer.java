@@ -1,8 +1,11 @@
 package com.ray.vehicle;
 
 import com.ray.vehicle.grpc.*;
+import com.ray.vehicle.util.auth.AuthorizationServerInterceptor;
 import com.ray.vehicle.util.email.EmailUtil;
 import com.ray.vehicle.util.user.UserUtil;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +31,21 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
 
     public static void main(String[] args) {
         loadConfig(args);
-        registerAndDiscoverServices();
+        Server server = null;
+		try {
+			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
+                    .addService(new VehicleServer())
+                    .intercept(new AuthorizationServerInterceptor())
+                    .build().start();
+			LOG.info("Server started....");
+            registerAndDiscoverServices();
+			server.awaitTermination();
+		} catch (IOException | InterruptedException e) {
+            if (server != null) {
+                server.shutdown();
+            }
+            LOG.error(e.getMessage(), e);
+		}
 
     }
 

@@ -1,8 +1,11 @@
 package com.ray.user;
 
 import com.ray.user.grpc.*;
+import com.ray.user.util.auth.AuthorizationServerInterceptor;
 import com.ray.user.util.email.EmailUtil;
 import com.ray.user.util.hibernate.HibernateUtil;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +31,21 @@ public class UserInfoServer extends UserServiceGrpc.UserServiceImplBase {
 
     public static void main( String[] args ) {
         loadConfig(args);
-        registerAndDiscoverServices();
+        Server server = null;
+		try {
+			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
+                    .addService(new UserInfoServer())
+                    .intercept(new AuthorizationServerInterceptor())
+                    .build().start();
+			LOG.info("Server started....");
+            registerAndDiscoverServices();
+			server.awaitTermination();
+		} catch (IOException | InterruptedException e) {
+            if (server != null) {
+                server.shutdown();
+            }
+            LOG.error(e.getMessage(), e);
+		}
 
     }
 

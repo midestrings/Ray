@@ -1,4 +1,4 @@
-package com.ray.app.util.auth;
+package com.ray.user.util.auth;
 
 
 import io.grpc.*;
