@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.ImageCursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200.0" prefWidth="250.0" style="-fx-background-color: #2E3033; -fx-background-radius: 5px;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Vehicle">
+   <children>
+      <HBox alignment="BASELINE_CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <ImageView fitHeight="111.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/car.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label layoutX="21.0" layoutY="123.0" prefHeight="25.0" prefWidth="149.0" text="Mercedes Benz 290" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="14.0" layoutY="162.0" style="-fx-border-color: white; -fx-border-radius: 5px;" text="RENT CAR" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="close_label11" alignment="CENTER" layoutX="85.0" layoutY="162.0" onMouseClicked="#handleCloseLabel" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="23.0" prefWidth="62.0" style="-fx-border-color: white; -fx-border-style: solid; -fx-border-width: 0 0 1px 0;" text="Book Ride" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+         <cursor>
+            <ImageCursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="174.0" layoutY="166.0" prefHeight="16.0" prefWidth="62.0" style="-fx-text-fill: #8F8E8E;" text="\$60/hour" />
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="189.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/icons/rating_icon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="205.0" layoutY="128.0" style="-fx-text-fill: #8F8E8E;" text="4.98" />
+   </children>
+</AnchorPane>

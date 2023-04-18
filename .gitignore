@@ -25,3 +25,4 @@
 hs_err_pid*
 /email_service/target/
 /*/src/main/resources/application-dev.properties
+/client_app/src/main/resources/assets/icons/file.svg

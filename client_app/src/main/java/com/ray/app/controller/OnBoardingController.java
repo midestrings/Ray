@@ -1,5 +1,6 @@
 package com.ray.app.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.ray.app.util.Utility;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,8 +12,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OnBoardingController implements Initializable {
-    public Button ownerButton;
-    public Button clientButton;
+    @FXML
+    public JFXButton ownerButton;
+    @FXML
+    public JFXButton clientButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

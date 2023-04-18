@@ -1,6 +1,7 @@
 package com.ray.app;
 
 import com.ray.app.grpc.Authentication;
+import com.ray.app.grpc.User;
 import com.ray.app.util.Utility;
 import com.ray.app.util.schedule.ScheduleUtil;
 import com.ray.app.util.user.UserUtil;
@@ -34,6 +35,7 @@ public class Main extends Application {
     private static final String host = "_http._tcp.local.";// = "localhost";
     private static final Preferences prefs = Preferences.userRoot().node("/com/ray/preferences");
     private static Authentication auth;
+    private static User user;
 
     public static void main(String[] args) {
         Long startTime = System.currentTimeMillis();
@@ -53,12 +55,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/fxml/home.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/fxml/onboarding.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("RentMyRide");
-        stage.show();
         Utility.setStageIcon(stage);
+        stage.show();
 
     }
 
@@ -99,6 +101,14 @@ public class Main extends Application {
 
     public static void setAuth(Authentication auth) {
         Main.auth = auth;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        Main.user = user;
     }
 
     public static Preferences getPrefs() {

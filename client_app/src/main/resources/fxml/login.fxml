@@ -12,17 +12,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Login">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Login">
    <children>
-      <Text fill="#202125" layoutX="232.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="appName" text="RentMyRide">
+      <Text fill="#202125" layoutX="325.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="appName" text="RentMyRide">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Label layoutX="85.0" layoutY="104.0" prefHeight="16.0" prefWidth="430.0" text="Quickly and easily rent cars or hail rides from wherever you are" />
-      <JFXTextField layoutX="145.0" layoutY="170.0" prefHeight="24.0" prefWidth="310.0" promptText="Email" />
-      <JFXPasswordField layoutX="145.0" layoutY="222.0" prefHeight="24.0" prefWidth="310.0" promptText="Password" />
-      <HBox alignment="CENTER" layoutX="145.0" layoutY="273.0" prefHeight="24.0" prefWidth="310.0" style="-fx-background-radius: 5px; -fx-background-color: #24292E;">
+      <Label layoutX="178.0" layoutY="173.0" prefHeight="16.0" prefWidth="430.0" text="Quickly and easily rent cars or hail rides from wherever you are" />
+      <JFXTextField layoutX="165.0" layoutY="265.0" prefHeight="24.0" prefWidth="470.0" promptText="Email" />
+      <JFXPasswordField layoutX="165.0" layoutY="315.0" prefHeight="24.0" prefWidth="470.0" promptText="Password" />
+      <HBox alignment="CENTER" layoutX="246.0" layoutY="380.0" prefHeight="24.0" prefWidth="310.0" style="-fx-background-radius: 5px; -fx-background-color: #24292E;">
          <children>
             <Label prefHeight="16.0" prefWidth="43.0" text="Log in" textFill="WHITE" />
             <ImageView fitHeight="12.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -35,7 +35,7 @@
             <Insets bottom="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="TOP_CENTER" layoutX="145.0" layoutY="322.0" prefHeight="23.0" prefWidth="310.0">
+      <HBox alignment="TOP_CENTER" layoutX="245.0" layoutY="436.0" prefHeight="23.0" prefWidth="310.0">
          <children>
             <Label fx:id="close_label1" alignment="CENTER" layoutX="726.0" onMouseClicked="#handleCloseLabel" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="23.0" prefWidth="125.0" text="New to RentMyRide?" textFill="#222020">
                <font>
