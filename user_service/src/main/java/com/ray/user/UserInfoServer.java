@@ -70,6 +70,13 @@ public class UserInfoServer extends UserServiceGrpc.UserServiceImplBase {
     }
 
     @Override
+    public void resendOTP(User request, StreamObserver<Authentication> responseObserver) {
+        var auth = userService.resendOTP(request).orElse(Authentication.newBuilder().setError("Authentication Error").build());
+        responseObserver.onNext(auth);
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void updateUser(User request, StreamObserver<User> responseObserver) {
         userService.updateUser(request).ifPresent(responseObserver::onNext);
         responseObserver.onCompleted();

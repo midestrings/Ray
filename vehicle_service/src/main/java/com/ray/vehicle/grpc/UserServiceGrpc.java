@@ -251,6 +251,38 @@ public final class UserServiceGrpc {
      return getGetAllUserMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.ray.vehicle.grpc.User,
+      com.ray.vehicle.grpc.Authentication> getResendOTPMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "resendOTP",
+      requestType = com.ray.vehicle.grpc.User.class,
+      responseType = com.ray.vehicle.grpc.Authentication.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ray.vehicle.grpc.User,
+      com.ray.vehicle.grpc.Authentication> getResendOTPMethod() {
+    io.grpc.MethodDescriptor<com.ray.vehicle.grpc.User, com.ray.vehicle.grpc.Authentication> getResendOTPMethod;
+    if ((getResendOTPMethod = UserServiceGrpc.getResendOTPMethod) == null) {
+      synchronized (UserServiceGrpc.class) {
+        if ((getResendOTPMethod = UserServiceGrpc.getResendOTPMethod) == null) {
+          UserServiceGrpc.getResendOTPMethod = getResendOTPMethod = 
+              io.grpc.MethodDescriptor.<com.ray.vehicle.grpc.User, com.ray.vehicle.grpc.Authentication>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "user.UserService", "resendOTP"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.User.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ray.vehicle.grpc.Authentication.getDefaultInstance()))
+                  .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("resendOTP"))
+                  .build();
+          }
+        }
+     }
+     return getResendOTPMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -327,6 +359,13 @@ public final class UserServiceGrpc {
       asyncUnimplementedUnaryCall(getGetAllUserMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void resendOTP(com.ray.vehicle.grpc.User request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Authentication> responseObserver) {
+      asyncUnimplementedUnaryCall(getResendOTPMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -378,6 +417,13 @@ public final class UserServiceGrpc {
                 com.ray.vehicle.grpc.UserFilter,
                 com.ray.vehicle.grpc.User>(
                   this, METHODID_GET_ALL_USER)))
+          .addMethod(
+            getResendOTPMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.ray.vehicle.grpc.User,
+                com.ray.vehicle.grpc.Authentication>(
+                  this, METHODID_RESEND_OTP)))
           .build();
     }
   }
@@ -455,6 +501,14 @@ public final class UserServiceGrpc {
       asyncServerStreamingCall(
           getChannel().newCall(getGetAllUserMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void resendOTP(com.ray.vehicle.grpc.User request,
+        io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Authentication> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getResendOTPMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -524,6 +578,13 @@ public final class UserServiceGrpc {
       return blockingServerStreamingCall(
           getChannel(), getGetAllUserMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public com.ray.vehicle.grpc.Authentication resendOTP(com.ray.vehicle.grpc.User request) {
+      return blockingUnaryCall(
+          getChannel(), getResendOTPMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -591,6 +652,14 @@ public final class UserServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getActivateUserMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ray.vehicle.grpc.Authentication> resendOTP(
+        com.ray.vehicle.grpc.User request) {
+      return futureUnaryCall(
+          getChannel().newCall(getResendOTPMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_USER = 0;
@@ -600,6 +669,7 @@ public final class UserServiceGrpc {
   private static final int METHODID_GET_USER = 4;
   private static final int METHODID_ACTIVATE_USER = 5;
   private static final int METHODID_GET_ALL_USER = 6;
+  private static final int METHODID_RESEND_OTP = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -645,6 +715,10 @@ public final class UserServiceGrpc {
         case METHODID_GET_ALL_USER:
           serviceImpl.getAllUser((com.ray.vehicle.grpc.UserFilter) request,
               (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.User>) responseObserver);
+          break;
+        case METHODID_RESEND_OTP:
+          serviceImpl.resendOTP((com.ray.vehicle.grpc.User) request,
+              (io.grpc.stub.StreamObserver<com.ray.vehicle.grpc.Authentication>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -714,6 +788,7 @@ public final class UserServiceGrpc {
               .addMethod(getGetUserMethod())
               .addMethod(getActivateUserMethod())
               .addMethod(getGetAllUserMethod())
+              .addMethod(getResendOTPMethod())
               .build();
         }
       }

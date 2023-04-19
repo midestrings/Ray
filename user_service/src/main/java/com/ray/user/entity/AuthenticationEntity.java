@@ -11,14 +11,14 @@ import java.time.LocalDate;
 public class AuthenticationEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(length = 1024)
     private String token;
     @Column
     private String refreshToken;
     @Column
     private LocalDate refreshTokenExpiry;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 

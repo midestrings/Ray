@@ -8,7 +8,6 @@ import com.ray.user.util.Role;
 import com.ray.user.util.Status;
 import com.ray.user.util.Type;
 import com.ray.user.util.Utility;
-import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -21,9 +20,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String firstName;
-    @Column
-    private String lastName;
+    private String name;
     @Column(unique = true)
     private String email;
     @Column
@@ -63,20 +60,12 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -192,14 +181,13 @@ public class UserEntity {
     }
 
     public String getFullName() {
-        return firstName + (lastName != null ? " " + lastName : "");
+        return name;
     }
 
     public static User getUser(UserEntity user, boolean loadImage) {
         var userBuilder = User.newBuilder()
                 .setAddress(user.address)
-                .setFirstName(user.firstName)
-                .setLastName(user.lastName)
+                .setName(user.name)
                 .setEmail(user.email)
                 .setPassportNo(user.passportNo)
                 .setPhone(user.phone)
@@ -207,9 +195,8 @@ public class UserEntity {
                 .setNationality(user.nationality)
                 .setType(user.type)
                 .setStatus(user.status);
-        int index = 0;
         for (var role : user.roles) {
-            userBuilder.setRoles(index++, UserEntityRole.getUserRole(role));
+            userBuilder.addRoles(UserEntityRole.getUserRole(role));
         }
         if (loadImage) {
             userBuilder.setFileName(user.fileName)
@@ -222,14 +209,13 @@ public class UserEntity {
     public static UserEntity getInstance(User user) {
         var entity = new UserEntity();
         entity.status = user.getStatus();
-        entity.lastName = user.getLastName();
         entity.contentType = user.getContentType();
         entity.fileName = user.getFileName();
         entity.address = user.getAddress();
         entity.gender = user.getGender();
         entity.nationality = user.getNationality();
         entity.email = user.getEmail();
-        entity.firstName = user.getFirstName();
+        entity.name = user.getName();
         entity.passportNo = user.getPassportNo();
         entity.phone = user.getPhone();
         entity.otp = user.getOtp();
@@ -244,11 +230,10 @@ public class UserEntity {
 
     public static void updateInstance(User user, UserEntity savedUser) {
         savedUser.status = Status.statuses.contains(user.getStatus()) ? user.getStatus() : savedUser.status;
-        savedUser.lastName = Utility.isEmpty(user.getLastName()) ? savedUser.lastName : user.getLastName();
         savedUser.address = Utility.isEmpty(user.getAddress()) ? savedUser.getAddress() : user.getAddress();
         savedUser.gender = Utility.isEmpty(user.getGender()) ? savedUser.gender : user.getGender();
         savedUser.nationality = Utility.isEmpty(user.getNationality()) ? savedUser.nationality : user.getNationality();
-        savedUser.firstName = Utility.isEmpty(user.getFirstName()) ? savedUser.firstName : user.getFirstName();
+        savedUser.name = Utility.isEmpty(user.getName()) ? savedUser.name : user.getName();
         savedUser.passportNo = Utility.isEmpty(user.getPassportNo()) ? savedUser.passportNo : user.getPassportNo();
         savedUser.phone = Utility.isEmpty(user.getPhone()) ? savedUser.phone : user.getPhone();
         savedUser.type = Type.types.contains(user.getType()) ? user.getType() : savedUser.type;

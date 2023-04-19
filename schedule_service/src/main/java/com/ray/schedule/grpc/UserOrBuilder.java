@@ -8,14 +8,14 @@ public interface UserOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string firstName = 2;</code>
+   * <code>string name = 2;</code>
    */
-  java.lang.String getFirstName();
+  java.lang.String getName();
   /**
-   * <code>string firstName = 2;</code>
+   * <code>string name = 2;</code>
    */
   com.google.protobuf.ByteString
-      getFirstNameBytes();
+      getNameBytes();
 
   /**
    * <code>repeated .user.UserRole roles = 3;</code>
@@ -40,16 +40,6 @@ public interface UserOrBuilder extends
    */
   com.ray.schedule.grpc.UserRoleOrBuilder getRolesOrBuilder(
       int index);
-
-  /**
-   * <code>string lastName = 4;</code>
-   */
-  java.lang.String getLastName();
-  /**
-   * <code>string lastName = 4;</code>
-   */
-  com.google.protobuf.ByteString
-      getLastNameBytes();
 
   /**
    * <code>string email = 5;</code>
@@ -180,4 +170,14 @@ public interface UserOrBuilder extends
    * <code>bool loadImage = 18;</code>
    */
   boolean getLoadImage();
+
+  /**
+   * <code>string error = 19;</code>
+   */
+  java.lang.String getError();
+  /**
+   * <code>string error = 19;</code>
+   */
+  com.google.protobuf.ByteString
+      getErrorBytes();
 }

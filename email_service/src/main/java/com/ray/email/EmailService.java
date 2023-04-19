@@ -4,6 +4,8 @@ import com.ray.email.grpc.Email;
 import com.ray.email.grpc.EmailResponse;
 import com.ray.email.grpc.MailStatus;
 import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -13,6 +15,7 @@ import java.util.Properties;
 import static com.ray.email.MailServer.getProperties;
 
 public class EmailService {
+    private static final Logger LOG = LogManager.getLogger(EmailService.class);
     private static EmailService instance;
 
     private EmailService() {}
@@ -44,13 +47,13 @@ public class EmailService {
             message.setSubject(email.getSubject());
             message.setText(email.getBody());
             Transport.send(message);
-            System.out.println("Mail successfully sent");
+            LOG.info("Mail successfully sent");
 
             return EmailResponse.newBuilder()
                     .setStatus(MailStatus.SENT)
                     .build();
         } catch (MessagingException mex) {
-            mex.printStackTrace();
+            LOG.error(mex.getMessage(), mex);
             return EmailResponse.newBuilder()
                     .setStatus(MailStatus.ERROR)
                     .build();

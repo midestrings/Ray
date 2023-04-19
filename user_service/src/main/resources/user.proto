@@ -13,12 +13,12 @@ service UserService {
   rpc getUser (User) returns (User) {}
   rpc activateUser (User) returns (Authentication) {}
   rpc getAllUser (UserFilter) returns (stream User) {}
+  rpc resendOTP (User) returns (Authentication) {}
 }
 
 message User {
-  string firstName = 2;
+  string name = 2;
   repeated UserRole roles = 3;
-  string lastName = 4;
   string email = 5;
   string phone = 6;
   string gender = 7;
@@ -33,6 +33,7 @@ message User {
   bytes profilePicture = 16;
   string password = 17;
   bool loadImage = 18;
+  string error = 19;
 }
 
 message UserRole {

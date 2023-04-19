@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.ImageCursor?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.OTPController">
    <children>
       <Text fill="#202125" layoutX="325.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RentMyRide">
          <font>
@@ -20,11 +19,10 @@
          </font>
       </Text>
       <Label layoutX="178.0" layoutY="173.0" prefHeight="16.0" prefWidth="430.0" text="Quickly and easily rent cars or hail rides from wherever you are" />
-      <JFXTextField fx:id="emailField" layoutX="165.0" layoutY="265.0" prefHeight="24.0" prefWidth="470.0" promptText="Email" />
-      <JFXPasswordField fx:id="passwordField" layoutX="165.0" layoutY="315.0" prefHeight="24.0" prefWidth="470.0" promptText="Password" />
-      <HBox fx:id="login" alignment="CENTER" layoutX="246.0" layoutY="380.0" prefHeight="24.0" prefWidth="310.0" style="-fx-background-radius: 5px; -fx-background-color: #24292E; -fx-cursor: hand;">
+      <JFXTextField fx:id="otpField" alignment="CENTER" layoutX="166.0" layoutY="288.0" prefHeight="24.0" prefWidth="470.0" promptText="OTP" />
+      <HBox fx:id="verify" alignment="CENTER" layoutX="246.0" layoutY="380.0" prefHeight="24.0" prefWidth="310.0" style="-fx-background-radius: 5px; -fx-background-color: #24292E; -fx-cursor: hand;">
          <children>
-            <Label prefHeight="16.0" prefWidth="43.0" text="Log in" textFill="WHITE" />
+            <Label prefHeight="16.0" prefWidth="43.0" text="Verify" textFill="WHITE" />
             <ImageView fitHeight="12.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/icons/icon_login.png" />
@@ -37,7 +35,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" layoutX="245.0" layoutY="436.0" prefHeight="23.0" prefWidth="310.0">
          <children>
-            <Label alignment="CENTER" layoutX="726.0" prefHeight="23.0" prefWidth="125.0" text="New to RentMyRide?" textFill="#222020">
+            <Label alignment="CENTER" layoutX="726.0" prefHeight="23.0" prefWidth="92.0" text="Didn't get otp?" textFill="#222020">
                <font>
                   <Font size="12.0" />
                </font>
@@ -45,7 +43,7 @@
                   <ImageCursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="signup" alignment="CENTER" layoutX="77.0" layoutY="10.0" prefHeight="23.0" prefWidth="113.0" style="-fx-border-color: blue; -fx-border-style: solid; -fx-border-width: 0 0 1px 0;" text="Create an account" textFill="BLUE">
+            <Label fx:id="resend" alignment="CENTER" layoutX="77.0" layoutY="10.0" prefHeight="23.0" prefWidth="57.0" style="-fx-border-color: blue; -fx-border-style: solid; -fx-border-width: 0 0 1px 0;" text="Resend" textFill="BLUE">
                <font>
                   <Font size="12.0" />
                </font>

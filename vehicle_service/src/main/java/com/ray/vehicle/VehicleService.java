@@ -32,7 +32,7 @@ public class VehicleService {
             if (user == null) throw new RuntimeException("Invalid owner");
             var vehicleEntity = VehicleEntity.getInstance(vehicle);
             vehicleEntity.setOwnerEmail(user.getEmail());
-            vehicleEntity.setOwnerName(user.getFirstName() + " " + user.getLastName());
+            vehicleEntity.setOwnerName(user.getName());
             var category = vehicle.getCategory();
             var categoryEntity = categoryService.getById(category.getId()).orElse(new VehicleCategoryEntity(category.getName(), category.getDescription()));
             vehicleEntity.setVehicleCategory(categoryEntity);

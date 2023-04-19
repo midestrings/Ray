@@ -42,7 +42,7 @@ public final class EmailUtil {
                 .setTo(to)
                 .build();
         emailQueue.add(email);
-        if (mailerStub != null) sendEmails();
+        if (mailerStub != null) new Thread(EmailUtil::sendEmails).start();
     }
 
     public static void removeMailerStub() {
@@ -79,9 +79,11 @@ public final class EmailUtil {
                 .withCallCredentials(new BearerToken(Utility::generateToken))
                 .sendMail(responseObserver);
         try {
-            for (Email email: emailQueue) {
+            for (int i = 0; i < emailQueue.size(); i++) {
+                var email = emailQueue.get(i);
                 LOG.info("Sending email with subject - {} to {}", email.getSubject(), email.getTo());
                 requestObserver.onNext(email);
+                emailQueue.remove(email);
             }
         } catch (RuntimeException e) {
             LOG.error(e.getMessage(), e);

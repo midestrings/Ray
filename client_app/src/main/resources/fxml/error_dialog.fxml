@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #1E1E1E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ErrorDialogController">
+   <children>
+      <Label layoutX="115.0" layoutY="28.0" text="ERROR" textFill="RED">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextFlow layoutX="17.0" layoutY="57.0" prefHeight="103.0" prefWidth="266.0" textAlignment="CENTER">
+         <children>
+            <Text fill="#f8f7f7" strokeType="OUTSIDE" strokeWidth="0.0" text="Error processing your request" />
+         </children>
+      </TextFlow>
+      <JFXButton layoutX="221.0" layoutY="162.0" style="-fx-background-color: red;" text="Okay" textFill="#fcfcfc" />
+   </children>
+</AnchorPane>

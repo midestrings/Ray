@@ -27,7 +27,7 @@ public final class Utility {
         calendar.set(Calendar.MONTH, dateTime.getMonth());
         calendar.set(Calendar.DAY_OF_MONTH, dateTime.getDay());
         calendar.set(Calendar.HOUR, dateTime.getHour());
-        calendar.set(Calendar.MINUTE, dateTime.getMonth());
+        calendar.set(Calendar.MINUTE, dateTime.getMinute());
         calendar.set(Calendar.SECOND, dateTime.getSecond());
         return calendar.getTime();
     }

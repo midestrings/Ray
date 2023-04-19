@@ -26,12 +26,12 @@
                     <Insets top="120.0" />
                 </VBox.margin>
             </Text>
-            <ImageView fitHeight="200.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image" fitHeight="200.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
                 <VBox.margin>
                     <Insets top="50.0" />
                 </VBox.margin>
                 <image>
-                    <Image url="@../assets/images/onboarding_img.jpg" />
+                    <Image url="@../assets/images/tesla.png" />
                 </image>
             </ImageView>
             <TextFlow prefHeight="0.0" prefWidth="300.0">
@@ -50,7 +50,7 @@
         </VBox>
         <VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="500.0" styleClass="right_vbox" GridPane.columnIndex="1">
             <HBox alignment="BASELINE_RIGHT" prefHeight="23.0" prefWidth="300.0" />
-         <Label fx:id="close_label12" alignment="CENTER" onMouseClicked="#handleCloseLabel" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="23.0" prefWidth="166.0" text="Get started" textFill="#222020">
+         <Label alignment="CENTER" prefHeight="23.0" prefWidth="166.0" text="Get started" textFill="#222020">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -78,7 +78,7 @@
          </JFXButton>
          <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="16.0" prefHeight="23.0" prefWidth="300.0">
             <children>
-               <Label fx:id="close_label1" alignment="CENTER" layoutX="726.0" onMouseClicked="#handleCloseLabel" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="23.0" prefWidth="166.0" text="Already have an account?" textFill="#222020">
+               <Label alignment="CENTER" layoutX="726.0" prefHeight="23.0" prefWidth="166.0" text="Already have an account?" textFill="#222020">
                   <font>
                      <Font size="12.0" />
                   </font>
@@ -86,7 +86,7 @@
                      <ImageCursor fx:constant="HAND" />
                   </cursor>
                </Label>
-               <Label fx:id="close_label11" alignment="CENTER" layoutX="77.0" layoutY="10.0" onMouseClicked="#handleCloseLabel" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="23.0" prefWidth="44.0" style="-fx-border-color: blue; -fx-border-style: solid; -fx-border-width: 0 0 1px 0;" text="Log in" textFill="BLUE">
+               <Label fx:id="login" alignment="CENTER" layoutX="77.0" layoutY="10.0" prefHeight="23.0" prefWidth="44.0" style="-fx-border-color: blue; -fx-border-style: solid; -fx-border-width: 0 0 1px 0;" text="Log in" textFill="BLUE">
                   <font>
                      <Font size="12.0" />
                   </font>
