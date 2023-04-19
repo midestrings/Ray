@@ -7,6 +7,8 @@ import com.ray.vehicle.util.Utility;
 import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity(name = "Vehicle")
 public class VehicleEntity {
     @Id
@@ -44,13 +46,19 @@ public class VehicleEntity {
     @Column
     private String status;
     @Column
+    private double rating;
+    @Column
     private String fileName;
     @Column(unique = true)
     private String plateNo;
     @Lob
-    @Column(columnDefinition = "BLOB", length = 5242880)
+    @Column(columnDefinition = "LONGBLOB")
     @Basic(fetch = FetchType.LAZY)
     private byte[] image;
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDateTime updatedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
@@ -59,6 +67,30 @@ public class VehicleEntity {
     // Getters and Setters for all the fields
     public String getMake() {
         return make;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public void setMake(String make) {
@@ -238,6 +270,8 @@ public class VehicleEntity {
         entity.mileage = vehicle.getMileage();
         entity.ridePrice = vehicle.getRidePrice();
         entity.rentPrice = vehicle.getRentPrice();
+        entity.status = vehicle.getStatus();
+        entity.rating = vehicle.getRating();
         entity.isAvailableForRent = vehicle.getIsAvailableForRent();
         entity.isAvailableForRideHailing = vehicle.getIsAvailableForRideHailing();
         if (!Utility.isEmpty(vehicle.getFileName())) {
@@ -246,6 +280,7 @@ public class VehicleEntity {
         }
         entity.plateNo = vehicle.getPlateNo();
 
+        entity.createdAt = LocalDateTime.now();
         return entity;
     }
 
@@ -261,12 +296,15 @@ public class VehicleEntity {
         entity.mileage = vehicle.getMileage() > entity.mileage ? vehicle.getMileage() : entity.mileage;
         entity.ridePrice = vehicle.getRidePrice() > 0 ? vehicle.getRidePrice() : entity.ridePrice;
         entity.rentPrice = vehicle.getRentPrice() > 0 ? vehicle.getRentPrice() : entity.rentPrice;
+        entity.rating = vehicle.getRating() > 0 ? vehicle.getRating() : entity.rating;
         entity.isAvailableForRent = vehicle.getIsAvailableForRent();
         entity.isAvailableForRideHailing = vehicle.getIsAvailableForRideHailing();
+        entity.status = Utility.isEmpty(vehicle.getStatus()) ? entity.status : vehicle.getStatus();
         if (!Utility.isEmpty(vehicle.getFileName()) && !vehicle.getFileName().equals(entity.fileName)) {
             entity.fileName = vehicle.getFileName();
             entity.image = vehicle.getImage().toByteArray();
         }
+        entity.updatedAt = LocalDateTime.now();
     }
 
     public static Vehicle getVehicle(VehicleEntity vehicle, boolean loadImage) {
@@ -280,9 +318,11 @@ public class VehicleEntity {
                 .setEngineType(vehicle.engineType)
                 .setFuelType(vehicle.fuelType)
                 .setTransmission(vehicle.transmission)
+                .setStatus(vehicle.status)
                 .setMileage(vehicle.mileage)
                 .setRidePrice(vehicle.ridePrice)
                 .setRentPrice(vehicle.rentPrice)
+                .setRating(vehicle.rating)
                 .setIsAvailableForRent(vehicle.isAvailableForRent)
                 .setIsAvailableForRideHailing(vehicle.isAvailableForRideHailing)
                 .setCategory(VehicleCategoryEntity.getCategory(vehicle.vehicleCategory, false));

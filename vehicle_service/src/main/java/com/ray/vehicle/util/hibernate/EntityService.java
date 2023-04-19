@@ -38,12 +38,12 @@ public class EntityService<T> {
         session.close();
         return entity != null ? Optional.of(entity) : Optional.empty();
     }
-    public List<T> getAll() {
+    public List<T> getAll(int limit) {
         Session session = HibernateUtil.getSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(clazz);
         criteria.from(clazz);
-        List<T> list = session.createQuery(criteria).getResultList();
+        List<T> list = session.createQuery(criteria).setMaxResults(limit).getResultList();
         session.close();
         return list != null ? list : new LinkedList<>();
     }

@@ -5,6 +5,7 @@ import com.ray.schedule.grpc.Reservation;
 import com.ray.schedule.util.Utility;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,6 +51,10 @@ public class ReservationEntity {
     private double rating;
     @Column
     private String vehiclePlateNo;
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDateTime updatedAt;
 
     public Integer getId() {
         return id;
@@ -211,6 +216,22 @@ public class ReservationEntity {
         this.vehiclePlateNo = vehiclePlateNo;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static ReservationEntity getInstance(Reservation reservation) {
         var entity = new ReservationEntity();
         entity.id = reservation.getId();
@@ -223,7 +244,7 @@ public class ReservationEntity {
         entity.dropOffAddress = reservation.getDropOffAddress();
         setDefaultFields(entity, reservation);
         entity.vehiclePlateNo = reservation.getVehiclePlateNo();
-
+        entity.createdAt = LocalDateTime.now();
         return entity;
     }
 
@@ -257,6 +278,7 @@ public class ReservationEntity {
         entity.destinationAddress = Utility.isEmpty(reservation.getDestinationAddress()) ? entity.destinationAddress : reservation.getDestinationAddress();
         entity.dropOffAddress = Utility.isEmpty(reservation.getDropOffAddress()) ? entity.dropOffAddress : reservation.getDropOffAddress();
         setDefaultFields(entity, reservation);
+        entity.updatedAt = LocalDateTime.now();
 
     }
 

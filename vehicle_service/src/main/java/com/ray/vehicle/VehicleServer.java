@@ -68,28 +68,14 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     }
 
     @Override
-    public StreamObserver<VehicleCategory> addCategory(StreamObserver<VehicleCategory> responseObserver) {
-        return new StreamObserver<VehicleCategory>() {
-            @Override
-            public void onNext(VehicleCategory category) {
-                service.addCategory(category).ifPresent(responseObserver::onNext);
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                LOG.error(throwable.getMessage(), throwable);
-            }
-
-            @Override
-            public void onCompleted() {
-                responseObserver.onCompleted();
-            }
-        };
+    public void addCategory(VehicleCategory request, StreamObserver<VehicleCategory> responseObserver) {
+        service.addCategory(request).ifPresent(responseObserver::onNext);
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void getCategories(Empty request, StreamObserver<VehicleCategory> responseObserver) {
-        service.getCategories().forEach(responseObserver::onNext);
+    public void getCategories(CategoryFilter request, StreamObserver<VehicleCategory> responseObserver) {
+        service.getCategories(request).forEach(responseObserver::onNext);
         responseObserver.onCompleted();
     }
 

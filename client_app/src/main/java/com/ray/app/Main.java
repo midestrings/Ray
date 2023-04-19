@@ -42,16 +42,12 @@ public class Main extends Application {
         Long startTime = System.currentTimeMillis();
         LOG.info("Ray app started  on {}", Utility.formatDateTimeString(startTime));
         loadConfig(args);
+        discoverServices();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             Long exitTime = System.currentTimeMillis();
             LOG.info("Ray app is closing on {}. Used for {} ms", Utility.formatDateTimeString(startTime), exitTime);
         }));
         launch(args);
-    }
-
-    @Override
-    public void init() throws Exception {
-        discoverServices();
     }
 
     @Override

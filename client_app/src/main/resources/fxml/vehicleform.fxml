@@ -10,72 +10,72 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.RentRide">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.VehicleFormController">
     <children>
         <Label layoutX="322.0" layoutY="23.0" prefHeight="16.0" prefWidth="62.0" text="Vehicle">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Label>
-        <ImageView fitHeight="16.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="close" fitHeight="16.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assets/icons/cancel_icon.png" />
             </image>
         </ImageView>
-        <JFXButton buttonType="RAISED" layoutX="228.0" layoutY="550.0" prefHeight="24.0" prefWidth="243.0" style="-fx-background-color: #4646d9;" text="Confirm" textFill="#c8e9eb">
+        <JFXButton fx:id="confirm" buttonType="RAISED" layoutX="263.0" layoutY="603.0" prefHeight="24.0" prefWidth="243.0" style="-fx-background-color: #4646d9;" text="Confirm" textFill="#c8e9eb">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </JFXButton>
-      <JFXTextField layoutX="173.0" layoutY="63.0" prefHeight="24.0" prefWidth="180.0" promptText="Liscence plate number" AnchorPane.topAnchor="60.0" />
+      <JFXTextField fx:id="plateNO" layoutX="173.0" layoutY="63.0" prefHeight="24.0" prefWidth="180.0" promptText="Liscence plate number" AnchorPane.topAnchor="60.0" />
       <Label layoutX="54.0" layoutY="68.0" prefHeight="16.0" prefWidth="108.0" text="Plate number" AnchorPane.topAnchor="65.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="173.0" layoutY="100.0" prefHeight="24.0" prefWidth="180.0" promptText="Liscence plate number" text="make" AnchorPane.topAnchor="100.0" />
+      <JFXTextField fx:id="make" layoutX="173.0" layoutY="100.0" prefHeight="24.0" prefWidth="180.0" promptText="make" AnchorPane.topAnchor="100.0" />
       <Label layoutX="54.0" layoutY="104.0" prefHeight="16.0" prefWidth="108.0" text="Make" AnchorPane.topAnchor="105.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="170.0" layoutY="136.0" prefHeight="24.0" prefWidth="180.0" promptText="Liscence plate number" text="model" AnchorPane.topAnchor="140.0" />
+      <JFXTextField fx:id="model" layoutX="170.0" layoutY="136.0" prefHeight="24.0" prefWidth="180.0" promptText="model" AnchorPane.topAnchor="140.0" />
       <Label layoutX="51.0" layoutY="141.0" prefHeight="16.0" prefWidth="108.0" text="Model" AnchorPane.topAnchor="145.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="170.0" layoutY="176.0" prefHeight="24.0" prefWidth="180.0" promptText="Liscence plate number" text="Year" AnchorPane.topAnchor="180.0" />
+      <JFXTextField fx:id="year" layoutX="170.0" layoutY="176.0" prefHeight="24.0" prefWidth="180.0" promptText="Year" AnchorPane.topAnchor="180.0" />
       <Label layoutX="51.0" layoutY="181.0" prefHeight="16.0" prefWidth="108.0" text="Year" AnchorPane.topAnchor="185.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="173.0" layoutY="228.0" prefHeight="24.0" prefWidth="180.0" promptText="Liscence plate number" text="mileage" AnchorPane.topAnchor="220.0" />
+      <JFXTextField fx:id="mileage" layoutX="173.0" layoutY="228.0" prefHeight="24.0" prefWidth="180.0" promptText="mileage" AnchorPane.topAnchor="220.0" />
       <Label layoutX="54.0" layoutY="233.0" prefHeight="16.0" prefWidth="108.0" text="Mileage" AnchorPane.topAnchor="225.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="172.0" layoutY="275.0" prefHeight="24.0" prefWidth="180.0" promptText="Body Type" AnchorPane.topAnchor="260.0" />
+      <JFXComboBox fx:id="bodyType" layoutX="172.0" layoutY="275.0" prefHeight="24.0" prefWidth="180.0" promptText="Body Type" AnchorPane.topAnchor="260.0" />
       <Label layoutX="54.0" layoutY="264.0" prefHeight="16.0" prefWidth="108.0" text="Body type" AnchorPane.topAnchor="265.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="169.0" layoutY="300.0" prefHeight="24.0" prefWidth="180.0" promptText="Engine type" AnchorPane.topAnchor="300.0" />
+      <JFXComboBox fx:id="engineType" layoutX="169.0" layoutY="300.0" prefHeight="24.0" prefWidth="180.0" promptText="Engine type" AnchorPane.topAnchor="300.0" />
       <Label layoutX="51.0" layoutY="305.0" prefHeight="16.0" prefWidth="108.0" text="Engine type" AnchorPane.topAnchor="305.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="172.0" layoutY="348.0" prefHeight="24.0" prefWidth="180.0" promptText="Transmission" AnchorPane.topAnchor="340.0" />
+      <JFXComboBox fx:id="transmission" layoutX="172.0" layoutY="348.0" prefHeight="24.0" prefWidth="180.0" promptText="Transmission" AnchorPane.topAnchor="340.0" />
       <Label layoutX="54.0" layoutY="353.0" prefHeight="16.0" prefWidth="108.0" text="Transmission" AnchorPane.topAnchor="345.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="386.0" prefHeight="16.0" prefWidth="108.0" text="Rent price" AnchorPane.topAnchor="385.0">
+      <Label layoutX="54.0" layoutY="386.0" prefHeight="16.0" prefWidth="108.0" text="Ride price" AnchorPane.topAnchor="385.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
@@ -85,20 +85,28 @@
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="170.0" layoutY="470.0" prefHeight="24.0" prefWidth="180.0" promptText="status" AnchorPane.topAnchor="460.0" />
+      <JFXComboBox fx:id="status" layoutX="170.0" layoutY="470.0" prefHeight="24.0" prefWidth="180.0" promptText="status" AnchorPane.topAnchor="460.0" />
       <Label layoutX="52.0" layoutY="475.0" prefHeight="16.0" prefWidth="108.0" text="status" AnchorPane.topAnchor="465.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="169.0" layoutY="389.0" prefHeight="24.0" prefWidth="180.0" AnchorPane.topAnchor="380.0" />
-      <JFXTextField layoutX="169.0" layoutY="421.0" prefHeight="24.0" prefWidth="180.0" AnchorPane.topAnchor="420.0" />
-      <ImageView fitHeight="364.0" fitWidth="382.0" layoutX="387.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+      <JFXTextField fx:id="ridePrice" layoutX="169.0" layoutY="389.0" prefHeight="24.0" prefWidth="180.0" promptText="Ride price" AnchorPane.topAnchor="380.0" />
+      <JFXTextField fx:id="rentPrice" layoutX="169.0" layoutY="421.0" prefHeight="24.0" prefWidth="180.0" promptText="Rent Price" AnchorPane.topAnchor="420.0" />
+      <ImageView fx:id="image" fitHeight="364.0" fitWidth="382.0" layoutX="387.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXCheckBox fx:id="isAvailableForRent" layoutX="384.0" layoutY="432.0" text="Is available for rent" />
+      <JFXCheckBox fx:id="isAvailableForRide" layoutX="384.0" layoutY="470.0" text="Is available for ride hailing" />
+      <JFXTextField fx:id="imagePath" layoutX="384.0" layoutY="500.0" prefHeight="24.0" prefWidth="327.0" promptText="Select image" />
+      <ImageView fx:id="imageChooser" fitHeight="18.0" fitWidth="28.0" layoutX="708.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/images/onboarding_img.jpg" />
+            <Image url="@../assets/icons/folder_icon.png" />
          </image>
       </ImageView>
-      <JFXCheckBox layoutX="425.0" layoutY="435.0" text="Is available for rent" />
-      <JFXCheckBox layoutX="425.0" layoutY="472.0" text="Is available for ride hailing" />
+      <JFXComboBox fx:id="category" layoutX="169.0" layoutY="498.0" prefHeight="24.0" prefWidth="180.0" promptText="Category" AnchorPane.topAnchor="500.0" />
+      <Label layoutX="55.0" layoutY="502.0" prefHeight="16.0" prefWidth="108.0" text="Category" AnchorPane.topAnchor="505.0">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

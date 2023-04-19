@@ -25,6 +25,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -126,12 +127,13 @@ public class UserService {
 
             if (savedAuth == null)
                 return Optional.of(Authentication.newBuilder().setError("Invalid refresh token").build());
-            if (LocalDate.from(Instant.now()).isAfter(savedAuth.getRefreshTokenExpiry())) {
+            if (LocalDate.now().isAfter(savedAuth.getRefreshTokenExpiry())) {
                 return Optional.of(Authentication.newBuilder().setError("Refresh token expired").build());
             }
 
             savedAuth.setToken(generateToken(savedAuth.getUser()));
-            savedAuth.setRefreshTokenExpiry(LocalDate.from(Instant.now().plus(1L, ChronoUnit.YEARS)));
+            savedAuth.setRefreshTokenExpiry(LocalDate.now().plusYears(1L));
+            savedAuth.setUpdatedAt(LocalDateTime.now());
             authService.update(savedAuth);
             return Optional.of(AuthenticationEntity.getAuthentication(savedAuth));
 
@@ -198,6 +200,7 @@ public class UserService {
         auth.setToken(generateToken(savedUser));
         auth.setRefreshToken(UUID.randomUUID().toString());
         auth.setRefreshTokenExpiry(LocalDate.now().plusYears(1L));
+        auth.setCreatedAt(LocalDateTime.now());
         authService.save(auth);
         return Optional.of(AuthenticationEntity.getAuthentication(auth));
     }

@@ -16,6 +16,10 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private VehicleFilter() {
+    byRating_ = false;
+    byDateAdded_ = false;
+    query_ = "";
+    limit_ = 0;
   }
 
   @java.lang.Override
@@ -31,6 +35,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -41,6 +46,27 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
+          case 8: {
+
+            byRating_ = input.readBool();
+            break;
+          }
+          case 16: {
+
+            byDateAdded_ = input.readBool();
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            query_ = s;
+            break;
+          }
+          case 32: {
+
+            limit_ = input.readInt32();
+            break;
+          }
           default: {
             if (!parseUnknownFieldProto3(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -73,6 +99,67 @@ private static final long serialVersionUID = 0L;
             com.ray.app.grpc.VehicleFilter.class, com.ray.app.grpc.VehicleFilter.Builder.class);
   }
 
+  public static final int BYRATING_FIELD_NUMBER = 1;
+  private boolean byRating_;
+  /**
+   * <code>bool byRating = 1;</code>
+   */
+  public boolean getByRating() {
+    return byRating_;
+  }
+
+  public static final int BYDATEADDED_FIELD_NUMBER = 2;
+  private boolean byDateAdded_;
+  /**
+   * <code>bool byDateAdded = 2;</code>
+   */
+  public boolean getByDateAdded() {
+    return byDateAdded_;
+  }
+
+  public static final int QUERY_FIELD_NUMBER = 3;
+  private volatile java.lang.Object query_;
+  /**
+   * <code>string query = 3;</code>
+   */
+  public java.lang.String getQuery() {
+    java.lang.Object ref = query_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      query_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string query = 3;</code>
+   */
+  public com.google.protobuf.ByteString
+      getQueryBytes() {
+    java.lang.Object ref = query_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      query_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int LIMIT_FIELD_NUMBER = 4;
+  private int limit_;
+  /**
+   * <code>int32 limit = 4;</code>
+   */
+  public int getLimit() {
+    return limit_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -87,6 +174,18 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (byRating_ != false) {
+      output.writeBool(1, byRating_);
+    }
+    if (byDateAdded_ != false) {
+      output.writeBool(2, byDateAdded_);
+    }
+    if (!getQueryBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, query_);
+    }
+    if (limit_ != 0) {
+      output.writeInt32(4, limit_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -96,6 +195,21 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (byRating_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(1, byRating_);
+    }
+    if (byDateAdded_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(2, byDateAdded_);
+    }
+    if (!getQueryBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, query_);
+    }
+    if (limit_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, limit_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -112,6 +226,14 @@ private static final long serialVersionUID = 0L;
     com.ray.app.grpc.VehicleFilter other = (com.ray.app.grpc.VehicleFilter) obj;
 
     boolean result = true;
+    result = result && (getByRating()
+        == other.getByRating());
+    result = result && (getByDateAdded()
+        == other.getByDateAdded());
+    result = result && getQuery()
+        .equals(other.getQuery());
+    result = result && (getLimit()
+        == other.getLimit());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -123,6 +245,16 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + BYRATING_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getByRating());
+    hash = (37 * hash) + BYDATEADDED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getByDateAdded());
+    hash = (37 * hash) + QUERY_FIELD_NUMBER;
+    hash = (53 * hash) + getQuery().hashCode();
+    hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+    hash = (53 * hash) + getLimit();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -256,6 +388,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      byRating_ = false;
+
+      byDateAdded_ = false;
+
+      query_ = "";
+
+      limit_ = 0;
+
       return this;
     }
 
@@ -282,6 +422,10 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.ray.app.grpc.VehicleFilter buildPartial() {
       com.ray.app.grpc.VehicleFilter result = new com.ray.app.grpc.VehicleFilter(this);
+      result.byRating_ = byRating_;
+      result.byDateAdded_ = byDateAdded_;
+      result.query_ = query_;
+      result.limit_ = limit_;
       onBuilt();
       return result;
     }
@@ -330,6 +474,19 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ray.app.grpc.VehicleFilter other) {
       if (other == com.ray.app.grpc.VehicleFilter.getDefaultInstance()) return this;
+      if (other.getByRating() != false) {
+        setByRating(other.getByRating());
+      }
+      if (other.getByDateAdded() != false) {
+        setByDateAdded(other.getByDateAdded());
+      }
+      if (!other.getQuery().isEmpty()) {
+        query_ = other.query_;
+        onChanged();
+      }
+      if (other.getLimit() != 0) {
+        setLimit(other.getLimit());
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -356,6 +513,153 @@ private static final long serialVersionUID = 0L;
           mergeFrom(parsedMessage);
         }
       }
+      return this;
+    }
+
+    private boolean byRating_ ;
+    /**
+     * <code>bool byRating = 1;</code>
+     */
+    public boolean getByRating() {
+      return byRating_;
+    }
+    /**
+     * <code>bool byRating = 1;</code>
+     */
+    public Builder setByRating(boolean value) {
+      
+      byRating_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool byRating = 1;</code>
+     */
+    public Builder clearByRating() {
+      
+      byRating_ = false;
+      onChanged();
+      return this;
+    }
+
+    private boolean byDateAdded_ ;
+    /**
+     * <code>bool byDateAdded = 2;</code>
+     */
+    public boolean getByDateAdded() {
+      return byDateAdded_;
+    }
+    /**
+     * <code>bool byDateAdded = 2;</code>
+     */
+    public Builder setByDateAdded(boolean value) {
+      
+      byDateAdded_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool byDateAdded = 2;</code>
+     */
+    public Builder clearByDateAdded() {
+      
+      byDateAdded_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object query_ = "";
+    /**
+     * <code>string query = 3;</code>
+     */
+    public java.lang.String getQuery() {
+      java.lang.Object ref = query_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        query_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string query = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getQueryBytes() {
+      java.lang.Object ref = query_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        query_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string query = 3;</code>
+     */
+    public Builder setQuery(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      query_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string query = 3;</code>
+     */
+    public Builder clearQuery() {
+      
+      query_ = getDefaultInstance().getQuery();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string query = 3;</code>
+     */
+    public Builder setQueryBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      query_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int limit_ ;
+    /**
+     * <code>int32 limit = 4;</code>
+     */
+    public int getLimit() {
+      return limit_;
+    }
+    /**
+     * <code>int32 limit = 4;</code>
+     */
+    public Builder setLimit(int value) {
+      
+      limit_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 limit = 4;</code>
+     */
+    public Builder clearLimit() {
+      
+      limit_ = 0;
+      onChanged();
       return this;
     }
     @java.lang.Override

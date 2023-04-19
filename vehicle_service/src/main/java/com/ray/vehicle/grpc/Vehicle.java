@@ -36,6 +36,9 @@ private static final long serialVersionUID = 0L;
     plateNo_ = "";
     bodyType_ = "";
     loadImage_ = false;
+    status_ = "";
+    error_ = "";
+    rating_ = 0D;
   }
 
   @java.lang.Override
@@ -184,6 +187,23 @@ private static final long serialVersionUID = 0L;
           case 168: {
 
             loadImage_ = input.readBool();
+            break;
+          }
+          case 186: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            status_ = s;
+            break;
+          }
+          case 194: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            error_ = s;
+            break;
+          }
+          case 201: {
+
+            rating_ = input.readDouble();
             break;
           }
           default: {
@@ -694,6 +714,83 @@ private static final long serialVersionUID = 0L;
     return loadImage_;
   }
 
+  public static final int STATUS_FIELD_NUMBER = 23;
+  private volatile java.lang.Object status_;
+  /**
+   * <code>string status = 23;</code>
+   */
+  public java.lang.String getStatus() {
+    java.lang.Object ref = status_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      status_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string status = 23;</code>
+   */
+  public com.google.protobuf.ByteString
+      getStatusBytes() {
+    java.lang.Object ref = status_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      status_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int ERROR_FIELD_NUMBER = 24;
+  private volatile java.lang.Object error_;
+  /**
+   * <code>string error = 24;</code>
+   */
+  public java.lang.String getError() {
+    java.lang.Object ref = error_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      error_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string error = 24;</code>
+   */
+  public com.google.protobuf.ByteString
+      getErrorBytes() {
+    java.lang.Object ref = error_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      error_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int RATING_FIELD_NUMBER = 25;
+  private double rating_;
+  /**
+   * <code>double rating = 25;</code>
+   */
+  public double getRating() {
+    return rating_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -770,6 +867,15 @@ private static final long serialVersionUID = 0L;
     }
     if (loadImage_ != false) {
       output.writeBool(21, loadImage_);
+    }
+    if (!getStatusBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 23, status_);
+    }
+    if (!getErrorBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 24, error_);
+    }
+    if (rating_ != 0D) {
+      output.writeDouble(25, rating_);
     }
     unknownFields.writeTo(output);
   }
@@ -853,6 +959,16 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(21, loadImage_);
     }
+    if (!getStatusBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, status_);
+    }
+    if (!getErrorBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, error_);
+    }
+    if (rating_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(25, rating_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -918,6 +1034,14 @@ private static final long serialVersionUID = 0L;
         .equals(other.getBodyType());
     result = result && (getLoadImage()
         == other.getLoadImage());
+    result = result && getStatus()
+        .equals(other.getStatus());
+    result = result && getError()
+        .equals(other.getError());
+    result = result && (
+        java.lang.Double.doubleToLongBits(getRating())
+        == java.lang.Double.doubleToLongBits(
+            other.getRating()));
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -978,6 +1102,13 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + LOADIMAGE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getLoadImage());
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + getStatus().hashCode();
+    hash = (37 * hash) + ERROR_FIELD_NUMBER;
+    hash = (53 * hash) + getError().hashCode();
+    hash = (37 * hash) + RATING_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getRating()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1157,6 +1288,12 @@ private static final long serialVersionUID = 0L;
 
       loadImage_ = false;
 
+      status_ = "";
+
+      error_ = "";
+
+      rating_ = 0D;
+
       return this;
     }
 
@@ -1208,6 +1345,9 @@ private static final long serialVersionUID = 0L;
       result.plateNo_ = plateNo_;
       result.bodyType_ = bodyType_;
       result.loadImage_ = loadImage_;
+      result.status_ = status_;
+      result.error_ = error_;
+      result.rating_ = rating_;
       onBuilt();
       return result;
     }
@@ -1329,6 +1469,17 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getLoadImage() != false) {
         setLoadImage(other.getLoadImage());
+      }
+      if (!other.getStatus().isEmpty()) {
+        status_ = other.status_;
+        onChanged();
+      }
+      if (!other.getError().isEmpty()) {
+        error_ = other.error_;
+        onChanged();
+      }
+      if (other.getRating() != 0D) {
+        setRating(other.getRating());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -2468,6 +2619,170 @@ private static final long serialVersionUID = 0L;
     public Builder clearLoadImage() {
       
       loadImage_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object status_ = "";
+    /**
+     * <code>string status = 23;</code>
+     */
+    public java.lang.String getStatus() {
+      java.lang.Object ref = status_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        status_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string status = 23;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStatusBytes() {
+      java.lang.Object ref = status_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        status_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string status = 23;</code>
+     */
+    public Builder setStatus(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      status_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string status = 23;</code>
+     */
+    public Builder clearStatus() {
+      
+      status_ = getDefaultInstance().getStatus();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string status = 23;</code>
+     */
+    public Builder setStatusBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      status_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object error_ = "";
+    /**
+     * <code>string error = 24;</code>
+     */
+    public java.lang.String getError() {
+      java.lang.Object ref = error_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        error_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string error = 24;</code>
+     */
+    public com.google.protobuf.ByteString
+        getErrorBytes() {
+      java.lang.Object ref = error_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        error_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string error = 24;</code>
+     */
+    public Builder setError(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      error_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string error = 24;</code>
+     */
+    public Builder clearError() {
+      
+      error_ = getDefaultInstance().getError();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string error = 24;</code>
+     */
+    public Builder setErrorBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      error_ = value;
+      onChanged();
+      return this;
+    }
+
+    private double rating_ ;
+    /**
+     * <code>double rating = 25;</code>
+     */
+    public double getRating() {
+      return rating_;
+    }
+    /**
+     * <code>double rating = 25;</code>
+     */
+    public Builder setRating(double value) {
+      
+      rating_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double rating = 25;</code>
+     */
+    public Builder clearRating() {
+      
+      rating_ = 0D;
       onChanged();
       return this;
     }

@@ -3,16 +3,38 @@ package com.ray.user.entity;
 import com.ray.user.grpc.UserRole;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity(name = "User_Role")
 public class UserEntityRole {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String role;
-    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "user_id", nullable = false)
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDateTime updatedAt;
+    @ManyToOne @JoinColumn(name = "user_id", nullable = false)
     UserEntity user;
 
     public UserEntityRole() {}
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public UserEntityRole(String role) {
         this.role = role;
@@ -51,6 +73,7 @@ public class UserEntityRole {
     public static UserEntityRole getInstance(UserRole role) {
         var entity = new UserEntityRole();
         entity.setRole(role.getRole());
+        entity.createdAt = LocalDateTime.now();
         return entity;
     }
 }

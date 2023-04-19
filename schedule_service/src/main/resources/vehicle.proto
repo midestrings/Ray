@@ -9,8 +9,8 @@ service VehicleService {
   rpc addVehicle (Vehicle) returns (Vehicle) {}
   rpc getVehicles (VehicleFilter) returns (stream Vehicle) {}
   rpc update (Vehicle) returns (Vehicle) {}
-  rpc addCategory (stream VehicleCategory) returns (stream VehicleCategory) {}
-  rpc getCategories (Empty) returns (stream VehicleCategory) {}
+  rpc addCategory (VehicleCategory) returns (VehicleCategory) {}
+  rpc getCategories (CategoryFilter) returns (stream VehicleCategory) {}
   rpc confirmAvailability(Vehicle) returns (Vehicle) {}
   rpc getVehicle(Vehicle) returns (Vehicle) {}
 
@@ -38,6 +38,9 @@ message Vehicle {
   string plate_no = 19;
   string body_type = 20;
   bool loadImage = 21;
+  string status = 23;
+  string error = 24;
+  double rating = 25;
 }
 
 message VehicleCategory {
@@ -53,4 +56,7 @@ message VehicleFilter {
 
 }
 
-message Empty {}
+message CategoryFilter {
+  string query = 2;
+  int32 limit = 4;
+}

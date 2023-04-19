@@ -22,6 +22,8 @@ private static final long serialVersionUID = 0L;
     image_ = com.google.protobuf.ByteString.EMPTY;
     id_ = 0;
     loadImage_ = false;
+    error_ = "";
+    ownerEmail_ = "";
   }
 
   @java.lang.Override
@@ -79,6 +81,18 @@ private static final long serialVersionUID = 0L;
           case 56: {
 
             loadImage_ = input.readBool();
+            break;
+          }
+          case 66: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            error_ = s;
+            break;
+          }
+          case 74: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            ownerEmail_ = s;
             break;
           }
           default: {
@@ -242,6 +256,74 @@ private static final long serialVersionUID = 0L;
     return loadImage_;
   }
 
+  public static final int ERROR_FIELD_NUMBER = 8;
+  private volatile java.lang.Object error_;
+  /**
+   * <code>string error = 8;</code>
+   */
+  public java.lang.String getError() {
+    java.lang.Object ref = error_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      error_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string error = 8;</code>
+   */
+  public com.google.protobuf.ByteString
+      getErrorBytes() {
+    java.lang.Object ref = error_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      error_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int OWNEREMAIL_FIELD_NUMBER = 9;
+  private volatile java.lang.Object ownerEmail_;
+  /**
+   * <code>string ownerEmail = 9;</code>
+   */
+  public java.lang.String getOwnerEmail() {
+    java.lang.Object ref = ownerEmail_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      ownerEmail_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string ownerEmail = 9;</code>
+   */
+  public com.google.protobuf.ByteString
+      getOwnerEmailBytes() {
+    java.lang.Object ref = ownerEmail_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      ownerEmail_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -274,6 +356,12 @@ private static final long serialVersionUID = 0L;
     if (loadImage_ != false) {
       output.writeBool(7, loadImage_);
     }
+    if (!getErrorBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, error_);
+    }
+    if (!getOwnerEmailBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, ownerEmail_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -304,6 +392,12 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(7, loadImage_);
     }
+    if (!getErrorBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, error_);
+    }
+    if (!getOwnerEmailBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, ownerEmail_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -332,6 +426,10 @@ private static final long serialVersionUID = 0L;
         == other.getId());
     result = result && (getLoadImage()
         == other.getLoadImage());
+    result = result && getError()
+        .equals(other.getError());
+    result = result && getOwnerEmail()
+        .equals(other.getOwnerEmail());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -356,6 +454,10 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + LOADIMAGE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getLoadImage());
+    hash = (37 * hash) + ERROR_FIELD_NUMBER;
+    hash = (53 * hash) + getError().hashCode();
+    hash = (37 * hash) + OWNEREMAIL_FIELD_NUMBER;
+    hash = (53 * hash) + getOwnerEmail().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -501,6 +603,10 @@ private static final long serialVersionUID = 0L;
 
       loadImage_ = false;
 
+      error_ = "";
+
+      ownerEmail_ = "";
+
       return this;
     }
 
@@ -533,6 +639,8 @@ private static final long serialVersionUID = 0L;
       result.image_ = image_;
       result.id_ = id_;
       result.loadImage_ = loadImage_;
+      result.error_ = error_;
+      result.ownerEmail_ = ownerEmail_;
       onBuilt();
       return result;
     }
@@ -601,6 +709,14 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getLoadImage() != false) {
         setLoadImage(other.getLoadImage());
+      }
+      if (!other.getError().isEmpty()) {
+        error_ = other.error_;
+        onChanged();
+      }
+      if (!other.getOwnerEmail().isEmpty()) {
+        ownerEmail_ = other.ownerEmail_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -915,6 +1031,144 @@ private static final long serialVersionUID = 0L;
     public Builder clearLoadImage() {
       
       loadImage_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object error_ = "";
+    /**
+     * <code>string error = 8;</code>
+     */
+    public java.lang.String getError() {
+      java.lang.Object ref = error_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        error_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string error = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getErrorBytes() {
+      java.lang.Object ref = error_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        error_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string error = 8;</code>
+     */
+    public Builder setError(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      error_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string error = 8;</code>
+     */
+    public Builder clearError() {
+      
+      error_ = getDefaultInstance().getError();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string error = 8;</code>
+     */
+    public Builder setErrorBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      error_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object ownerEmail_ = "";
+    /**
+     * <code>string ownerEmail = 9;</code>
+     */
+    public java.lang.String getOwnerEmail() {
+      java.lang.Object ref = ownerEmail_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ownerEmail_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string ownerEmail = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOwnerEmailBytes() {
+      java.lang.Object ref = ownerEmail_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ownerEmail_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string ownerEmail = 9;</code>
+     */
+    public Builder setOwnerEmail(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      ownerEmail_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string ownerEmail = 9;</code>
+     */
+    public Builder clearOwnerEmail() {
+      
+      ownerEmail_ = getDefaultInstance().getOwnerEmail();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string ownerEmail = 9;</code>
+     */
+    public Builder setOwnerEmailBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      ownerEmail_ = value;
       onChanged();
       return this;
     }

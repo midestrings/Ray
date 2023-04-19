@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(name = "Authentication")
 public class AuthenticationEntity {
@@ -17,6 +18,10 @@ public class AuthenticationEntity {
     private String refreshToken;
     @Column
     private LocalDate refreshTokenExpiry;
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDateTime updatedAt;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
@@ -24,6 +29,22 @@ public class AuthenticationEntity {
 
     public Integer getId() {
         return id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public void setId(Integer id) {

@@ -1,6 +1,7 @@
 package com.ray.app.util.user;
 
 
+import com.ray.app.Main;
 import com.ray.app.grpc.Authentication;
 import com.ray.app.grpc.User;
 import com.ray.app.grpc.UserServiceGrpc;
@@ -13,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.jmdns.ServiceInfo;
 import java.util.Optional;
 
-import static com.ray.app.Main.getAuth;
+import static com.ray.app.Main.*;
 
 public class UserUtil {
     private UserUtil() {
@@ -27,6 +28,10 @@ public class UserUtil {
         LOG.info("IP Resolved for user_service - " + info.getPort() + ":" + info.getHostAddress());
         ManagedChannel channel = ManagedChannelBuilder.forAddress(info.getHostAddress(), info.getPort()).usePlaintext().build();
         serviceStub = UserServiceGrpc.newBlockingStub(channel);
+        if (isLoggedIn()) {
+            refreshToken();
+            setUser(getUser(Main.getUser().getEmail()).orElse(Main.getUser()));
+        }
     }
 
 
@@ -42,7 +47,6 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
-            return Optional.empty();
         }
         return Optional.empty();
     }
@@ -55,7 +59,6 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
-            return Optional.empty();
         }
         return Optional.empty();
     }
@@ -68,7 +71,6 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
-            return Optional.empty();
         }
         return Optional.empty();
     }
@@ -81,9 +83,19 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
-            return Optional.empty();
         }
         return Optional.empty();
+    }
+
+    public static void refreshToken() {
+        if (serviceStub != null) {
+            try {
+                var auth = serviceStub.refreshToken(getAuth());
+                if (auth != null) setAuth(auth);
+            } catch (Exception e) {
+                LOG.info(e.getMessage(), e);
+            }
+        }
     }
 
     public static Optional<Authentication> activateUser(String otp, String email) {
@@ -94,7 +106,6 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
-            return Optional.empty();
         }
         return Optional.empty();
     }

@@ -10,6 +10,7 @@ import com.ray.user.util.Type;
 import com.ray.user.util.Utility;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,19 +42,39 @@ public class UserEntity {
     private String status;
     @Column
     private String fileName;
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDateTime updatedAt;
     @Lob
-    @Column(columnDefinition = "BLOB", length = 5242880)
+    @Column(columnDefinition = "LONGBLOB")
     @Basic(fetch = FetchType.LAZY)
     private byte[] profilePicture;
     @Column
     private String contentType;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<UserEntityRole> roles = new ArrayList<>();
 
     public Integer getId() {
         return id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public void setId(Integer id) {
@@ -225,6 +246,7 @@ public class UserEntity {
         entity.roles = user.getRolesList().stream()
                 .map(UserEntityRole::getInstance)
                 .collect(Collectors.toList());
+        entity.createdAt = LocalDateTime.now();
         return entity;
     }
 
@@ -256,5 +278,6 @@ public class UserEntity {
             savedUser.fileName = user.getFileName();
             savedUser.profilePicture = user.getProfilePicture().toByteArray();
         }
+        savedUser.updatedAt = LocalDateTime.now();
     }
 }

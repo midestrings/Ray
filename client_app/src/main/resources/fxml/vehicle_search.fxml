@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+
+<AnchorPane prefWidth="1079.0" style="-fx-background-color: #202125;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.VehicleSearch">
+   <children>
+      <FlowPane prefHeight="200.0" prefWidth="1079.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="1079.0" text="No vehicles found" textFill="#ab9393">
+               <FlowPane.margin>
+                  <Insets top="30.0" />
+               </FlowPane.margin>
+            </Label>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>

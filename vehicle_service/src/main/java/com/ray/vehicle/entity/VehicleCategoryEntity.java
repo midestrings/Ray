@@ -4,8 +4,10 @@ import com.google.protobuf.ByteString;
 import com.ray.vehicle.grpc.Vehicle;
 import com.ray.vehicle.grpc.VehicleCategory;
 import com.ray.vehicle.util.Utility;
+import io.grpc.Context;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "VehicleCategory")
@@ -13,14 +15,22 @@ public class VehicleCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String name;
+    @Column
     private String description;
+    @Column
+    private String ownerEmail;
     @Column
     private String fileName;
     @Lob
-    @Column(columnDefinition = "BLOB", length = 5242880)
+    @Column(columnDefinition = "LONGBLOB")
     @Basic(fetch = FetchType.LAZY)
     private byte[] image;
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "vehicleCategory")
     private List<VehicleEntity> vehicles;
@@ -31,6 +41,22 @@ public class VehicleCategoryEntity {
     public VehicleCategoryEntity(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     // Getters and Setters for the fields
@@ -82,7 +108,16 @@ public class VehicleCategoryEntity {
         this.vehicles = vehicles;
     }
 
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
     public static VehicleCategory getCategory(VehicleCategoryEntity vehicleCategory, boolean loadImage) {
+        if (vehicleCategory == null) return VehicleCategory.getDefaultInstance();
         var categoryBuilder = VehicleCategory.newBuilder()
                 .setDescription(vehicleCategory.description)
                 .setName(vehicleCategory.name)
@@ -100,6 +135,8 @@ public class VehicleCategoryEntity {
             entity.fileName = category.getFileName();
             entity.image = category.getImage().toByteArray();
         }
+        entity.createdAt = LocalDateTime.now();
+        entity.ownerEmail = category.getOwnerEmail();
         return entity;
     }
 }

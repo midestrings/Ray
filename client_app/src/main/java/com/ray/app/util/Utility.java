@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public final class Utility {
     private Utility() {
@@ -116,6 +117,10 @@ public final class Utility {
     }
 
 
+    public static boolean isValidPlateNumber(String plateNumber) {
+        Stream<String> regexes = Stream.of("^[A-Z]{2}-\\d{4}-[A-Z]{1,2}$");
+        return plateNumber != null && regexes.anyMatch(plateNumber::matches);
+    }
     public static boolean isInvalidPassword(String password) {
         return password == null || password.length() < 8;
     }

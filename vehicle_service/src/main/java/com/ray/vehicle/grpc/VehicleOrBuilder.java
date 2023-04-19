@@ -174,4 +174,29 @@ public interface VehicleOrBuilder extends
    * <code>bool loadImage = 21;</code>
    */
   boolean getLoadImage();
+
+  /**
+   * <code>string status = 23;</code>
+   */
+  java.lang.String getStatus();
+  /**
+   * <code>string status = 23;</code>
+   */
+  com.google.protobuf.ByteString
+      getStatusBytes();
+
+  /**
+   * <code>string error = 24;</code>
+   */
+  java.lang.String getError();
+  /**
+   * <code>string error = 24;</code>
+   */
+  com.google.protobuf.ByteString
+      getErrorBytes();
+
+  /**
+   * <code>double rating = 25;</code>
+   */
+  double getRating();
 }
