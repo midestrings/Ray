@@ -5,6 +5,7 @@ import com.ray.schedule.grpc.ReservationFilter;
 import com.ray.schedule.grpc.ScheduleServiceGrpc;
 import com.ray.schedule.util.auth.AuthorizationServerInterceptor;
 import com.ray.schedule.util.email.EmailUtil;
+import com.ray.schedule.util.hibernate.HibernateUtil;
 import com.ray.schedule.util.user.UserUtil;
 import com.ray.schedule.util.vehicle.VehicleUtil;
 import io.grpc.Server;
@@ -61,6 +62,7 @@ public class ReservationServer extends ScheduleServiceGrpc.ScheduleServiceImplBa
     public void getReservations(ReservationFilter request, StreamObserver<Reservation> responseObserver) {
         service.getReservations(request).forEach(responseObserver::onNext);
         responseObserver.onCompleted();
+        HibernateUtil.closeSession();
     }
 
     @Override

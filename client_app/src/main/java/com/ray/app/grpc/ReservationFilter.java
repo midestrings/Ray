@@ -16,6 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ReservationFilter() {
+    clientEmail_ = "";
+    limit_ = 0;
   }
 
   @java.lang.Override
@@ -31,6 +33,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -41,6 +44,17 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            clientEmail_ = s;
+            break;
+          }
+          case 32: {
+
+            limit_ = input.readInt32();
+            break;
+          }
           default: {
             if (!parseUnknownFieldProto3(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -73,6 +87,49 @@ private static final long serialVersionUID = 0L;
             com.ray.app.grpc.ReservationFilter.class, com.ray.app.grpc.ReservationFilter.Builder.class);
   }
 
+  public static final int CLIENTEMAIL_FIELD_NUMBER = 1;
+  private volatile java.lang.Object clientEmail_;
+  /**
+   * <code>string clientEmail = 1;</code>
+   */
+  public java.lang.String getClientEmail() {
+    java.lang.Object ref = clientEmail_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      clientEmail_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string clientEmail = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getClientEmailBytes() {
+    java.lang.Object ref = clientEmail_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      clientEmail_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int LIMIT_FIELD_NUMBER = 4;
+  private int limit_;
+  /**
+   * <code>int32 limit = 4;</code>
+   */
+  public int getLimit() {
+    return limit_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -87,6 +144,12 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!getClientEmailBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, clientEmail_);
+    }
+    if (limit_ != 0) {
+      output.writeInt32(4, limit_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -96,6 +159,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!getClientEmailBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, clientEmail_);
+    }
+    if (limit_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, limit_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -112,6 +182,10 @@ private static final long serialVersionUID = 0L;
     com.ray.app.grpc.ReservationFilter other = (com.ray.app.grpc.ReservationFilter) obj;
 
     boolean result = true;
+    result = result && getClientEmail()
+        .equals(other.getClientEmail());
+    result = result && (getLimit()
+        == other.getLimit());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -123,6 +197,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + CLIENTEMAIL_FIELD_NUMBER;
+    hash = (53 * hash) + getClientEmail().hashCode();
+    hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+    hash = (53 * hash) + getLimit();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -256,6 +334,10 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      clientEmail_ = "";
+
+      limit_ = 0;
+
       return this;
     }
 
@@ -282,6 +364,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.ray.app.grpc.ReservationFilter buildPartial() {
       com.ray.app.grpc.ReservationFilter result = new com.ray.app.grpc.ReservationFilter(this);
+      result.clientEmail_ = clientEmail_;
+      result.limit_ = limit_;
       onBuilt();
       return result;
     }
@@ -330,6 +414,13 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ray.app.grpc.ReservationFilter other) {
       if (other == com.ray.app.grpc.ReservationFilter.getDefaultInstance()) return this;
+      if (!other.getClientEmail().isEmpty()) {
+        clientEmail_ = other.clientEmail_;
+        onChanged();
+      }
+      if (other.getLimit() != 0) {
+        setLimit(other.getLimit());
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -356,6 +447,101 @@ private static final long serialVersionUID = 0L;
           mergeFrom(parsedMessage);
         }
       }
+      return this;
+    }
+
+    private java.lang.Object clientEmail_ = "";
+    /**
+     * <code>string clientEmail = 1;</code>
+     */
+    public java.lang.String getClientEmail() {
+      java.lang.Object ref = clientEmail_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clientEmail_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string clientEmail = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClientEmailBytes() {
+      java.lang.Object ref = clientEmail_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clientEmail_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string clientEmail = 1;</code>
+     */
+    public Builder setClientEmail(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      clientEmail_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string clientEmail = 1;</code>
+     */
+    public Builder clearClientEmail() {
+      
+      clientEmail_ = getDefaultInstance().getClientEmail();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string clientEmail = 1;</code>
+     */
+    public Builder setClientEmailBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      clientEmail_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int limit_ ;
+    /**
+     * <code>int32 limit = 4;</code>
+     */
+    public int getLimit() {
+      return limit_;
+    }
+    /**
+     * <code>int32 limit = 4;</code>
+     */
+    public Builder setLimit(int value) {
+      
+      limit_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 limit = 4;</code>
+     */
+    public Builder clearLimit() {
+      
+      limit_ = 0;
+      onChanged();
       return this;
     }
     @java.lang.Override

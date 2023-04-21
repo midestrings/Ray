@@ -80,6 +80,17 @@ public class VehicleUtil {
         }
         return null;
     }
+    public static Optional<Vehicle> getVehicle(Vehicle vehicle) {
+        if (serviceStub != null) {
+            try {
+                return Optional.of(serviceStub.withCallCredentials(new BearerToken(getAuth()::getToken))
+                        .getVehicle(vehicle));
+            } catch (Exception e) {
+                LOG.info(e.getMessage(), e);
+            }
+        }
+        return Optional.empty();
+    }
 
     public static void removeVehicleStub() {
         serviceStub = null;

@@ -38,7 +38,7 @@ public final class ScheduleServiceImpl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016schedule.proto\022\010schedule\"\231\004\n\013Reservati" +
+      "\n\016schedule.proto\022\010schedule\"\250\004\n\013Reservati" +
       "on\022\n\n\002id\030\001 \001(\005\022\022\n\nvehicle_id\030\002 \001(\005\022\024\n\014cl" +
       "ient_email\030\003 \001(\t\022\023\n\013client_name\030\004 \001(\t\022\014\n" +
       "\004type\030\005 \001(\t\022\026\n\016pickup_address\030\006 \001(\t\022\033\n\023d" +
@@ -52,19 +52,20 @@ public final class ScheduleServiceImpl {
       "e\030\017 \001(\001\022\034\n\024destination_latitude\030\020 \001(\001\022\035\n" +
       "\025destination_longitude\030\021 \001(\001\022\016\n\006status\030\022" +
       " \001(\t\022\016\n\006rating\030\023 \001(\001\022\030\n\020vehicle_plate_no" +
-      "\030\024 \001(\t\"b\n\010DateTime\022\014\n\004year\030\001 \001(\005\022\r\n\005mont" +
-      "h\030\002 \001(\005\022\013\n\003day\030\003 \001(\005\022\014\n\004hour\030\004 \001(\005\022\016\n\006mi" +
-      "nute\030\005 \001(\005\022\016\n\006second\030\006 \001(\005\"\023\n\021Reservatio" +
-      "nFilter2\250\002\n\017ScheduleService\022C\n\021createRes" +
-      "ervation\022\025.schedule.Reservation\032\025.schedu" +
-      "le.Reservation\"\000\022I\n\017getReservations\022\033.sc" +
-      "hedule.ReservationFilter\032\025.schedule.Rese" +
-      "rvation\"\0000\001\022C\n\021updateReservation\022\025.sched" +
-      "ule.Reservation\032\025.schedule.Reservation\"\000" +
-      "\022@\n\016getReservation\022\025.schedule.Reservatio" +
-      "n\032\025.schedule.Reservation\"\000B.\n\025com.ray.sc" +
-      "hedule.grpcB\023ScheduleServiceImplP\001b\006prot" +
-      "o3"
+      "\030\024 \001(\t\022\r\n\005error\030\025 \001(\t\"b\n\010DateTime\022\014\n\004yea" +
+      "r\030\001 \001(\005\022\r\n\005month\030\002 \001(\005\022\013\n\003day\030\003 \001(\005\022\014\n\004h" +
+      "our\030\004 \001(\005\022\016\n\006minute\030\005 \001(\005\022\016\n\006second\030\006 \001(" +
+      "\005\"7\n\021ReservationFilter\022\023\n\013clientEmail\030\001 " +
+      "\001(\t\022\r\n\005limit\030\004 \001(\0052\250\002\n\017ScheduleService\022C" +
+      "\n\021createReservation\022\025.schedule.Reservati" +
+      "on\032\025.schedule.Reservation\"\000\022I\n\017getReserv" +
+      "ations\022\033.schedule.ReservationFilter\032\025.sc" +
+      "hedule.Reservation\"\0000\001\022C\n\021updateReservat" +
+      "ion\022\025.schedule.Reservation\032\025.schedule.Re" +
+      "servation\"\000\022@\n\016getReservation\022\025.schedule" +
+      ".Reservation\032\025.schedule.Reservation\"\000B.\n" +
+      "\025com.ray.schedule.grpcB\023ScheduleServiceI" +
+      "mplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -83,7 +84,7 @@ public final class ScheduleServiceImpl {
     internal_static_schedule_Reservation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_schedule_Reservation_descriptor,
-        new java.lang.String[] { "Id", "VehicleId", "ClientEmail", "ClientName", "Type", "PickupAddress", "DestinationAddress", "PickupTime", "DropOffTime", "DropOffAddress", "ExpectedEndTime", "PickupLatitude", "PickupLongitude", "DropOffLatitude", "DropOffLongitude", "DestinationLatitude", "DestinationLongitude", "Status", "Rating", "VehiclePlateNo", });
+        new java.lang.String[] { "Id", "VehicleId", "ClientEmail", "ClientName", "Type", "PickupAddress", "DestinationAddress", "PickupTime", "DropOffTime", "DropOffAddress", "ExpectedEndTime", "PickupLatitude", "PickupLongitude", "DropOffLatitude", "DropOffLongitude", "DestinationLatitude", "DestinationLongitude", "Status", "Rating", "VehiclePlateNo", "Error", });
     internal_static_schedule_DateTime_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_schedule_DateTime_fieldAccessorTable = new
@@ -95,7 +96,7 @@ public final class ScheduleServiceImpl {
     internal_static_schedule_ReservationFilter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_schedule_ReservationFilter_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "ClientEmail", "Limit", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

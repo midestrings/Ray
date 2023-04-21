@@ -10,28 +10,28 @@
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.RentRide">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.BooKRideController">
     <children>
         <Label layoutX="161.0" layoutY="23.0" prefHeight="16.0" prefWidth="87.0" text="Hall a Ride">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Label>
-        <ImageView fitHeight="16.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="close" fitHeight="16.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assets/icons/cancel_icon.png" />
             </image>
         </ImageView>
-        <JFXComboBox layoutX="38.0" layoutY="79.0" prefHeight="24.0" prefWidth="332.0" promptText="Pickup Location" />
-        <JFXTextField layoutX="38.0" layoutY="121.0" prefWidth="332.0" promptText="Can't find your location? Enter the address here" />
+        <JFXComboBox fx:id="pickupLocation" layoutX="38.0" layoutY="79.0" prefHeight="24.0" prefWidth="332.0" promptText="Pickup Location" />
+        <JFXTextField fx:id="pickupAddress" layoutX="38.0" layoutY="121.0" prefWidth="332.0" promptText="Can't find your location? Enter the address here" />
         <Label layoutX="40.0" layoutY="287.0" text="Pickup time" AnchorPane.leftAnchor="40.0" />
-        <DateTimePicker layoutX="180.0" layoutY="283.0" prefHeight="24.0" prefWidth="189.0" />
-        <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="341.0" prefHeight="24.0" prefWidth="243.0" style="-fx-background-color: #4646d9;" text="Confirm" textFill="#c8e9eb">
+        <DateTimePicker fx:id="pickupTime" layoutX="180.0" layoutY="283.0" prefHeight="24.0" prefWidth="189.0" />
+        <JFXButton fx:id="confirm" buttonType="RAISED" layoutX="79.0" layoutY="341.0" prefHeight="24.0" prefWidth="243.0" style="-fx-background-color: #4646d9;" text="Confirm" textFill="#c8e9eb">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </JFXButton>
-      <JFXComboBox layoutX="38.0" layoutY="176.0" prefHeight="24.0" prefWidth="332.0" promptText="Drop off location" />
-      <JFXTextField layoutX="34.0" layoutY="228.0" prefWidth="332.0" promptText="Can't find your location? Enter the address here" />
+      <JFXComboBox fx:id="destinationLocation" layoutX="38.0" layoutY="176.0" prefHeight="24.0" prefWidth="332.0" promptText="Destination" />
+      <JFXTextField fx:id="destinationAddress" layoutX="34.0" layoutY="228.0" prefWidth="332.0" promptText="Can't find your destination? Enter the address here" />
     </children>
 </AnchorPane>

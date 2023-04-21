@@ -15,10 +15,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VehicleService {
     private static final Logger LOG = LogManager.getLogger(VehicleService.class);
@@ -50,40 +48,47 @@ public class VehicleService {
         }
     }
 
-    public List<Vehicle> getVehicles(VehicleFilter filter) {
-        try (var session = HibernateUtil.getSession()) {
+    public Stream<Vehicle> getVehicles(VehicleFilter filter) {
+        try {
+            var session = HibernateUtil.getSession();
             if (filter.getByDateAdded()) {
                 var query = session.createQuery("from Vehicle order by createdAt desc", VehicleEntity.class).setMaxResults(filter.getLimit());
-                return query.getResultList().stream().map(v -> VehicleEntity.getVehicle(v, true)).collect(Collectors.toList());
+                return query.getResultStream().map(v -> VehicleEntity.getVehicle(v, true));
             }
             if (filter.getByRating()) {
                 var query = session.createQuery("from Vehicle order by rating desc", VehicleEntity.class).setMaxResults(filter.getLimit());
-                return query.getResultList().stream().map(v -> VehicleEntity.getVehicle(v, true)).collect(Collectors.toList());
+                return query.getResultStream().map(v -> VehicleEntity.getVehicle(v, true));
+            }
+            if (Utility.isNotEmpty(filter.getCategoryName())) {
+                var query = session.createQuery("from Vehicle v join v.vehicleCategory vc where vc.name = :name", VehicleEntity.class)
+                        .setParameter("name", filter.getCategoryName()).setMaxResults(filter.getLimit());
+                return query.getResultStream().map(v -> VehicleEntity.getVehicle(v, true));
             }
             var query = session.createQuery("from  Vehicle v join v.vehicleCategory vc where (v.model like %:query% or v.plateNo like %:query% or " +
-                    "v.make like %:query% or v.color like %:query% or v.ownerEmail like %:query% or v.ownerName like %:query%" +
-                    " or v.engineType like %:query% or v.fuelType like %:query% or v.transmission like %:query%" +
+                            "v.make like %:query% or v.color like %:query% or v.ownerEmail like %:query% or v.ownerName like %:query%" +
+                            " or v.engineType like %:query% or v.fuelType like %:query% or v.transmission like %:query%" +
                             " or vc.name like %:query% or vc.ownerEmail like %:query%) and v.status = 'active'", VehicleEntity.class)
                     .setParameter("query", filter.getQuery());
-            return query.getResultList().stream().map(v -> VehicleEntity.getVehicle(v, true)).collect(Collectors.toList());
+            return query.getResultStream().map(v -> VehicleEntity.getVehicle(v, true));
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
         }
-        return new ArrayList<>();
+        return Stream.of();
     }
 
-    public List<VehicleCategory> getCategories(CategoryFilter filter) {
-        if (Utility.isEmpty(filter.getQuery())) {
-            return categoryService.getAll(filter.getLimit()).stream().map(category -> VehicleCategoryEntity.getCategory(category, true)).collect(Collectors.toList());
-        }
-        try (var session = HibernateUtil.getSession()) {
+    public Stream<VehicleCategory> getCategories(CategoryFilter filter) {
+        try {
+            var session = HibernateUtil.getSession();
+            if (Utility.isEmpty(filter.getQuery())) {
+                return categoryService.getAll(filter.getLimit()).map(category -> VehicleCategoryEntity.getCategory(category, true));
+            }
             var query = session.createQuery("from  VehicleCategory where name like %:query% or ownerEmail like %:query%", VehicleCategoryEntity.class)
                     .setParameter("query", filter.getQuery());
-            return query.getResultList().stream().map(c -> VehicleCategoryEntity.getCategory(c, true)).collect(Collectors.toList());
+            return query.getResultStream().map(c -> VehicleCategoryEntity.getCategory(c, true));
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
         }
-        return new ArrayList<>();
+        return Stream.of();
     }
 
     public Optional<Vehicle> update(Vehicle vehicle) {

@@ -33,6 +33,7 @@ message Reservation {
   string status = 18;
   double rating = 19;
   string vehicle_plate_no = 20;
+  string error = 21;
 }
 
 message DateTime {
@@ -45,5 +46,7 @@ message DateTime {
 }
 
 message ReservationFilter {
+  string clientEmail = 1;
+  int32 limit = 4;
 
 }

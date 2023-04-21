@@ -31,6 +31,10 @@ public final class Utility {
         return string == null || string.isBlank();
     }
 
+    public static boolean isNotEmpty(String string) {
+        return !isEmpty(string);
+    }
+
     public static String generateToken() {
         var secret = getProperties().getProperty("jwt_secret_key");
 

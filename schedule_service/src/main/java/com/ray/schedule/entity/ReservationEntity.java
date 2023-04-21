@@ -234,8 +234,8 @@ public class ReservationEntity {
 
     public static ReservationEntity getInstance(Reservation reservation) {
         var entity = new ReservationEntity();
-        entity.id = reservation.getId();
         entity.vehicleId = reservation.getVehicleId();
+        entity.vehiclePlateNo = reservation.getVehiclePlateNo();
         entity.clientEmail = reservation.getClientEmail();
         entity.clientName = reservation.getClientName();
         entity.type = reservation.getType();

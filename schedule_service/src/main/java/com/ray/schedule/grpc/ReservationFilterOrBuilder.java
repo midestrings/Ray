@@ -6,4 +6,19 @@ package com.ray.schedule.grpc;
 public interface ReservationFilterOrBuilder extends
     // @@protoc_insertion_point(interface_extends:schedule.ReservationFilter)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>string clientEmail = 1;</code>
+   */
+  java.lang.String getClientEmail();
+  /**
+   * <code>string clientEmail = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getClientEmailBytes();
+
+  /**
+   * <code>int32 limit = 4;</code>
+   */
+  int getLimit();
 }

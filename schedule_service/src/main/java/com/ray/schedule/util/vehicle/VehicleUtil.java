@@ -13,10 +13,12 @@ import javax.jmdns.ServiceInfo;
 import java.util.Optional;
 
 public class VehicleUtil {
-    private VehicleUtil() {}
+    private VehicleUtil() {
+    }
 
     private static final Logger LOG = LogManager.getLogger(VehicleUtil.class);
     private static VehicleServiceGrpc.VehicleServiceBlockingStub serviceStub;
+
     @SuppressWarnings("deprecation")
     public static void setServiceStub(ServiceInfo info) {
         LOG.info("IP Resolved for vehicle_service - " + info.getPort() + ":" + info.getHostAddress());
@@ -28,10 +30,22 @@ public class VehicleUtil {
         if (serviceStub != null) {
             var vehicle = Vehicle.newBuilder().setId(vehicleId).build();
             vehicle = serviceStub
-                .withCallCredentials(new BearerToken(Utility::generateToken))
-                .confirmAvailability(vehicle);
+                    .withCallCredentials(new BearerToken(Utility::generateToken))
+                    .confirmAvailability(vehicle);
             if (vehicle.getIsAvailableForRent() || vehicle.getIsAvailableForRideHailing()) {
-                return Optional.of(Vehicle.newBuilder().setId(vehicle.getId()).setPlateNo(vehicle.getPlateNo()).build());
+                return Optional.of(vehicle);
+            }
+        }
+        return Optional.empty();
+    }
+
+
+    public static Optional<Vehicle> updateVehicle(Vehicle vehicle) {
+        if (serviceStub != null) {
+            try {
+                return Optional.of(serviceStub.withCallCredentials(new BearerToken(Utility::generateToken)).update(vehicle));
+            } catch (Exception e) {
+                LOG.info(e.getMessage(), e);
             }
         }
         return Optional.empty();

@@ -19,9 +19,9 @@
             <Image url="@../assets/icons/search_icon.png" />
          </image>
       </ImageView>
-      <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="89.0" maxWidth="520.0" prefHeight="1079.0" style="-fx-background-color: #202125;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="89.0" prefHeight="500.0" prefWidth="1079.0" style="-fx-background-color: #202125;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <content>
-            <VBox prefHeight="850.0">
+            <VBox prefHeight="850.0" prefWidth="1079.0">
                <children>
                   <AnchorPane fx:id="pageBody" prefHeight="850.0" prefWidth="1079.0" style="-fx-background-color: #202125;">
                      <children>
@@ -35,7 +35,7 @@
                               <Image url="@../assets/icons/arrow_icon.png" />
                            </image>
                         </ImageView>
-                        <HBox fx:id="categories" layoutX="50.0" layoutY="45.0" prefHeight="200.0" prefWidth="880.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="60.0" />
+                        <HBox fx:id="categories" layoutX="70.0" layoutY="45.0" prefHeight="200.0" prefWidth="1000.0" style="-fx-background-color: #1A1B1E; -fx-background-radius: 10px;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="3.0" />
                         <Label layoutX="50.0" layoutY="260.0" prefHeight="19.0" prefWidth="123.0" text="Recently added" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
@@ -46,7 +46,7 @@
                               <Image url="@../assets/icons/arrow_icon.png" />
                            </image>
                         </ImageView>
-                        <HBox fx:id="recentlyAdded" layoutX="45.0" layoutY="295.0" prefHeight="200.0" prefWidth="880.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="55.0" />
+                        <HBox fx:id="recentlyAdded" layoutX="65.0" layoutY="295.0" prefHeight="200.0" prefWidth="1000.0" style="-fx-background-color: #1A1B1E; -fx-background-radius: 10px;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="4.0" />
                         <Label layoutX="50.0" layoutY="507.0" prefHeight="19.0" prefWidth="87.0" text="Top rentals" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
@@ -57,7 +57,7 @@
                               <Image url="@../assets/icons/arrow_icon.png" />
                            </image>
                         </ImageView>
-                        <HBox fx:id="topRentals" layoutX="46.0" layoutY="544.0" prefHeight="200.0" prefWidth="409.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="540.0" />
+                        <HBox fx:id="topRentals" layoutX="46.0" layoutY="544.0" prefHeight="200.0" prefWidth="1000.0" style="-fx-background-color: #1A1B1E; -fx-background-radius: 10px;" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="540.0" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

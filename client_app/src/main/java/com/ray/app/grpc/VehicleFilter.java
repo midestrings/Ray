@@ -20,6 +20,7 @@ private static final long serialVersionUID = 0L;
     byDateAdded_ = false;
     query_ = "";
     limit_ = 0;
+    categoryName_ = "";
   }
 
   @java.lang.Override
@@ -65,6 +66,12 @@ private static final long serialVersionUID = 0L;
           case 32: {
 
             limit_ = input.readInt32();
+            break;
+          }
+          case 42: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            categoryName_ = s;
             break;
           }
           default: {
@@ -160,6 +167,40 @@ private static final long serialVersionUID = 0L;
     return limit_;
   }
 
+  public static final int CATEGORY_NAME_FIELD_NUMBER = 5;
+  private volatile java.lang.Object categoryName_;
+  /**
+   * <code>string category_name = 5;</code>
+   */
+  public java.lang.String getCategoryName() {
+    java.lang.Object ref = categoryName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      categoryName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string category_name = 5;</code>
+   */
+  public com.google.protobuf.ByteString
+      getCategoryNameBytes() {
+    java.lang.Object ref = categoryName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      categoryName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -186,6 +227,9 @@ private static final long serialVersionUID = 0L;
     if (limit_ != 0) {
       output.writeInt32(4, limit_);
     }
+    if (!getCategoryNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, categoryName_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -209,6 +253,9 @@ private static final long serialVersionUID = 0L;
     if (limit_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(4, limit_);
+    }
+    if (!getCategoryNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, categoryName_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -234,6 +281,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getQuery());
     result = result && (getLimit()
         == other.getLimit());
+    result = result && getCategoryName()
+        .equals(other.getCategoryName());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -255,6 +304,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getQuery().hashCode();
     hash = (37 * hash) + LIMIT_FIELD_NUMBER;
     hash = (53 * hash) + getLimit();
+    hash = (37 * hash) + CATEGORY_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getCategoryName().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -396,6 +447,8 @@ private static final long serialVersionUID = 0L;
 
       limit_ = 0;
 
+      categoryName_ = "";
+
       return this;
     }
 
@@ -426,6 +479,7 @@ private static final long serialVersionUID = 0L;
       result.byDateAdded_ = byDateAdded_;
       result.query_ = query_;
       result.limit_ = limit_;
+      result.categoryName_ = categoryName_;
       onBuilt();
       return result;
     }
@@ -486,6 +540,10 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getLimit() != 0) {
         setLimit(other.getLimit());
+      }
+      if (!other.getCategoryName().isEmpty()) {
+        categoryName_ = other.categoryName_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -659,6 +717,75 @@ private static final long serialVersionUID = 0L;
     public Builder clearLimit() {
       
       limit_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object categoryName_ = "";
+    /**
+     * <code>string category_name = 5;</code>
+     */
+    public java.lang.String getCategoryName() {
+      java.lang.Object ref = categoryName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        categoryName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string category_name = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCategoryNameBytes() {
+      java.lang.Object ref = categoryName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        categoryName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string category_name = 5;</code>
+     */
+    public Builder setCategoryName(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      categoryName_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string category_name = 5;</code>
+     */
+    public Builder clearCategoryName() {
+      
+      categoryName_ = getDefaultInstance().getCategoryName();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string category_name = 5;</code>
+     */
+    public Builder setCategoryNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      categoryName_ = value;
       onChanged();
       return this;
     }

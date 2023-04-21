@@ -24,10 +24,6 @@ import static com.ray.app.Main.getUser;
 public class CategoryFormController extends BaseController implements Initializable {
     private final static Logger LOG = LogManager.getLogger(CategoryFormController.class.getName());
     @FXML
-    private JFXButton confirm;
-    @FXML
-    private ImageView close;
-    @FXML
     private JFXTextField name;
     @FXML
     private JFXTextArea description;

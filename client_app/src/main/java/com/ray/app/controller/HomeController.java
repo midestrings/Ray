@@ -65,7 +65,7 @@ public class HomeController extends BaseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         explore.setOnMouseClicked(event -> loadPage(explore, "/fxml/explore.fxml", "Explore"));
-        reservation.setOnMouseClicked(event -> loadPage(reservation, "/fxml/explore.fxml", "Reservations"));
+        reservation.setOnMouseClicked(event -> loadPage(reservation, "/fxml/reservations.fxml", "Reservations"));
         profile.setOnMouseClicked(event -> loadPage(profile, "/fxml/explore.fxml", "Profile"));
         myVehicles.setOnMouseClicked(event -> loadPage(myVehicles, "/fxml/explore.fxml", "My Vehicles"));
         categories.setOnMouseClicked(event -> loadPage(categories, "/fxml/explore.fxml", "Vehicle Categories"));

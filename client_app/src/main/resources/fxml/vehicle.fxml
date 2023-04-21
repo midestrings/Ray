@@ -25,12 +25,12 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXButton fx:id="rent" layoutX="14.0" layoutY="162.0" style="-fx-border-color: white; -fx-border-radius: 5px;" text="RENT CAR" textFill="WHITE">
+      <JFXButton fx:id="rent" layoutX="14.0" layoutY="162.0" style="-fx-border-color: white; -fx-border-radius: 5px; -fx-cursor: hand;" text="RENT CAR" textFill="WHITE">
          <font>
             <Font size="10.0" />
          </font>
       </JFXButton>
-      <Label fx:id="bookRide" alignment="CENTER" layoutX="85.0" layoutY="162.0" prefHeight="23.0" prefWidth="62.0" style="-fx-border-color: white; -fx-border-style: solid; -fx-border-width: 0 0 1px 0;" text="Book Ride" textFill="WHITE">
+      <Label fx:id="bookRide" alignment="CENTER" layoutX="85.0" layoutY="162.0" prefHeight="23.0" prefWidth="62.0" style="-fx-border-color: white; -fx-border-style: solid; -fx-border-width: 0 0 1px 0; -fx-cursor: hand" text="Book Ride" textFill="WHITE">
          <font>
             <Font size="10.0" />
          </font>

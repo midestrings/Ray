@@ -60,7 +60,7 @@ public class VehicleEntity {
     @Column
     private LocalDateTime updatedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private VehicleCategoryEntity vehicleCategory;
 

@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static com.ray.user.UserInfoServer.getProperties;
 
@@ -190,8 +191,8 @@ public class UserService {
         return Optional.of(Authentication.newBuilder().setError("Verification error").build());
     }
 
-    public List<User> getAllUsers(UserFilter filter) {
-        return null;
+    public Stream<User> getAllUsers(UserFilter filter) {
+        return Stream.of();
     }
 
     private Optional<Authentication> getAuthentication(UserEntity savedUser) {

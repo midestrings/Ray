@@ -59,6 +59,7 @@ message VehicleFilter {
   bool byDateAdded = 2;
   string query = 3;
   int32 limit = 4;
+  string category_name = 5;
 }
 
 message CategoryFilter {

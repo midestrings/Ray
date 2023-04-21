@@ -1,6 +1,9 @@
 package com.ray.app.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.ray.app.grpc.Reservation;
+import com.ray.app.util.Utility;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,6 +28,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import static com.ray.app.Main.getPreferences;
+
 public abstract class BaseController {
     private final static Logger LOG = LogManager.getLogger(BaseController.class.getName());
     protected File selectedFile;
@@ -34,6 +39,11 @@ public abstract class BaseController {
     protected ImageView image;
     @FXML
     protected ImageView imageChooser;
+    @FXML
+    protected ImageView close;
+    @FXML
+    protected JFXButton confirm;
+
 
     protected void gotoSignupPage(MouseEvent event) {
         goTo(event, "/fxml/signup.fxml");
@@ -96,11 +106,13 @@ public abstract class BaseController {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
         long maxSize = 10 * 1024 * 200; // 10MB in bytes
+        fileChooser.setInitialDirectory(new File(getPreferences().get("initialDirectory", System.getProperty("user.home"))));
 
         var source = (Node) event.getSource();
         var stage = (Stage) source.getScene().getWindow();
         var file = fileChooser.showOpenDialog(stage);
         if (file != null) {
+            getPreferences().put("initialDirectory", file.getAbsolutePath());
             if (file.length() > maxSize) {
                 showErrorAlert("The selected file is too large. Please choose a file smaller than 200Kb.");
             } else {
@@ -120,23 +132,47 @@ public abstract class BaseController {
         var stage = (Stage) source.getScene().getWindow();
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource(path)));
-            Scene scene = new Scene(root);
-
-            // Create the child stage
-            Stage childStage = new Stage();
-            childStage.initStyle(StageStyle.UNDECORATED);
-            childStage.setScene(scene);
-
-            // Set the parent of the child stage
-            childStage.initOwner(stage);
-
-            // Set the modality of the child stage
-            childStage.initModality(Modality.WINDOW_MODAL);
-
-            // Show the child stage
-            childStage.show();
+            popupNewStage(stage, root);
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }
     }
+
+    protected void popupNewStage(MouseEvent event, Parent root) {
+        var source = (Node) event.getSource();
+        var stage = (Stage) source.getScene().getWindow();
+        popupNewStage(stage, root);
+    }
+
+    private void popupNewStage(Stage stage, Parent root) {
+        Scene scene = new Scene(root);
+
+        // Create the child stage
+        Stage childStage = new Stage();
+        childStage.initStyle(StageStyle.UNDECORATED);
+        childStage.setScene(scene);
+
+        // Set the parent of the child stage
+        childStage.initOwner(stage);
+
+        // Set the modality of the child stage
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        // Show the child stage
+        childStage.show();
+    }
+
+    protected void validateReservationCreation(MouseEvent event, Reservation reservation) {
+        if (reservation == null) {
+            showErrorAlert("Error creating reservation");
+            return;
+        }
+        if (Utility.isNotEmpty(reservation.getError())) {
+            showErrorAlert(reservation.getError());
+            return;
+        }
+        showInfoAlert("Reservation has been created");
+        closePopUp(event);
+    }
+
 }

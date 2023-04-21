@@ -8,8 +8,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -30,12 +32,18 @@ public final class Utility {
     }
 
     public static String formatDateTimeString(Date date) {
-        return DATE_TIME_FORMAT.format(date);
+        return date != null ? DATE_TIME_FORMAT.format(date) : "";
+    }
+
+    public static String formatDateTimeString(Date date, String prefix) {
+        var dateString = formatDateTimeString(date);
+        return isNotEmpty(dateString) ? prefix + dateString : "";
     }
 
     public static String formatDateTimeString(Long time) {
         return DATE_TIME_FORMAT.format(new Date(time));
     }
+
 
     public static String getDateString(Date date) {
         return DATE_FORMAT.format(date);
@@ -86,17 +94,15 @@ public final class Utility {
         }
     }
 
-    public static DateTime getDateTime(Date date) {
+    public static DateTime getDateTime(LocalDateTime date) {
         if (date == null) return DateTime.getDefaultInstance();
-        var calendar = Calendar.getInstance();
-        calendar.setTime(date);
         return DateTime.newBuilder()
-                .setYear(calendar.get(Calendar.YEAR))
-                .setMonth(calendar.get(Calendar.MONTH))
-                .setDay(calendar.get(Calendar.DAY_OF_MONTH))
-                .setHour(calendar.get(Calendar.HOUR))
-                .setMinute(calendar.get(Calendar.MINUTE))
-                .setSecond(calendar.get(Calendar.SECOND))
+                .setYear(date.getYear())
+                .setMonth(date.getMonthValue())
+                .setDay(date.getDayOfMonth())
+                .setHour(date.getHour())
+                .setMinute(date.getMinute())
+                .setSecond(date.getSecond())
                 .build();
     }
 
@@ -125,4 +131,19 @@ public final class Utility {
         return password == null || password.length() < 8;
     }
 
+
+    public static List<String> popularLocations() {
+        return  List.of(
+            "Dublin, Ireland",
+            "Galway, Ireland",
+            "Cork, Ireland",
+            "Killarney, County Kerry, Ireland",
+            "Limerick, Ireland",
+            "Kilkenny, Ireland",
+            "Waterford, Ireland",
+            "Sligo, Ireland",
+            "Dingle, County Kerry, Ireland",
+            "Cliffs of Moher, County Clare, Ireland"
+    );
+    }
 }

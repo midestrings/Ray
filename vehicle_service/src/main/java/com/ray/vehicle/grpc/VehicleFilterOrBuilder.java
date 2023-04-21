@@ -31,4 +31,14 @@ public interface VehicleFilterOrBuilder extends
    * <code>int32 limit = 4;</code>
    */
   int getLimit();
+
+  /**
+   * <code>string category_name = 5;</code>
+   */
+  java.lang.String getCategoryName();
+  /**
+   * <code>string category_name = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getCategoryNameBytes();
 }

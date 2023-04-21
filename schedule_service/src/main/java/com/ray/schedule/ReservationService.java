@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class ReservationService {
     private static final Logger LOG = LogManager.getLogger(ReservationService.class);
@@ -32,17 +33,34 @@ public class ReservationService {
               reservationEntity.setVehiclePlateNo(vehicle.getPlateNo());
 
               reservationService.save(reservationEntity);
-              EmailUtil.sendEmail("Vehicle scheduled", vehicle.getOwnerEmail(), getScheduleMessage(reservationEntity));
+              if (Type.Ride.equals(reservation.getType())) {
+                  VehicleUtil.updateVehicle(vehicle.toBuilder().setIsAvailableForRideHailing(false).build());
+              } else {
+                  VehicleUtil.updateVehicle(vehicle.toBuilder().setIsAvailableForRent(false).build());
+
+              }
+              EmailUtil.sendEmail("Vehicle scheduled by", vehicle.getOwnerEmail(), getScheduleMessage(reservationEntity));
               return Optional.of(ReservationEntity.getReservation(reservationEntity));
-          }
+          } else throw new RuntimeException("Vehicle isn't available");
+        } catch (Exception e) {
+            LOG.info(e.getMessage(), e);
+            return Optional.of(Reservation.newBuilder().setError(e.getMessage()).build());
+        }
+    }
+
+    public Stream<Reservation> getReservations(ReservationFilter filter) {
+        try{
+            var session = HibernateUtil.getSession();
+            if (Utility.isEmpty(filter.getClientEmail())) {
+                return reservationService.getAll(filter.getLimit()).map(ReservationEntity::getReservation);
+            }
+            var query = session.createQuery("from  Reservation where clientEmail = :clientEmail", ReservationEntity.class)
+                    .setParameter("clientEmail", filter.getClientEmail());
+            return query.getResultStream().map(ReservationEntity::getReservation);
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
         }
-        return Optional.empty();
-    }
-
-    public List<Reservation> getReservations(ReservationFilter filter) {
-        return new LinkedList<>();
+        return Stream.of();
     }
 
     public Optional<Reservation> update(Reservation reservation) {
@@ -53,8 +71,8 @@ public class ReservationService {
           return Optional.of(ReservationEntity.getReservation(savedReservation));
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
+            return Optional.of(Reservation.newBuilder().setError(e.getMessage()).build());
         }
-        return Optional.empty();
     }
 
     public Optional<Reservation> getReservation(Reservation reservation) {

@@ -27,7 +27,7 @@
       </Label>
       <TextFlow layoutX="5.0" layoutY="151.0" prefHeight="46.0" prefWidth="238.0">
          <children>
-            <Text fx:id="description" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="description"  strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </TextFlow>
    </children>

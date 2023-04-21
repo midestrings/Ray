@@ -1,19 +1,20 @@
 package com.ray.app.controller;
 
 import com.google.protobuf.ByteString;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.ray.app.grpc.CategoryFilter;
 import com.ray.app.grpc.Vehicle;
+import com.ray.app.grpc.VehicleCategory;
 import com.ray.app.util.Utility;
 import com.ray.app.util.vehicle.VehicleUtil;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,17 +22,15 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import static com.ray.app.Main.getUser;
 
 public class VehicleFormController extends BaseController implements Initializable {
     private final static Logger LOG = LogManager.getLogger(VehicleFormController.class.getName());
-    public JFXComboBox category;
-    @FXML
-    private ImageView close;
-    @FXML
-    private JFXButton confirm;
+    public JFXComboBox<String> categories;
     @FXML
     private JFXTextField plateNO;
     @FXML
@@ -58,9 +57,8 @@ public class VehicleFormController extends BaseController implements Initializab
     private JFXCheckBox isAvailableForRent;
     @FXML
     private JFXCheckBox isAvailableForRide;
-    @FXML
-    private JFXTextField imagePath;
     private int vehicleId;
+    private final Map<String, VehicleCategory> categoryMap = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,6 +82,16 @@ public class VehicleFormController extends BaseController implements Initializab
         rentPrice.setTextFormatter(new TextFormatter<>(change -> change.getControlNewText().matches("^\\d*\\.?\\d*$") ? change : null));
         ridePrice.setTextFormatter(new TextFormatter<>(change -> change.getControlNewText().matches("^\\d*\\.?\\d*$") ? change : null));
 
+        Platform.runLater(() -> {
+            var iterator = VehicleUtil.getCategories(CategoryFilter.newBuilder().setLimit(Integer.MAX_VALUE).build());
+            if (iterator != null) {
+                while (iterator.hasNext()) {
+                    var category = iterator.next();
+                    categoryMap.put(category.getName(), category);
+                }
+                categories.setItems(FXCollections.observableArrayList(categoryMap.keySet()));
+            }
+        });
     }
 
     private void createOrUpdateVehicle(MouseEvent event) {
@@ -106,34 +114,40 @@ public class VehicleFormController extends BaseController implements Initializab
                     .setOwnerEmail(getUser().getEmail())
                     .setOwnerName(getUser().getName())
                     .setIsAvailableForRideHailing(isAvailableForRide.isSelected());
-            if (selectedFile != null) {
-                try {
+            try {
+                if (selectedFile != null) {
                     vehicleBuilder.setFileName(selectedFile.getName())
                             .setImage(ByteString.copyFrom(Files.readAllBytes(selectedFile.toPath())));
-                } catch (IOException e) {
-                    LOG.error(e.getMessage(), e);
                 }
+                var category = categoryMap.get(categories.getValue());
+                if (category != null) {
+                    vehicleBuilder.setCategory(category);
+                }
+            } catch (IOException e) {
+                LOG.error(e.getMessage(), e);
             }
-            var vehicle = vehicleBuilder.build();
-            vehicle = VehicleUtil.createOrUpdateVehicle(vehicle).orElse(null);
-            if (vehicle == null) {
+            if (selectedFile != null) {
+                var vehicle = vehicleBuilder.build();
+                vehicle = VehicleUtil.createOrUpdateVehicle(vehicle).orElse(null);
+                if (vehicle == null) {
+                    if (vehicleId > 0) {
+                        showErrorAlert("Error creating vehicle");
+                    } else {
+                        showErrorAlert("Error updating vehicle");
+                    }
+                    return;
+                }
+                if (Utility.isNotEmpty(vehicle.getError())) {
+                    showErrorAlert(vehicle.getError());
+                    return;
+                }
                 if (vehicleId > 0) {
-                    showErrorAlert("Error creating vehicle");
+                    showInfoAlert("Vehicle has been created");
                 } else {
-                    showErrorAlert("Error updating vehicle");
+                    showInfoAlert("Vehicle has been updated");
                 }
-                return;
+                closePopUp(event);
             }
-            if (Utility.isNotEmpty(vehicle.getError())) {
-                showErrorAlert(vehicle.getError());
-                return;
-            }
-            if (vehicleId > 0) {
-                showInfoAlert("Vehicle has been created");
-            } else {
-                showInfoAlert("Vehicle has been updated");
-            }
-            closePopUp(event);
         }
     }
 }

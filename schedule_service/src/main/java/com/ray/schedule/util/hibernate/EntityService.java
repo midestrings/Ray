@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class EntityService<T> {
     private final Class<T> clazz;
@@ -38,13 +39,12 @@ public class EntityService<T> {
         session.close();
         return entity != null ? Optional.of(entity) : Optional.empty();
     }
-    public List<T> getAll() {
+    public Stream<T> getAll(int limit) {
         Session session = HibernateUtil.getSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(clazz);
         criteria.from(clazz);
-        List<T> list = session.createQuery(criteria).getResultList();
-        session.close();
-        return list != null ? list : new LinkedList<>();
+        Stream<T> stream = session.createQuery(criteria).setMaxResults(limit).getResultStream();
+        return stream != null ? stream : Stream.of();
     }
 }

@@ -102,7 +102,7 @@
             <Image url="@../assets/icons/folder_icon.png" />
          </image>
       </ImageView>
-      <JFXComboBox fx:id="category" layoutX="169.0" layoutY="498.0" prefHeight="24.0" prefWidth="180.0" promptText="Category" AnchorPane.topAnchor="500.0" />
+      <JFXComboBox fx:id="categories" layoutX="169.0" layoutY="498.0" prefHeight="24.0" prefWidth="180.0" promptText="Category" AnchorPane.topAnchor="500.0" />
       <Label layoutX="55.0" layoutY="502.0" prefHeight="16.0" prefWidth="108.0" text="Category" AnchorPane.topAnchor="505.0">
          <font>
             <Font name="System Bold Italic" size="13.0" />

@@ -170,4 +170,14 @@ public interface ReservationOrBuilder extends
    */
   com.google.protobuf.ByteString
       getVehiclePlateNoBytes();
+
+  /**
+   * <code>string error = 21;</code>
+   */
+  java.lang.String getError();
+  /**
+   * <code>string error = 21;</code>
+   */
+  com.google.protobuf.ByteString
+      getErrorBytes();
 }

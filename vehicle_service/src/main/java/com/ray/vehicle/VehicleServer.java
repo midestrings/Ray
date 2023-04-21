@@ -3,6 +3,7 @@ package com.ray.vehicle;
 import com.ray.vehicle.grpc.*;
 import com.ray.vehicle.util.auth.AuthorizationServerInterceptor;
 import com.ray.vehicle.util.email.EmailUtil;
+import com.ray.vehicle.util.hibernate.HibernateUtil;
 import com.ray.vehicle.util.user.UserUtil;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -59,6 +60,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     public void getVehicles(VehicleFilter request, StreamObserver<Vehicle> responseObserver) {
         service.getVehicles(request).forEach(responseObserver::onNext);
         responseObserver.onCompleted();
+        HibernateUtil.closeSession();
     }
 
     @Override
@@ -77,6 +79,7 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     public void getCategories(CategoryFilter request, StreamObserver<VehicleCategory> responseObserver) {
         service.getCategories(request).forEach(responseObserver::onNext);
         responseObserver.onCompleted();
+        HibernateUtil.closeSession();
     }
 
     @Override

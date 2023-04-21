@@ -59,23 +59,23 @@ public final class VehicleServiceImpl {
       "\017VehicleCategory\022\014\n\004name\030\001 \001(\t\022\023\n\013descri" +
       "ption\030\002 \001(\t\022\020\n\010fileName\030\003 \001(\t\022\r\n\005image\030\004" +
       " \001(\014\022\n\n\002id\030\006 \001(\005\022\021\n\tloadImage\030\007 \001(\010\022\r\n\005e" +
-      "rror\030\010 \001(\t\022\022\n\nownerEmail\030\t \001(\t\"T\n\rVehicl" +
+      "rror\030\010 \001(\t\022\022\n\nownerEmail\030\t \001(\t\"k\n\rVehicl" +
       "eFilter\022\020\n\010byRating\030\001 \001(\010\022\023\n\013byDateAdded" +
-      "\030\002 \001(\010\022\r\n\005query\030\003 \001(\t\022\r\n\005limit\030\004 \001(\005\".\n\016" +
-      "CategoryFilter\022\r\n\005query\030\002 \001(\t\022\r\n\005limit\030\004" +
-      " \001(\0052\257\003\n\016VehicleService\0222\n\naddVehicle\022\020." +
-      "vehicle.Vehicle\032\020.vehicle.Vehicle\"\000\022;\n\013g" +
-      "etVehicles\022\026.vehicle.VehicleFilter\032\020.veh" +
-      "icle.Vehicle\"\0000\001\022.\n\006update\022\020.vehicle.Veh" +
-      "icle\032\020.vehicle.Vehicle\"\000\022C\n\013addCategory\022" +
-      "\030.vehicle.VehicleCategory\032\030.vehicle.Vehi" +
-      "cleCategory\"\000\022F\n\rgetCategories\022\027.vehicle" +
-      ".CategoryFilter\032\030.vehicle.VehicleCategor" +
-      "y\"\0000\001\022;\n\023confirmAvailability\022\020.vehicle.V" +
-      "ehicle\032\020.vehicle.Vehicle\"\000\0222\n\ngetVehicle" +
-      "\022\020.vehicle.Vehicle\032\020.vehicle.Vehicle\"\000B," +
-      "\n\024com.ray.vehicle.grpcB\022VehicleServiceIm" +
-      "plP\001b\006proto3"
+      "\030\002 \001(\010\022\r\n\005query\030\003 \001(\t\022\r\n\005limit\030\004 \001(\005\022\025\n\r" +
+      "category_name\030\005 \001(\t\".\n\016CategoryFilter\022\r\n" +
+      "\005query\030\002 \001(\t\022\r\n\005limit\030\004 \001(\0052\257\003\n\016VehicleS" +
+      "ervice\0222\n\naddVehicle\022\020.vehicle.Vehicle\032\020" +
+      ".vehicle.Vehicle\"\000\022;\n\013getVehicles\022\026.vehi" +
+      "cle.VehicleFilter\032\020.vehicle.Vehicle\"\0000\001\022" +
+      ".\n\006update\022\020.vehicle.Vehicle\032\020.vehicle.Ve" +
+      "hicle\"\000\022C\n\013addCategory\022\030.vehicle.Vehicle" +
+      "Category\032\030.vehicle.VehicleCategory\"\000\022F\n\r" +
+      "getCategories\022\027.vehicle.CategoryFilter\032\030" +
+      ".vehicle.VehicleCategory\"\0000\001\022;\n\023confirmA" +
+      "vailability\022\020.vehicle.Vehicle\032\020.vehicle." +
+      "Vehicle\"\000\0222\n\ngetVehicle\022\020.vehicle.Vehicl" +
+      "e\032\020.vehicle.Vehicle\"\000B,\n\024com.ray.vehicle" +
+      ".grpcB\022VehicleServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -106,7 +106,7 @@ public final class VehicleServiceImpl {
     internal_static_vehicle_VehicleFilter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vehicle_VehicleFilter_descriptor,
-        new java.lang.String[] { "ByRating", "ByDateAdded", "Query", "Limit", });
+        new java.lang.String[] { "ByRating", "ByDateAdded", "Query", "Limit", "CategoryName", });
     internal_static_vehicle_CategoryFilter_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_vehicle_CategoryFilter_fieldAccessorTable = new
