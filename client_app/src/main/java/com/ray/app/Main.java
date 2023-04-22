@@ -20,8 +20,6 @@ import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.time.Instant;
 import java.util.Objects;
@@ -33,7 +31,6 @@ import java.util.prefs.Preferences;
  */
 public class Main extends Application {
     private final static Logger LOG = LogManager.getLogger(Main.class.getName());
-    private static final Properties properties = new Properties();
     private static final String host = "_http._tcp.local.";// = "localhost";
     private static final Preferences prefs = Preferences.userRoot().node("/com/ray/preferences");
     private static Authentication auth;
@@ -42,7 +39,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         Long startTime = System.currentTimeMillis();
         LOG.info("Ray app started  on {}", Utility.formatDateTimeString(startTime));
-        loadConfig(args);
+        loadAuthAndUser();
         discoverServices();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             Long exitTime = System.currentTimeMillis();
@@ -77,24 +74,14 @@ public class Main extends Application {
 
     }
 
-    private static void loadConfig(String[] args) {
-        var propertyFile = "/application.properties";
-        if (args.length > 0 && args[0].equalsIgnoreCase("dev")) {
-            propertyFile = "/application-dev.properties";
-        }
-        try (InputStream is = Main.class.getResourceAsStream(propertyFile)) {
-            properties.load(is);
-            auth = Authentication.newBuilder()
-                    .setToken(prefs.get("token", ""))
-                    .setRefreshToken(prefs.get("refreshToken", ""))
-                    .setRefreshTokenExpiry(Utility.getProtoDate(Utility.getDate(prefs.get("refreshTokenExpiry", "01-01-1970"))))
-                    .build();
-            user = User.newBuilder()
-                    .setEmail(prefs.get("userEmail", "")).build();
-        } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
-            throw new RuntimeException(e);
-        }
+    private static void loadAuthAndUser() {
+        auth = Authentication.newBuilder()
+                .setToken(prefs.get("token", ""))
+                .setRefreshToken(prefs.get("refreshToken", ""))
+                .setRefreshTokenExpiry(Utility.getProtoDate(Utility.getDate(prefs.get("refreshTokenExpiry", "01-01-1970"))))
+                .build();
+        user = User.newBuilder()
+                .setEmail(prefs.get("userEmail", "")).build();
     }
 
     public static void discoverServices() {
@@ -111,10 +98,6 @@ public class Main extends Application {
         }
     }
 
-    public static Properties getProperties() {
-        return properties;
-    }
-
     public static Authentication getAuth() {
         return auth == null ? Authentication.getDefaultInstance() : auth;
     }
@@ -129,10 +112,6 @@ public class Main extends Application {
 
     public static void setUser(User user) {
         Main.user = user;
-    }
-
-    public static Preferences getPrefs() {
-        return prefs;
     }
 
     private static class AppListener implements ServiceListener {
