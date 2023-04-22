@@ -1,9 +1,9 @@
 package com.ray.app.util.email;
 
 
-import com.ray.schedule.grpc.Email;
-import com.ray.schedule.grpc.EmailResponse;
-import com.ray.schedule.grpc.MailerGrpc;
+import com.ray.app.grpc.Email;
+import com.ray.app.grpc.EmailResponse;
+import com.ray.app.grpc.MailerGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
