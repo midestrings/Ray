@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.ray.user.UserInfoServer.getProperties;
@@ -47,7 +48,7 @@ public class UserService {
             var roles = new LinkedList<UserEntityRole>();
             roles.add(new UserEntityRole(Role.User_Client));
             if (Type.Vendor.equals(user.getType())) roles.add(new UserEntityRole(Role.User_Vendor));
-            userEntity.setRoles(roles);
+            userEntity.setRoles(roles.stream().peek(r -> r.setUser(userEntity)).collect(Collectors.toList()));
             userEntity.setPassword(BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray()));
             userEntity.setOtp(generateOTP());
             userEntity.setStatus(Status.Unverified);
