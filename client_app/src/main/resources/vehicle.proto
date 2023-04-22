@@ -9,7 +9,7 @@ service VehicleService {
   rpc addVehicle (Vehicle) returns (Vehicle) {}
   rpc getVehicles (VehicleFilter) returns (stream Vehicle) {}
   rpc update (Vehicle) returns (Vehicle) {}
-  rpc addCategory (VehicleCategory) returns (VehicleCategory) {}
+  rpc addCategory (stream VehicleCategory) returns (Success) {}
   rpc getCategories (CategoryFilter) returns (stream VehicleCategory) {}
   rpc confirmAvailability(Vehicle) returns (Vehicle) {}
   rpc getVehicle(Vehicle) returns (Vehicle) {}
@@ -66,3 +66,8 @@ message CategoryFilter {
   string query = 2;
   int32 limit = 4;
 }
+
+message Success {
+  bool success = 2;
+}
+

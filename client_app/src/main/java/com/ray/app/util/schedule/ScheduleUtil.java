@@ -8,6 +8,7 @@ import com.ray.app.grpc.VehicleCategory;
 import com.ray.app.util.auth.BearerToken;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import javafx.application.Platform;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +17,7 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import static com.ray.app.Main.getAuth;
+import static com.ray.app.controller.BaseController.showErrorAlert;
 
 public class ScheduleUtil {
     private ScheduleUtil() {}
@@ -39,6 +41,8 @@ public class ScheduleUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("Schedule service isn't reachable"));
         }
         return Optional.empty();
     }
@@ -50,6 +54,8 @@ public class ScheduleUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("Schedule serviceisn't reachable"));
         }
         return null;
     }

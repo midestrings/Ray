@@ -124,29 +124,29 @@ public final class VehicleServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.ray.app.grpc.VehicleCategory,
-      com.ray.app.grpc.VehicleCategory> getAddCategoryMethod;
+      com.ray.app.grpc.Success> getAddCategoryMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "addCategory",
       requestType = com.ray.app.grpc.VehicleCategory.class,
-      responseType = com.ray.app.grpc.VehicleCategory.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      responseType = com.ray.app.grpc.Success.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
   public static io.grpc.MethodDescriptor<com.ray.app.grpc.VehicleCategory,
-      com.ray.app.grpc.VehicleCategory> getAddCategoryMethod() {
-    io.grpc.MethodDescriptor<com.ray.app.grpc.VehicleCategory, com.ray.app.grpc.VehicleCategory> getAddCategoryMethod;
+      com.ray.app.grpc.Success> getAddCategoryMethod() {
+    io.grpc.MethodDescriptor<com.ray.app.grpc.VehicleCategory, com.ray.app.grpc.Success> getAddCategoryMethod;
     if ((getAddCategoryMethod = VehicleServiceGrpc.getAddCategoryMethod) == null) {
       synchronized (VehicleServiceGrpc.class) {
         if ((getAddCategoryMethod = VehicleServiceGrpc.getAddCategoryMethod) == null) {
           VehicleServiceGrpc.getAddCategoryMethod = getAddCategoryMethod = 
-              io.grpc.MethodDescriptor.<com.ray.app.grpc.VehicleCategory, com.ray.app.grpc.VehicleCategory>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              io.grpc.MethodDescriptor.<com.ray.app.grpc.VehicleCategory, com.ray.app.grpc.Success>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "vehicle.VehicleService", "addCategory"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ray.app.grpc.VehicleCategory.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ray.app.grpc.VehicleCategory.getDefaultInstance()))
+                  com.ray.app.grpc.Success.getDefaultInstance()))
                   .setSchemaDescriptor(new VehicleServiceMethodDescriptorSupplier("addCategory"))
                   .build();
           }
@@ -301,9 +301,9 @@ public final class VehicleServiceGrpc {
 
     /**
      */
-    public void addCategory(com.ray.app.grpc.VehicleCategory request,
-        io.grpc.stub.StreamObserver<com.ray.app.grpc.VehicleCategory> responseObserver) {
-      asyncUnimplementedUnaryCall(getAddCategoryMethod(), responseObserver);
+    public io.grpc.stub.StreamObserver<com.ray.app.grpc.VehicleCategory> addCategory(
+        io.grpc.stub.StreamObserver<com.ray.app.grpc.Success> responseObserver) {
+      return asyncUnimplementedStreamingCall(getAddCategoryMethod(), responseObserver);
     }
 
     /**
@@ -352,10 +352,10 @@ public final class VehicleServiceGrpc {
                   this, METHODID_UPDATE)))
           .addMethod(
             getAddCategoryMethod(),
-            asyncUnaryCall(
+            asyncClientStreamingCall(
               new MethodHandlers<
                 com.ray.app.grpc.VehicleCategory,
-                com.ray.app.grpc.VehicleCategory>(
+                com.ray.app.grpc.Success>(
                   this, METHODID_ADD_CATEGORY)))
           .addMethod(
             getGetCategoriesMethod(),
@@ -426,10 +426,10 @@ public final class VehicleServiceGrpc {
 
     /**
      */
-    public void addCategory(com.ray.app.grpc.VehicleCategory request,
-        io.grpc.stub.StreamObserver<com.ray.app.grpc.VehicleCategory> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getAddCategoryMethod(), getCallOptions()), request, responseObserver);
+    public io.grpc.stub.StreamObserver<com.ray.app.grpc.VehicleCategory> addCategory(
+        io.grpc.stub.StreamObserver<com.ray.app.grpc.Success> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getAddCategoryMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -499,13 +499,6 @@ public final class VehicleServiceGrpc {
 
     /**
      */
-    public com.ray.app.grpc.VehicleCategory addCategory(com.ray.app.grpc.VehicleCategory request) {
-      return blockingUnaryCall(
-          getChannel(), getAddCategoryMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
     public java.util.Iterator<com.ray.app.grpc.VehicleCategory> getCategories(
         com.ray.app.grpc.CategoryFilter request) {
       return blockingServerStreamingCall(
@@ -563,14 +556,6 @@ public final class VehicleServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.ray.app.grpc.VehicleCategory> addCategory(
-        com.ray.app.grpc.VehicleCategory request) {
-      return futureUnaryCall(
-          getChannel().newCall(getAddCategoryMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<com.ray.app.grpc.Vehicle> confirmAvailability(
         com.ray.app.grpc.Vehicle request) {
       return futureUnaryCall(
@@ -589,10 +574,10 @@ public final class VehicleServiceGrpc {
   private static final int METHODID_ADD_VEHICLE = 0;
   private static final int METHODID_GET_VEHICLES = 1;
   private static final int METHODID_UPDATE = 2;
-  private static final int METHODID_ADD_CATEGORY = 3;
-  private static final int METHODID_GET_CATEGORIES = 4;
-  private static final int METHODID_CONFIRM_AVAILABILITY = 5;
-  private static final int METHODID_GET_VEHICLE = 6;
+  private static final int METHODID_GET_CATEGORIES = 3;
+  private static final int METHODID_CONFIRM_AVAILABILITY = 4;
+  private static final int METHODID_GET_VEHICLE = 5;
+  private static final int METHODID_ADD_CATEGORY = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -623,10 +608,6 @@ public final class VehicleServiceGrpc {
           serviceImpl.update((com.ray.app.grpc.Vehicle) request,
               (io.grpc.stub.StreamObserver<com.ray.app.grpc.Vehicle>) responseObserver);
           break;
-        case METHODID_ADD_CATEGORY:
-          serviceImpl.addCategory((com.ray.app.grpc.VehicleCategory) request,
-              (io.grpc.stub.StreamObserver<com.ray.app.grpc.VehicleCategory>) responseObserver);
-          break;
         case METHODID_GET_CATEGORIES:
           serviceImpl.getCategories((com.ray.app.grpc.CategoryFilter) request,
               (io.grpc.stub.StreamObserver<com.ray.app.grpc.VehicleCategory>) responseObserver);
@@ -649,6 +630,9 @@ public final class VehicleServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_ADD_CATEGORY:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.addCategory(
+              (io.grpc.stub.StreamObserver<com.ray.app.grpc.Success>) responseObserver);
         default:
           throw new AssertionError();
       }

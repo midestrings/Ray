@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 
 public class ReservationCardController extends BaseController implements Initializable {
     @FXML
+    private Label location;
+    @FXML
     private Label type;
     @FXML
     private Label plateNo;
@@ -24,10 +26,12 @@ public class ReservationCardController extends BaseController implements Initial
 
     public void setReservation(Reservation reservation) {
         plateNo.setText(reservation.getVehiclePlateNo());
-        type.setText(reservation.getType());
+        type.setText(reservation.getType().toUpperCase());
         if ("rent".equalsIgnoreCase(reservation.getType())) {
+            location.setText(reservation.getDropOffAddress());
             time.setText(Utility.formatDateTimeString(Utility.getDate(reservation.getDropOffTime())));
         } else {
+            location.setText(reservation.getPickupAddress());
             time.setText(Utility.formatDateTimeString(Utility.getDate(reservation.getPickupTime())));
         }
     }

@@ -77,4 +77,10 @@ public class VehicleCardController extends BaseController implements Initializab
             LOG.error(e.getMessage(), e);
         }
     }
+
+    public void isUpdate() {
+        bookRide.setVisible(false);
+        rent.setVisible(false);
+    }
+
 }

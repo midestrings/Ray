@@ -34,6 +34,11 @@ public final class VehicleServiceImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_vehicle_CategoryFilter_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_vehicle_Success_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_vehicle_Success_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -63,19 +68,20 @@ public final class VehicleServiceImpl {
       "eFilter\022\020\n\010byRating\030\001 \001(\010\022\023\n\013byDateAdded" +
       "\030\002 \001(\010\022\r\n\005query\030\003 \001(\t\022\r\n\005limit\030\004 \001(\005\022\025\n\r" +
       "category_name\030\005 \001(\t\".\n\016CategoryFilter\022\r\n" +
-      "\005query\030\002 \001(\t\022\r\n\005limit\030\004 \001(\0052\257\003\n\016VehicleS" +
-      "ervice\0222\n\naddVehicle\022\020.vehicle.Vehicle\032\020" +
-      ".vehicle.Vehicle\"\000\022;\n\013getVehicles\022\026.vehi" +
-      "cle.VehicleFilter\032\020.vehicle.Vehicle\"\0000\001\022" +
-      ".\n\006update\022\020.vehicle.Vehicle\032\020.vehicle.Ve" +
-      "hicle\"\000\022C\n\013addCategory\022\030.vehicle.Vehicle" +
-      "Category\032\030.vehicle.VehicleCategory\"\000\022F\n\r" +
-      "getCategories\022\027.vehicle.CategoryFilter\032\030" +
-      ".vehicle.VehicleCategory\"\0000\001\022;\n\023confirmA" +
-      "vailability\022\020.vehicle.Vehicle\032\020.vehicle." +
-      "Vehicle\"\000\0222\n\ngetVehicle\022\020.vehicle.Vehicl" +
-      "e\032\020.vehicle.Vehicle\"\000B(\n\020com.ray.app.grp" +
-      "cB\022VehicleServiceImplP\001b\006proto3"
+      "\005query\030\002 \001(\t\022\r\n\005limit\030\004 \001(\005\"\032\n\007Success\022\017" +
+      "\n\007success\030\002 \001(\0102\251\003\n\016VehicleService\0222\n\nad" +
+      "dVehicle\022\020.vehicle.Vehicle\032\020.vehicle.Veh" +
+      "icle\"\000\022;\n\013getVehicles\022\026.vehicle.VehicleF" +
+      "ilter\032\020.vehicle.Vehicle\"\0000\001\022.\n\006update\022\020." +
+      "vehicle.Vehicle\032\020.vehicle.Vehicle\"\000\022=\n\013a" +
+      "ddCategory\022\030.vehicle.VehicleCategory\032\020.v" +
+      "ehicle.Success\"\000(\001\022F\n\rgetCategories\022\027.ve" +
+      "hicle.CategoryFilter\032\030.vehicle.VehicleCa" +
+      "tegory\"\0000\001\022;\n\023confirmAvailability\022\020.vehi" +
+      "cle.Vehicle\032\020.vehicle.Vehicle\"\000\0222\n\ngetVe" +
+      "hicle\022\020.vehicle.Vehicle\032\020.vehicle.Vehicl" +
+      "e\"\000B(\n\020com.ray.app.grpcB\022VehicleServiceI" +
+      "mplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -113,6 +119,12 @@ public final class VehicleServiceImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vehicle_CategoryFilter_descriptor,
         new java.lang.String[] { "Query", "Limit", });
+    internal_static_vehicle_Success_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_vehicle_Success_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_vehicle_Success_descriptor,
+        new java.lang.String[] { "Success", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

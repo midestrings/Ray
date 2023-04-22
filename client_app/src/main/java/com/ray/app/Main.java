@@ -1,5 +1,6 @@
 package com.ray.app;
 
+import com.ray.app.controller.HomeController;
 import com.ray.app.grpc.Authentication;
 import com.ray.app.grpc.User;
 import com.ray.app.util.Utility;
@@ -54,7 +55,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root;
         if (isLoggedIn()) {
-            root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/fxml/home.fxml")));
+            var loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("/fxml/home.fxml")));
+            root = loader.load();
+            HomeController controller = loader.getController();
+            UserUtil.setHomeController(controller);
         } else {
             root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/fxml/onboarding.fxml")));
         }

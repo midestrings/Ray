@@ -76,7 +76,7 @@ public class UserService {
 
             if (Status.Unverified.equals(savedUser.getStatus())) {
                 savedUser.setOtp(generateOTP());
-                userService.update(savedUser);
+                userService.updateWithoutSession(savedUser);
                 EmailUtil.sendEmail("Verify your email", user.getEmail(),
                         "Verify your email on the Ray app.\nHere is your one time passcode\n" + savedUser.getOtp());
                 return Optional.of(Authentication.newBuilder().setError("OTP").build());
@@ -89,6 +89,7 @@ public class UserService {
         }
         return Optional.empty();
     }
+
     public Optional<Authentication> resendOTP(User user) {
         if (Utility.isInvalidEmail(user.getEmail())) {
             return Optional.of(Authentication.newBuilder().setError("Enter valid email").build());
@@ -103,7 +104,7 @@ public class UserService {
             }
 
             savedUser.setOtp(generateOTP());
-            userService.update(savedUser);
+            userService.updateWithoutSession(savedUser);
             EmailUtil.sendEmail("Verify your email", user.getEmail(),
                     "Verify your email on the Ray app.\nHere is your one time passcode\n" + savedUser.getOtp());
             return Optional.of(Authentication.newBuilder().setError("OTP").build());
@@ -135,7 +136,7 @@ public class UserService {
             savedAuth.setToken(generateToken(savedAuth.getUser()));
             savedAuth.setRefreshTokenExpiry(LocalDate.now().plusYears(1L));
             savedAuth.setUpdatedAt(LocalDateTime.now());
-            authService.update(savedAuth);
+            authService.updateWithoutSession(savedAuth);
             return Optional.of(AuthenticationEntity.getAuthentication(savedAuth));
 
         } catch (Exception e) {
@@ -146,12 +147,14 @@ public class UserService {
     }
 
     public Optional<User> updateUser(User user) {
-        try {
-            validateUser(user);
-            var savedUser = getUserByEmailWithoutSession(user.getEmail()).orElseThrow();
+        try (var session = HibernateUtil.getSession()) {
+            if (Utility.isEmpty(user.getName())) throw new RuntimeException("Invalid name");
+            if (Utility.isEmpty(user.getType()) && !Type.types.contains(user.getType()))
+                throw new RuntimeException("Invalid type");
+            var savedUser = getUserByEmail(user.getEmail(), session).orElseThrow();
             UserEntity.updateInstance(user, savedUser);
-            userService.update(savedUser);
-            return Optional.of(UserEntity.getUser(savedUser, false));
+            userService.update(savedUser, session);
+            return Optional.of(UserEntity.getUser(savedUser, true));
         } catch (Exception e) {
             HibernateUtil.closeSession();
             LOG.info(e.getMessage(), e);
@@ -181,7 +184,7 @@ public class UserService {
                 return Optional.of(Authentication.newBuilder().setError("Invalid OTP").build());
             }
             savedUser.setStatus(Status.Active);
-            userService.update(savedUser);
+            userService.updateWithoutSession(savedUser);
             return getAuthentication(savedUser);
 
         } catch (Exception e) {
@@ -245,7 +248,7 @@ public class UserService {
     }
 
     private String generateOTP() {
-        var rand =  new SecureRandom();
+        var rand = new SecureRandom();
         StringBuilder otp = new StringBuilder();
 
         for (int i = 0; i < 6; i++) {

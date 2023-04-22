@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="562.0" prefWidth="1079.0" style="-fx-background-color:  #202125;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.UserProfileController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="7.0" prefHeight="514.0" prefWidth="1018.0" style="-fx-background-radius: 8px; -fx-background-color: #9babb0;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="24.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="10.0" prefHeight="301.0" prefWidth="996.0">
+               <children>
+                  <ImageView fx:id="image" fitHeight="289.0" fitWidth="630.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <JFXTextField fx:id="imagePath" layoutX="661.0" layoutY="302.0" prefHeight="24.0" prefWidth="327.0" promptText="Select image" />
+            <ImageView fx:id="imageChooser" fitHeight="18.0" fitWidth="28.0" layoutX="985.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/folder_icon.png" />
+               </image>
+            </ImageView>
+            <JFXTextField fx:id="name" layoutX="19.0" layoutY="302.0" prefHeight="24.0" prefWidth="303.0" promptText="Name" />
+            <JFXComboBox fx:id="gender" layoutX="19.0" layoutY="346.0" prefHeight="24.0" prefWidth="303.0" promptText="Gender" />
+            <JFXTextField fx:id="address" layoutX="19.0" layoutY="397.0" prefHeight="24.0" prefWidth="452.0" promptText="Address" />
+            <JFXTextField fx:id="phone" layoutX="343.0" layoutY="346.0" prefHeight="24.0" prefWidth="303.0" promptText="Phone" />
+            <JFXTextField fx:id="nationality" layoutX="661.0" layoutY="346.0" prefHeight="24.0" prefWidth="342.0" promptText="Nationality" />
+            <JFXTextField fx:id="passportNumber" layoutX="659.0" layoutY="397.0" prefHeight="24.0" prefWidth="342.0" promptText="Passport number" />
+            <JFXButton fx:id="confirm" buttonType="RAISED" layoutX="418.0" layoutY="456.0" prefHeight="35.0" prefWidth="243.0" style="-fx-background-color: #4646d9;" text="Update" textFill="#c8e9eb">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXCheckBox fx:id="upgradeToVendor" layoutX="10.0" layoutY="455.0" prefHeight="18.0" prefWidth="173.0" text="Upgrade to vendor" textFill="#434040" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

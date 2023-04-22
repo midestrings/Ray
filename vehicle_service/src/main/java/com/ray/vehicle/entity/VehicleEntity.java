@@ -273,6 +273,8 @@ public class VehicleEntity {
         entity.status = vehicle.getStatus();
         entity.rating = vehicle.getRating();
         entity.isAvailableForRent = vehicle.getIsAvailableForRent();
+        entity.ownerEmail = vehicle.getOwnerEmail();
+        entity.ownerName = vehicle.getOwnerName();
         entity.isAvailableForRideHailing = vehicle.getIsAvailableForRideHailing();
         if (!Utility.isEmpty(vehicle.getFileName())) {
             entity.fileName = vehicle.getFileName();
@@ -285,21 +287,21 @@ public class VehicleEntity {
     }
 
     public static void updateInstance(Vehicle vehicle, VehicleEntity entity) {
-        entity.make = Utility.isEmpty(vehicle.getMake()) ? vehicle.getMake() : entity.make;
-        entity.model = Utility.isEmpty(vehicle.getModel()) ? vehicle.getModel() : entity.model;
+        entity.make = Utility.isNotEmpty(vehicle.getMake()) ? vehicle.getMake() : entity.make;
+        entity.model = Utility.isNotEmpty(vehicle.getModel()) ? vehicle.getModel() : entity.model;
         entity.year = vehicle.getYear() > 1900 ? vehicle.getYear() : entity.year;
-        entity.color = Utility.isEmpty(vehicle.getColor()) ? vehicle.getColor() : entity.color;
-        entity.bodyType = Utility.isEmpty(vehicle.getBodyType()) ? vehicle.getBodyType() : entity.bodyType;
-        entity.engineType = Utility.isEmpty(vehicle.getEngineType()) ? vehicle.getEngineType() : entity.engineType;
-        entity.fuelType = Utility.isEmpty(vehicle.getFuelType()) ? vehicle.getFuelType() : entity.fuelType;
-        entity.transmission = Utility.isEmpty(vehicle.getTransmission()) ? vehicle.getTransmission() : entity.transmission;
+        entity.color = Utility.isNotEmpty(vehicle.getColor()) ? vehicle.getColor() : entity.color;
+        entity.bodyType = Utility.isNotEmpty(vehicle.getBodyType()) ? vehicle.getBodyType() : entity.bodyType;
+        entity.engineType = Utility.isNotEmpty(vehicle.getEngineType()) ? vehicle.getEngineType() : entity.engineType;
+        entity.fuelType = Utility.isNotEmpty(vehicle.getFuelType()) ? vehicle.getFuelType() : entity.fuelType;
+        entity.transmission = Utility.isNotEmpty(vehicle.getTransmission()) ? vehicle.getTransmission() : entity.transmission;
         entity.mileage = vehicle.getMileage() > entity.mileage ? vehicle.getMileage() : entity.mileage;
         entity.ridePrice = vehicle.getRidePrice() > 0 ? vehicle.getRidePrice() : entity.ridePrice;
         entity.rentPrice = vehicle.getRentPrice() > 0 ? vehicle.getRentPrice() : entity.rentPrice;
         entity.rating = vehicle.getRating() > 0 ? vehicle.getRating() : entity.rating;
         entity.isAvailableForRent = vehicle.getIsAvailableForRent();
         entity.isAvailableForRideHailing = vehicle.getIsAvailableForRideHailing();
-        entity.status = Utility.isEmpty(vehicle.getStatus()) ? entity.status : vehicle.getStatus();
+        entity.status = Utility.isNotEmpty(vehicle.getStatus()) ? entity.status : vehicle.getStatus();
         if (!Utility.isEmpty(vehicle.getFileName()) && !vehicle.getFileName().equals(entity.fileName)) {
             entity.fileName = vehicle.getFileName();
             entity.image = vehicle.getImage().toByteArray();
@@ -310,6 +312,9 @@ public class VehicleEntity {
     public static Vehicle getVehicle(VehicleEntity vehicle, boolean loadImage) {
         var vehicleBuilder = Vehicle.newBuilder()
                 .setId(vehicle.id)
+                .setPlateNo(vehicle.plateNo)
+                .setOwnerEmail(vehicle.ownerEmail)
+                .setOwnerName(vehicle.ownerName)
                 .setMake(vehicle.make)
                 .setModel(vehicle.model)
                 .setYear(vehicle.year)

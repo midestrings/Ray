@@ -219,7 +219,7 @@ public class UserEntity {
         for (var role : user.roles) {
             userBuilder.addRoles(UserEntityRole.getUserRole(role));
         }
-        if (loadImage) {
+        if (loadImage && user.profilePicture != null) {
             userBuilder.setFileName(user.fileName)
                     .setContentType(user.contentType)
                     .setProfilePicture(ByteString.copyFrom(user.profilePicture));
@@ -269,8 +269,9 @@ public class UserEntity {
         savedUser.roles.addAll(user.getRolesList().stream()
                 .map(UserRole::getRole)
                 .filter(Role.roles::contains)
-                .filter(roles::contains)
+                .filter(r -> !roles.contains(r))
                 .map(UserEntityRole::new)
+                .peek(r -> r.setUser(savedUser))
                 .collect(Collectors.toList()));
 
         if (!Utility.isEmpty(user.getFileName()) && !user.getFileName().equals(savedUser.fileName)) {

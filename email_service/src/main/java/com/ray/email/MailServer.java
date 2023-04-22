@@ -25,20 +25,20 @@ public class MailServer extends MailerGrpc.MailerImplBase {
     public static void main(String[] args) {
         loadConfig(args);
         Server server = null;
-		try {
-			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
+        try {
+            server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
                     .addService(new MailServer())
                     .intercept(new AuthorizationServerInterceptor())
                     .build().start();
-			LOG.info("Server started....");
+            LOG.info("Server started....");
             registerService();
-			server.awaitTermination();
-		} catch (IOException | InterruptedException e) {
+            server.awaitTermination();
+        } catch (IOException | InterruptedException e) {
             if (server != null) {
                 server.shutdown();
             }
             LOG.error(e.getMessage(), e);
-		}
+        }
     }
 
     @Override
@@ -84,6 +84,11 @@ public class MailServer extends MailerGrpc.MailerImplBase {
             jmdns = JmDNS.create(InetAddress.getLocalHost());
             ServiceInfo serviceInfo = ServiceInfo.create("_http._tcp.local.", "email_service", Integer.parseInt(properties.getProperty("port")), "path=index.html");
             jmdns.registerService(serviceInfo);
+            JmDNS finalJmdns = jmdns;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                finalJmdns.unregisterAllServices();
+                LOG.info("Server is shutting down");
+            }));
         } catch (IOException e) {
             if (jmdns != null) {
                 jmdns.unregisterAllServices();

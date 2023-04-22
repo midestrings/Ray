@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="150.0" prefWidth="320.0" style="-fx-background-color: #2E3033; -fx-background-radius: 8px; -fx-cursor: hand;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.ReservationCardController">
+<AnchorPane prefHeight="115.0" prefWidth="235.0" style="-fx-background-color: #2E3033; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-cursor: hand;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ray.app.controller.ReservationCardController">
    <children>
-      <Label fx:id="type" layoutX="31.0" layoutY="22.0" prefHeight="29.0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="plateNo" layoutX="31.0" layoutY="61.0" prefHeight="29.0" textFill="WHITE">
-         <font>
-            <Font name="System Italic" size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="time" layoutX="31.0" layoutY="97.0" prefHeight="29.0" textFill="WHITE">
-         <font>
-            <Font name="System Italic" size="13.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="type" prefHeight="29.0" text="nil" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="plateNo" prefHeight="16.0" text="nil" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="location" prefHeight="16.0" text="nil" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="time" prefHeight="16.0" text="nil" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

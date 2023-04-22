@@ -23,13 +23,20 @@ public class EntityService<T> {
         session.close();
     }
 
-    public void update(T entity) {
+    public void updateWithoutSession(T entity) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         session.merge(entity);
         session.flush();
         session.getTransaction().commit();
         session.close();
+    }
+
+    public void update(T entity, Session session) {
+        session.beginTransaction();
+        session.merge(entity);
+        session.flush();
+        session.getTransaction().commit();
     }
 
     public Optional<T> getById(Integer id) {

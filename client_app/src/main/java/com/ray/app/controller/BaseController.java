@@ -2,8 +2,10 @@ package com.ray.app.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.ray.app.Main;
 import com.ray.app.grpc.Reservation;
 import com.ray.app.util.Utility;
+import com.ray.app.util.user.UserUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -43,6 +45,8 @@ public abstract class BaseController {
     protected ImageView close;
     @FXML
     protected JFXButton confirm;
+    protected static HomeController home;
+
 
 
     protected void gotoSignupPage(MouseEvent event) {
@@ -58,23 +62,39 @@ public abstract class BaseController {
     }
 
     protected void goTo(MouseEvent event, String path) {
-        var source = (Node) event.getSource();
-        var stage = (Stage) source.getScene().getWindow();
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource(path)));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            goTo(event, root);
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }
     }
 
-    protected static void showErrorAlert(String message) {
+    protected void goTo(MouseEvent event, Parent root) {
+        var source = (Node) event.getSource();
+        var stage = (Stage) source.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    protected void gotoHomePage(MouseEvent event) {
+        try {
+            var loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("/fxml/home.fxml")));
+            Parent root = loader.load();
+            HomeController controller = loader.getController();
+            UserUtil.setHomeController(controller);
+            goTo(event, root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void showErrorAlert(String message) {
         showAlert(message, Alert.AlertType.ERROR);
     }
 
-    protected static void showInfoAlert(String message) {
+    public static void showInfoAlert(String message) {
         showAlert(message, Alert.AlertType.INFORMATION);
     }
 
@@ -105,16 +125,16 @@ public abstract class BaseController {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
-        long maxSize = 10 * 1024 * 200; // 10MB in bytes
+        long maxSize = 1024 * 200; // 10MB in bytes
         fileChooser.setInitialDirectory(new File(getPreferences().get("initialDirectory", System.getProperty("user.home"))));
 
         var source = (Node) event.getSource();
         var stage = (Stage) source.getScene().getWindow();
         var file = fileChooser.showOpenDialog(stage);
         if (file != null) {
-            getPreferences().put("initialDirectory", file.getAbsolutePath());
+            getPreferences().put("initialDirectory", file.getParentFile().getPath());
             if (file.length() > maxSize) {
-                showErrorAlert("The selected file is too large. Please choose a file smaller than 200Kb.");
+                showErrorAlert("The selected file is too large. \nPlease choose a file smaller than 200Kb.");
             } else {
                 try {
                     selectedFile = transcodeToPNG(file);
@@ -124,17 +144,6 @@ public abstract class BaseController {
                     LOG.error(e.getMessage(), e);
                 }
             }
-        }
-    }
-
-    protected void popupNewStage(MouseEvent event, String path) {
-        var source = (Node) event.getSource();
-        var stage = (Stage) source.getScene().getWindow();
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource(path)));
-            popupNewStage(stage, root);
-        } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -173,6 +182,39 @@ public abstract class BaseController {
         }
         showInfoAlert("Reservation has been created");
         closePopUp(event);
+        home.reloadExplorePage();
+    }
+
+
+
+    protected void addVehicle(MouseEvent event) {
+        try {
+            var loader = new FXMLLoader(Objects.requireNonNull(HomeController.class.getResource("/fxml/vehicleform.fxml")));
+            Parent root = loader.load();
+            VehicleFormController controller = loader.getController();
+            controller.setHome((HomeController) this);
+            popupNewStage(event, root);
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+        }
+
+    }
+
+    protected void addCategory(MouseEvent event) {
+        try {
+            var loader = new FXMLLoader(Objects.requireNonNull(HomeController.class.getResource("/fxml/categoryform.fxml")));
+            Parent root = loader.load();
+            CategoryFormController controller = loader.getController();
+            controller.setHome((HomeController) this);
+            popupNewStage(event, root);
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+
+    public void setHome(HomeController home) {
+        BaseController.home = home;
     }
 
 }

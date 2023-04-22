@@ -2,15 +2,13 @@ package com.ray.vehicle;
 
 import com.ray.vehicle.entity.VehicleCategoryEntity;
 import com.ray.vehicle.entity.VehicleEntity;
-import com.ray.vehicle.grpc.CategoryFilter;
-import com.ray.vehicle.grpc.Vehicle;
-import com.ray.vehicle.grpc.VehicleCategory;
-import com.ray.vehicle.grpc.VehicleFilter;
+import com.ray.vehicle.grpc.*;
 import com.ray.vehicle.util.Utility;
 import com.ray.vehicle.util.email.EmailUtil;
 import com.ray.vehicle.util.hibernate.EntityService;
 import com.ray.vehicle.util.hibernate.HibernateUtil;
 import com.ray.vehicle.util.user.UserUtil;
+import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
@@ -61,14 +59,14 @@ public class VehicleService {
             }
             if (Utility.isNotEmpty(filter.getCategoryName())) {
                 var query = session.createQuery("from Vehicle v join v.vehicleCategory vc where vc.name = :name", VehicleEntity.class)
-                        .setParameter("name", filter.getCategoryName()).setMaxResults(filter.getLimit());
+                        .setParameter("name", filter.getCategoryName());
                 return query.getResultStream().map(v -> VehicleEntity.getVehicle(v, true));
             }
-            var query = session.createQuery("from  Vehicle v join v.vehicleCategory vc where (v.model like %:query% or v.plateNo like %:query% or " +
-                            "v.make like %:query% or v.color like %:query% or v.ownerEmail like %:query% or v.ownerName like %:query%" +
-                            " or v.engineType like %:query% or v.fuelType like %:query% or v.transmission like %:query%" +
-                            " or vc.name like %:query% or vc.ownerEmail like %:query%) and v.status = 'active'", VehicleEntity.class)
-                    .setParameter("query", filter.getQuery());
+            var query = session.createQuery("from  Vehicle v left join v.vehicleCategory vc where (v.model like :query or v.plateNo like :query or " +
+                            "v.make like :query or v.color like :query or v.ownerEmail like :query or v.ownerName like :query" +
+                            " or v.engineType like :query or v.fuelType like :query or v.transmission like :query" +
+                            " or vc.name like :query or vc.ownerEmail like :query) and v.status = 'active'", VehicleEntity.class)
+                    .setParameter("query", "%"+filter.getQuery()+"%");
             return query.getResultStream().map(v -> VehicleEntity.getVehicle(v, true));
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
@@ -82,7 +80,7 @@ public class VehicleService {
             if (Utility.isEmpty(filter.getQuery())) {
                 return categoryService.getAll(filter.getLimit()).map(category -> VehicleCategoryEntity.getCategory(category, true));
             }
-            var query = session.createQuery("from  VehicleCategory where name like %:query% or ownerEmail like %:query%", VehicleCategoryEntity.class)
+            var query = session.createQuery("from  VehicleCategory where name like :query  or ownerEmail like :query", VehicleCategoryEntity.class)
                     .setParameter("query", filter.getQuery());
             return query.getResultStream().map(c -> VehicleCategoryEntity.getCategory(c, true));
         } catch (Exception e) {
@@ -107,7 +105,7 @@ public class VehicleService {
         }
     }
 
-    public Optional<VehicleCategory> addCategory(VehicleCategory category) {
+    public void addCategory(VehicleCategory category, StreamObserver<Success> successStreamObserver) {
         try {
             if (Utility.isEmpty(category.getName())) throw new RuntimeException("Category name cannot be empty");
             var savedCategory = getCategoryByName(category.getName()).orElse(null);
@@ -115,10 +113,9 @@ public class VehicleService {
 
             savedCategory = VehicleCategoryEntity.getInstance(category);
             categoryService.save(savedCategory);
-            return Optional.of(VehicleCategoryEntity.getCategory(savedCategory, false));
         } catch (Exception e) {
             LOG.info(e.getMessage(), e);
-            return Optional.of(VehicleCategory.newBuilder().setError(e.getMessage()).build());
+            successStreamObserver.onError(e);
         }
     }
 

@@ -33,20 +33,20 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     public static void main(String[] args) {
         loadConfig(args);
         Server server = null;
-		try {
-			server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
+        try {
+            server = ServerBuilder.forPort(Integer.parseInt(properties.getProperty("port")))
                     .addService(new VehicleServer())
                     .intercept(new AuthorizationServerInterceptor())
                     .build().start();
-			LOG.info("Server started....");
+            LOG.info("Server started....");
             registerAndDiscoverServices();
-			server.awaitTermination();
-		} catch (IOException | InterruptedException e) {
+            server.awaitTermination();
+        } catch (IOException | InterruptedException e) {
             if (server != null) {
                 server.shutdown();
             }
             LOG.error(e.getMessage(), e);
-		}
+        }
 
     }
 
@@ -70,16 +70,31 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
     }
 
     @Override
-    public void addCategory(VehicleCategory request, StreamObserver<VehicleCategory> responseObserver) {
-        service.addCategory(request).ifPresent(responseObserver::onNext);
-        responseObserver.onCompleted();
-    }
-
-    @Override
     public void getCategories(CategoryFilter request, StreamObserver<VehicleCategory> responseObserver) {
         service.getCategories(request).forEach(responseObserver::onNext);
         responseObserver.onCompleted();
         HibernateUtil.closeSession();
+    }
+
+    @Override
+    public StreamObserver<VehicleCategory> addCategory(StreamObserver<Success> responseObserver) {
+        return new StreamObserver<>() {
+            @Override
+            public void onNext(VehicleCategory vehicleCategory) {
+                service.addCategory(vehicleCategory, responseObserver);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                LOG.error(throwable.getMessage(), throwable);
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onNext(Success.newBuilder().setSuccess(true).build());
+                responseObserver.onCompleted();
+            }
+        };
     }
 
     @Override
@@ -114,6 +129,11 @@ public class VehicleServer extends VehicleServiceGrpc.VehicleServiceImplBase {
             ServiceInfo serviceInfo = ServiceInfo.create(host, "vehicle_service", Integer.parseInt(properties.getProperty("port")), "path=index.html");
             jmdns.registerService(serviceInfo);
             jmdns.addServiceListener(host, new VehicleServiceListener());
+            JmDNS finalJmdns = jmdns;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                finalJmdns.unregisterAllServices();
+                LOG.info("Server is shutting down");
+            }));
 
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);

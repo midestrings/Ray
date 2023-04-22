@@ -2,12 +2,14 @@ package com.ray.app.util.user;
 
 
 import com.ray.app.Main;
+import com.ray.app.controller.HomeController;
 import com.ray.app.grpc.Authentication;
 import com.ray.app.grpc.User;
 import com.ray.app.grpc.UserServiceGrpc;
 import com.ray.app.util.auth.BearerToken;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import javafx.application.Platform;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +17,7 @@ import javax.jmdns.ServiceInfo;
 import java.util.Optional;
 
 import static com.ray.app.Main.*;
+import static com.ray.app.controller.BaseController.showErrorAlert;
 
 public class UserUtil {
     private UserUtil() {
@@ -22,6 +25,7 @@ public class UserUtil {
 
     private static final Logger LOG = LogManager.getLogger(UserUtil.class);
     private static UserServiceGrpc.UserServiceBlockingStub serviceStub;
+    private static HomeController homeController;
 
     @SuppressWarnings("deprecation")
     public static void setServiceStub(ServiceInfo info) {
@@ -31,6 +35,9 @@ public class UserUtil {
         if (isLoggedIn()) {
             refreshToken();
             setUser(getUser(Main.getUser().getEmail()).orElse(Main.getUser()));
+            if (homeController != null) {
+                homeController.loadUserDetails();
+            }
         }
     }
 
@@ -42,11 +49,13 @@ public class UserUtil {
     public static Optional<User> getUser(String email) {
         if (serviceStub != null) {
             try {
-                var user = serviceStub.withCallCredentials(new BearerToken(getAuth()::getToken)).getUser(User.newBuilder().setEmail(email).build());
+                var user = serviceStub.withCallCredentials(new BearerToken(getAuth()::getToken)).getUser(User.newBuilder().setLoadImage(true).setEmail(email).build());
                 return user != null ? Optional.of(user) : Optional.empty();
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
         }
         return Optional.empty();
     }
@@ -54,12 +63,27 @@ public class UserUtil {
     public static Optional<User> createUser(User user) {
         if (serviceStub != null) {
             try {
-                var createdUser = serviceStub.createUser(user);
-                return createdUser != null ? Optional.of(createdUser) : Optional.empty();
+                return Optional.of(serviceStub.createUser(user));
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
         }
+        return Optional.empty();
+    }
+
+    public static Optional<User> updateUser(User user) {
+        if (serviceStub != null) {
+            try {
+                return Optional.of(serviceStub.withCallCredentials(new BearerToken(getAuth()::getToken)).updateUser(user));
+            } catch (Exception e) {
+                LOG.info(e.getMessage(), e);
+            }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
+        }
+
         return Optional.empty();
     }
 
@@ -71,6 +95,8 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
         }
         return Optional.empty();
     }
@@ -83,6 +109,8 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
         }
         return Optional.empty();
     }
@@ -95,6 +123,8 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
         }
     }
 
@@ -106,8 +136,13 @@ public class UserUtil {
             } catch (Exception e) {
                 LOG.info(e.getMessage(), e);
             }
+        } else {
+            Platform.runLater(() -> showErrorAlert("User service isn't reachable"));
         }
         return Optional.empty();
     }
 
+    public static void setHomeController(HomeController homeController) {
+        UserUtil.homeController = homeController;
+    }
 }

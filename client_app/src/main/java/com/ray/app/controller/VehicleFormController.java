@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,6 +60,7 @@ public class VehicleFormController extends BaseController implements Initializab
     private JFXCheckBox isAvailableForRide;
     private int vehicleId;
     private final Map<String, VehicleCategory> categoryMap = new HashMap<>();
+    private String categoryName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,7 +91,8 @@ public class VehicleFormController extends BaseController implements Initializab
                     var category = iterator.next();
                     categoryMap.put(category.getName(), category);
                 }
-                categories.setItems(FXCollections.observableArrayList(categoryMap.keySet()));
+                categories.getItems().addAll(FXCollections.observableArrayList(categoryMap.keySet()));
+                categories.setValue(categoryName);
             }
         });
     }
@@ -126,28 +129,48 @@ public class VehicleFormController extends BaseController implements Initializab
             } catch (IOException e) {
                 LOG.error(e.getMessage(), e);
             }
-            if (selectedFile != null) {
-                var vehicle = vehicleBuilder.build();
-                vehicle = VehicleUtil.createOrUpdateVehicle(vehicle).orElse(null);
-                if (vehicle == null) {
-                    if (vehicleId > 0) {
-                        showErrorAlert("Error creating vehicle");
-                    } else {
-                        showErrorAlert("Error updating vehicle");
-                    }
-                    return;
-                }
-                if (Utility.isNotEmpty(vehicle.getError())) {
-                    showErrorAlert(vehicle.getError());
-                    return;
-                }
+            var vehicle = vehicleBuilder.build();
+            vehicle = VehicleUtil.createOrUpdateVehicle(vehicle).orElse(null);
+            if (vehicle == null) {
                 if (vehicleId > 0) {
-                    showInfoAlert("Vehicle has been created");
+                    showErrorAlert("Error creating vehicle");
                 } else {
-                    showInfoAlert("Vehicle has been updated");
+                    showErrorAlert("Error updating vehicle");
                 }
-                closePopUp(event);
+                return;
             }
+            if (Utility.isNotEmpty(vehicle.getError())) {
+                showErrorAlert(vehicle.getError());
+                return;
+            }
+            if (vehicleId > 0) {
+                showInfoAlert("Vehicle has been updated");
+            } else {
+                showInfoAlert("Vehicle has been created");
+            }
+            home.reloadMyVehiclesPage();
+            closePopUp(event);
+        }
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        vehicleId = vehicle.getId();
+        categoryName = vehicle.getCategory().getName();
+        plateNO.setText(vehicle.getPlateNo());
+        make.setText(vehicle.getMake());
+        model.setText(vehicle.getModel());
+        year.setText(String.valueOf(vehicle.getYear()));
+        mileage.setText(String.valueOf(vehicle.getMileage()));
+        bodyType.setValue(vehicle.getBodyType());
+        engineType.setValue(vehicle.getEngineType());
+        transmission.setValue(vehicle.getTransmission());
+        status.setValue(vehicle.getStatus());
+        ridePrice.setText(String.valueOf(vehicle.getRidePrice()));
+        rentPrice.setText(String.valueOf(vehicle.getRentPrice()));
+        isAvailableForRent.setSelected(vehicle.getIsAvailableForRent());
+        isAvailableForRide.setSelected(vehicle.getIsAvailableForRideHailing());
+        if (!vehicle.getImage().isEmpty()) {
+            image.setImage(new Image(vehicle.getImage().newInput()));
         }
     }
 }

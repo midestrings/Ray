@@ -1,18 +1,23 @@
 package com.ray.app.controller;
 
 import com.jfoenix.controls.JFXTextField;
+import com.ray.app.Main;
 import com.ray.app.grpc.Authentication;
 import com.ray.app.grpc.User;
 import com.ray.app.util.Utility;
 import com.ray.app.util.user.UserUtil;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.ray.app.Main.*;
@@ -52,7 +57,7 @@ public class OTPController extends BaseController implements Initializable {
             getPreferences().put("token", auth.getToken());
             getPreferences().put("refreshToken", auth.getRefreshToken());
             getPreferences().put("refreshTokenExpiry", Utility.formatDateTimeString(Utility.getDate(auth.getToken())));
-            goTo(event, "/fxml/home.fxml");
+            gotoHomePage(event);
         });
     }
 }

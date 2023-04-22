@@ -22,14 +22,14 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static com.ray.app.Main.getUser;
 
 public class ReservationsController extends BaseController implements Initializable {
     private final static Logger LOG = LogManager.getLogger(ReservationsController.class.getName());
+    @FXML
+    private Label expectedEndTime;
     @FXML
     private AnchorPane body;
     @FXML
@@ -58,6 +58,7 @@ public class ReservationsController extends BaseController implements Initializa
     private Label owner;
     @FXML
     private Label vehicleRating;
+    private final List<Parent> reservations = new LinkedList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,7 +76,8 @@ public class ReservationsController extends BaseController implements Initializa
                         ReservationCardController controller = loader.getController();
                         controller.setReservation(reservation);
                         listing.getChildren().add(root);
-                        root.setOnMouseClicked(event -> showBody(event, reservation));
+                        root.setOnMouseClicked(event -> showBody(event, reservation, root));
+                        reservations.add(root);
                     } catch (IOException e) {
                         LOG.error(e.getMessage(), e);
                     }
@@ -85,12 +87,23 @@ public class ReservationsController extends BaseController implements Initializa
 
     }
 
-    private void showBody(MouseEvent event, Reservation reservation) {
+    private void showBody(MouseEvent event, Reservation reservation, Parent root) {
+        var defaultStyle = root.getStyle();
+        for (Parent item: reservations) {
+            item.setStyle(defaultStyle.replace("-fx-border-color: white;", ""));
+        }
+        defaultStyle += "-fx-border-color: white;";
+        root.setStyle(defaultStyle);
+        body.setVisible(true);
         type.setText(reservation.getType().toUpperCase());
         if("rent".equalsIgnoreCase(reservation.getType())) {
-            pickup.setText(reservation.getPickupAddress() + Utility.formatDateTimeString(Utility.getDate(reservation.getPickupTime()), " @"));
-        } else {
             dropOff.setText(reservation.getDropOffAddress() + Utility.formatDateTimeString(Utility.getDate(reservation.getDropOffTime()), " @"));
+            expectedEndTime.setText(Utility.formatDateTimeString(Utility.getDate(reservation.getExpectedEndTime())));
+            pickup.setText("");
+        } else {
+            expectedEndTime.setText("");
+            dropOff.setText(reservation.getDestinationAddress());
+            pickup.setText(reservation.getPickupAddress() + Utility.formatDateTimeString(Utility.getDate(reservation.getPickupTime()), " @"));
         }
         rating.setText(String.valueOf(reservation.getRating()));
         status.setText(reservation.getStatus());
@@ -100,7 +113,7 @@ public class ReservationsController extends BaseController implements Initializa
                         plateNo.setText(vehicle.getPlateNo());
                         make.setText(vehicle.getMake());
                         model.setText(vehicle.getModel());
-                        owner.setText(vehicle.getOwnerName() + " " + vehicle.getOwnerEmail());
+                        owner.setText(vehicle.getOwnerEmail());
                         vehicleRating.setText(String.valueOf(vehicle.getRating()));
                         if ("rent".equalsIgnoreCase(reservation.getType())) {
                             price.setText(NumberFormat.getCurrencyInstance().format(vehicle.getRentPrice()));
@@ -113,7 +126,6 @@ public class ReservationsController extends BaseController implements Initializa
             });
 
         });
-        body.setVisible(true);
     }
 
 

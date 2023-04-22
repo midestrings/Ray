@@ -2,25 +2,21 @@ package com.ray.app.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.ray.app.grpc.Authentication;
+import com.ray.app.grpc.CategoryFilter;
 import com.ray.app.grpc.User;
-import javafx.animation.PauseTransition;
+import com.ray.app.grpc.VehicleFilter;
+import com.ray.app.util.vehicle.VehicleUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,44 +62,108 @@ public class HomeController extends BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         explore.setOnMouseClicked(event -> loadPage(explore, "/fxml/explore.fxml", "Explore"));
         reservation.setOnMouseClicked(event -> loadPage(reservation, "/fxml/reservations.fxml", "Reservations"));
-        profile.setOnMouseClicked(event -> loadPage(profile, "/fxml/explore.fxml", "Profile"));
-        myVehicles.setOnMouseClicked(event -> loadPage(myVehicles, "/fxml/explore.fxml", "My Vehicles"));
-        categories.setOnMouseClicked(event -> loadPage(categories, "/fxml/explore.fxml", "Vehicle Categories"));
+        profile.setOnMouseClicked(event -> loadUserProfile(profile));
+        myVehicles.setOnMouseClicked(event -> loadUserVehicles(myVehicles));
+        categories.setOnMouseClicked(event -> loadUserCategories(categories));
         addVehicle.setOnMouseClicked(this::addVehicle);
         addCategory.setOnMouseClicked(this::addCategory);
         logout.setOnMouseClicked(this::logout);
 
         // Execute the task after 5 seconds to allow the app to refresh tokens and user data
-        PauseTransition delay = new PauseTransition(Duration.seconds(5));
-        delay.setOnFinished(event -> {
-            Platform.runLater(() -> {
-                var user = getUser();
-                userName.setText(user.getName());
-                userType.setText(user.getType());
-                userEmail.setText(user.getEmail());
-                if (user.getProfilePicture().isEmpty()) {
-                    userDp.setImage(new Image(Objects.requireNonNull(HomeController.class.getResourceAsStream("/assets/icons/user_icon.png"))));
-                } else {
-                    userDp.setImage(new Image(user.getProfilePicture().newInput()));
-                }
-                user.getRolesList().stream().filter(r -> r.getRole().equals("user_vendor")).findAny().ifPresent(r -> {
-                    myVehicles.setVisible(true);
-                    categories.setVisible(true);
-                    addVehicle.setVisible(true);
-                    addCategory.setVisible(true);
-                });
-                try {
-                    Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource("/fxml/explore.fxml")));
-                    pageBody.getChildren().setAll(root);
-                } catch (IOException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            });
+        Platform.runLater(() -> {
+            loadUserDetails();
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource("/fxml/explore.fxml")));
+                pageBody.getChildren().setAll(root);
+            } catch (IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
         });
-        delay.play();
+    }
+
+    public void loadUserDetails() {
+        var user = getUser();
+        userName.setText(user.getName());
+        userType.setText(user.getType());
+        userEmail.setText(user.getEmail());
+        if (user.getProfilePicture().isEmpty()) {
+            userDp.setImage(new Image(Objects.requireNonNull(HomeController.class.getResourceAsStream("/assets/icons/user_icon.png"))));
+        } else {
+            userDp.setImage(new Image(user.getProfilePicture().newInput()));
+        }
+        user.getRolesList().stream().filter(r -> r.getRole().equals("user_vendor")).findAny().ifPresent(r -> {
+            myVehicles.setVisible(true);
+            categories.setVisible(true);
+            addVehicle.setVisible(true);
+            addCategory.setVisible(true);
+        });
     }
 
     private void loadPage(HBox box, String path, String name) {
+        highLightSelection(box);
+        Platform.runLater(() -> {
+            try {
+                pageName.setText(name);
+                Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource(path)));
+                pageBody.getChildren().setAll(root);
+            } catch (IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        });
+    }
+
+    private void loadUserVehicles(HBox box) {
+        highLightSelection(box);
+        Platform.runLater(() -> {
+            try {
+                var vehicleIterator = VehicleUtil.getVehicles(VehicleFilter.newBuilder().setQuery(getUser().getEmail()).build());
+                pageName.setText("My vehicles");
+                var loader = new FXMLLoader(Objects.requireNonNull(HomeController.class.getResource("/fxml/vehicle_search.fxml")));
+                Parent root = loader.load();
+                SearchController controller = loader.getController();
+                controller.setVehicles(vehicleIterator, true, this);
+                pageBody.getChildren().setAll(root);
+            } catch (IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        });
+    }
+
+    private void loadUserCategories(HBox box) {
+        highLightSelection(box);
+        Platform.runLater(() -> {
+            try {
+                var categoryIterator = VehicleUtil.getCategories(CategoryFilter.newBuilder().setQuery(getUser().getEmail()).build());
+                pageName.setText("My Categories");
+                var loader = new FXMLLoader(Objects.requireNonNull(HomeController.class.getResource("/fxml/category_search.fxml")));
+                Parent root = loader.load();
+                SearchController controller = loader.getController();
+                controller.setCategories(categoryIterator);
+                pageBody.getChildren().setAll(root);
+            } catch (IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        });
+    }
+
+    private void loadUserProfile(HBox box) {
+        highLightSelection(box);
+        Platform.runLater(() -> {
+            try {
+                loadUserDetails();
+                pageName.setText("Profile");
+                var loader = new FXMLLoader(Objects.requireNonNull(HomeController.class.getResource("/fxml/user_profile.fxml")));
+                Parent root = loader.load();
+                UserProfileController controller = loader.getController();
+                controller.setHome(this);
+                pageBody.getChildren().setAll(root);
+            } catch (IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        });
+    }
+
+    private void highLightSelection(HBox box) {
         var selectedStyle = "-fx-border-color: white; -fx-cursor: hand; -fx-border-radius: 5px;";
         var defaultStyle = "-fx-cursor: hand; -fx-border-radius: 5px;";
         explore.setStyle(defaultStyle);
@@ -113,21 +173,6 @@ public class HomeController extends BaseController implements Initializable {
         categories.setStyle(defaultStyle);
 
         box.setStyle(selectedStyle);
-        try {
-            pageName.setText(name);
-            Parent root = FXMLLoader.load(Objects.requireNonNull(BaseController.class.getResource(path)));
-            pageBody.getChildren().setAll(root);
-        } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
-        }
-    }
-
-    private void addVehicle(MouseEvent event) {
-        popupNewStage(event, "/fxml/vehicleform.fxml");
-
-    }
-    private void addCategory(MouseEvent event) {
-        popupNewStage(event, "/fxml/categoryform.fxml");
     }
 
     private void logout(MouseEvent event) {
@@ -139,5 +184,22 @@ public class HomeController extends BaseController implements Initializable {
         getPreferences().remove("refreshToken");
         getPreferences().remove("refreshTokenExpiry");
         gotoLoginPage(event);
+    }
+
+    public void reloadExplorePage() {
+        loadPage(explore, "/fxml/explore.fxml", "Explore");
+    }
+
+    public void reloadUserProfile() {
+        loadUserDetails();
+        loadUserProfile(profile);
+    }
+
+    public void reloadMyVehiclesPage() {
+        loadUserVehicles(myVehicles);
+    }
+
+    public void reloadCategoriesPage() {
+        loadUserCategories(categories);
     }
 }

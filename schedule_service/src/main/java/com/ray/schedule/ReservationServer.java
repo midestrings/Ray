@@ -97,7 +97,11 @@ public class ReservationServer extends ScheduleServiceGrpc.ScheduleServiceImplBa
             ServiceInfo serviceInfo = ServiceInfo.create(host, "schedule_service", Integer.parseInt(properties.getProperty("port")), "path=index.html");
             jmdns.registerService(serviceInfo);
             jmdns.addServiceListener(host, new ScheduleServiceListener());
-
+            JmDNS finalJmdns = jmdns;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                finalJmdns.unregisterAllServices();
+                LOG.info("Server is shutting down");
+            }));
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             if (jmdns != null) {
